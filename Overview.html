@@ -30,6 +30,9 @@
  p.status { position:absolute; margin:-2em 0 0 -125px; width:100px; padding:5px; border:thin solid; font-size:smaller; background:papayawhip; color:black; border-radius:5px }
  p.status::after { content:'\25BA'; position:absolute; top:5px; right:3px; width:0; color:papayawhip; text-shadow:black 2px 0 0; cursor:default }
 
+ .logo { border:1px outset gray; padding:2px; box-shadow:inset 0 0 0 4px white }
+ div.head .logo > img { border:1px inset gray; padding:1px; }
+
  @media print { [data-anolis-spec]::after { content:"[" attr(data-anolis-spec) "]"; font-size:.6em; vertical-align:super; text-transform:uppercase } }
 
  @media (max-width:500px) {
