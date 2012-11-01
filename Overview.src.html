@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang=en-US>
-<title>Quirks Mode</title>
+<meta charset=utf-8>
+<title class=not-draft>Quirks Mode</title>
+<title class="not-tr not-fs">Quirks Mode Standard</title>
 <meta name="viewport" content="width=device-width">
 <style>
  pre.idl { border:solid thin; background:#eee; color:#000; padding:0.5em }
@@ -48,18 +50,18 @@
 
 <div class="head">
 
-<p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a>
+<p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" src="//www.whatwg.org/images/logo"></a></p>
 
 <hgroup>
 <h1>Quirks Mode</h1>
-<h2 class="no-num no-toc not-tr not-fs">Living Specification &mdash; [DATE: 01 Jan 1901]</h2>
-<h2 class="no-num no-toc not-draft not-tr">Snapshot Specification &mdash; [DATE: 01 Jan 1901]</h2>
+<h2 class="no-num no-toc not-tr not-fs">Living Standard &mdash; [DATE: 01 Jan 1901]</h2>
+<h2 class="no-num no-toc not-draft not-tr">Snapshot Specification for Laywers &mdash; [DATE: 01 Jan 1901]</h2>
 <h2 class="no-num no-toc not-draft not-fs">[LONGSTATUS] [DATE: 01 Jan 1901]</h2>
 </hgroup>
 
 <dl>
  <dt>This Version:
- <dd class="not-tr not-fs"><a href="http://dvcs.w3.org/hg/quirks-mode/raw-file/tip/Overview.html">http://dvcs.w3.org/hg/quirks-mode/raw-file/tip/Overview.html</a>
+ <dd class="not-tr not-fs"><a href="http://quirks.spec.whatwg.org/">http://quirks.spec.whatwg.org/</a>
  <dd class="not-draft not-fs"><a href="[VERSION]">[VERSION]</a>
  <dd class="not-draft not-tr">XXX
 
@@ -67,7 +69,7 @@
  <dd class="not-draft not-fs"><a href="[LATEST]">[LATEST]</a>
 
  <dt class="not-draft">Latest Editor's Draft:
- <dd class="not-draft"><a href="http://dvcs.w3.org/hg/quirks-mode/raw-file/tip/Overview.html">http://dvcs.w3.org/hg/quirks-mode/raw-file/tip/Overview.html</a>
+ <dd class="not-draft"><a href="http://quirks.spec.whatwg.org/">http://quirks.spec.whatwg.org/</a>
 
  <dt class="not-tr">Participate:</dt>
  <dd class="not-tr">Send feedback to <a href="http://www.whatwg.org/mailing-list">whatwg@whatwg.org</a>
@@ -76,7 +78,7 @@
  <dd class="no-tr"><a href="http://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
 
  <dt>Version History:
- <dd><a href="http://dvcs.w3.org/hg/quirks-mode/shortlog">http://dvcs.w3.org/hg/quirks-mode/shortlog</a></dd>
+ <dd><a href="https://github.com/whatwg/quirks/commits">https://github.com/whatwg/quirks/commits</a></dd>
  <dt>Editor:
  <dd>
   Simon Pieters
@@ -84,16 +86,12 @@
   &lt;<a href="mailto:simonp@opera.com">simonp@opera.com</a>>
 </dl>
 
-<p class="copyright not-tr not-fs">Copyright &copy; 2012 the Contributors to the Quirks Mode Specification, published by the <a href="http://www.w3.org/community/whatwg/">WHATCG</a> under the <a href="http://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a>. A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/">summary</a> is available.
-
 <p class="copyright not-draft not-tr">Copyright &copy; 2012 the Contributors to the Quirks Mode Specification, published by the <a href="http://www.w3.org/community/whatwg/">WHATCG</a> under the <a href="http://www.w3.org/community/about/agreements/final/">W3C Community Final Specification Agreement (FSA)</a>. A human-readable <a href="http://www.w3.org/community/about/agreements/fsa-deed/">summary</a> is available.
 
-
-<p class="copyright not-tr">This living specification may also be used under the terms of
-<a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license">CC0 1.0 Universal</a>.
-To the extent possible under law, the editors has waived all copyright and
+<p class="copyright not-tr not-fs"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
+To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-[DATE: 01 Jan 1901], the editors have made this specification available
+23 October 2012, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -113,16 +111,14 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 
 <hr class="top">
 
-<div class="not-tr">
+<div class="not-tr not-draft">
 <h2 class="no-num no-toc">Disclaimer</h2>
 
-<p class="not-fs">This specification was published by the <a href="http://www.w3.org/community/whatwg/">WHATCG</a>. It is not a W3C Standard nor is it on the W3C Standards Track. Please note that under the <a href="http://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a> there is a limited opt-out and other conditions apply. Learn more about <a href="http://www.w3.org/community/">W3C Community and Business Groups</a>.</p>
-
-<p class="not-draft">This specification was published by the <a href="http://www.w3.org/community/whatwg/">WHATCG</a>. It is not a W3C Standard nor is it on the W3C Standards Track. Please note that under the <a href="http://www.w3.org/community/about/agreements/final/">W3C Community Final Specification Agreement (FSA)</a> other conditions apply. Learn more about <a href="http://www.w3.org/community/">W3C Community and Business Groups</a>.</p>
+<p>This specification was published by the <a href="http://www.w3.org/community/whatwg/">WHATCG</a>. It is not a W3C Standard nor is it on the W3C Standards Track. Please note that under the <a href="http://www.w3.org/community/about/agreements/final/">W3C Community Final Specification Agreement (FSA)</a> other conditions apply. Learn more about <a href="http://www.w3.org/community/">W3C Community and Business Groups</a>.</p>
 </div>
 
 <div id='status-warning' class=not-draft>
-<p>This is a snapshot. The <a href=http://dvcs.w3.org/hg/quirks-mode/raw-file/tip/Overview.html>editor's draft</a> is the latest version.
+<p>This is a snapshot. Please see the <a href=http://quirks.spec.whatwg.org/>latest version</a>.
 </div>
 <script class=not-draft src=http://dvcs.w3.org/hg/quirks-mode/raw-file/tip/status-warning.js async></script>
 

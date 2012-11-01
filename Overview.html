@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en-US"><title>Quirks Mode</title>
+<!DOCTYPE html><html lang="en-US"><meta charset="utf-8">
+<title class="not-tr not-fs">Quirks Mode Standard</title>
 <meta content="width=device-width" name="viewport">
 <style>
  pre.idl { border:solid thin; background:#eee; color:#000; padding:0.5em }
@@ -43,16 +44,16 @@
 <link class="not-tr" href="http://www.whatwg.org/style/specification" rel="stylesheet">
 <div class="head">
 
-<p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a>
+<p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" src="//www.whatwg.org/images/logo"></a></p>
 
-</p><hgroup>
+<hgroup>
 <h1>Quirks Mode</h1>
-<h2 class="no-num no-toc not-tr not-fs">Living Specification — 18 October 2012</h2>
+<h2 class="no-num no-toc not-tr not-fs">Living Standard — 1 November 2012</h2>
 </hgroup>
 
 <dl>
  <dt>This Version:
- <dd class="not-tr not-fs"><a href="http://dvcs.w3.org/hg/quirks-mode/raw-file/tip/Overview.html">http://dvcs.w3.org/hg/quirks-mode/raw-file/tip/Overview.html</a>
+ <dd class="not-tr not-fs"><a href="http://quirks.spec.whatwg.org/">http://quirks.spec.whatwg.org/</a>
  <dt class="not-tr">Participate:</dt>
  <dd class="not-tr">Send feedback to <a href="http://www.whatwg.org/mailing-list">whatwg@whatwg.org</a>
  or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WHATWG&amp;component=Quirks%20Mode">file a bug</a> (<a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WHATWG&amp;component=Quirks%20Mode&amp;resolution=---">open bugs</a>)
@@ -60,7 +61,7 @@
  <dd class="no-tr"><a href="http://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
 
  <dt>Version History:
- <dd><a href="http://dvcs.w3.org/hg/quirks-mode/shortlog">http://dvcs.w3.org/hg/quirks-mode/shortlog</a></dd>
+ <dd><a href="https://github.com/whatwg/quirks/commits">https://github.com/whatwg/quirks/commits</a></dd>
  <dt>Editor:
  <dd>
   Simon Pieters
@@ -68,13 +69,10 @@
   &lt;<a href="mailto:simonp@opera.com">simonp@opera.com</a>&gt;
 </dl>
 
-<p class="copyright not-tr not-fs">Copyright © 2012 the Contributors to the Quirks Mode Specification, published by the <a href="http://www.w3.org/community/whatwg/">WHATCG</a> under the <a href="http://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a>. A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/">summary</a> is available.
-
-<p class="copyright not-tr">This living specification may also be used under the terms of
-<a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license">CC0 1.0 Universal</a>.
-To the extent possible under law, the editors has waived all copyright and
+<p class="copyright not-tr not-fs"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
+To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-18 October 2012, the editors have made this specification available
+23 October 2012, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -83,13 +81,6 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 </div>
 
 <hr class="top">
-
-<div class="not-tr">
-<h2 class="no-num no-toc" id="disclaimer">Disclaimer</h2>
-
-<p class="not-fs">This specification was published by the <a href="http://www.w3.org/community/whatwg/">WHATCG</a>. It is not a W3C Standard nor is it on the W3C Standards Track. Please note that under the <a href="http://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a> there is a limited opt-out and other conditions apply. Learn more about <a href="http://www.w3.org/community/">W3C Community and Business Groups</a>.</p>
-
-</div>
 
 <h2 class="no-num no-toc" id="table-of-contents">Table of Contents</h2>
 
@@ -140,7 +131,7 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 <li>Where possible, limit quirks to a fixed set of legacy features so they don't propagate into new features.
 </ul>
 
-<p class="note">This specification does not enumerate all quirks that currently exist in browsers. The HTML specification specifies a number of quirks. <a data-anolis-ref="" href="#refsHTML">[HTML]</a> If a quirk is missing from both specifications, it is probably due to the second bullet point above.
+<p class="note">This specification does not enumerate all quirks that currently exist in browsers. The HTML specification specifies a number of quirks. <a href="#refsHTML">[HTML]</a> If a quirk is missing from both specifications, it is probably due to the second bullet point above.
 
 <h2 id="common-infrastructure"><span class="secno">2 </span>Common infrastructure</h2>
 
@@ -148,7 +139,7 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 
 <p>All diagrams, examples, and notes in this specification are non-normative, as are all sections explicitly marked non-normative. Everything else in this specification is normative.
 
-<p>The key words "MUST", "MUST NOT", "REQUIRED", <!--"SHALL", "SHALL NOT",--> "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in the normative parts of this specification are to be interpreted as described in RFC2119. For readability, these words do not appear in all uppercase letters in this specification. <a data-anolis-ref="" href="#refsRFC2119">[RFC2119]</a>
+<p>The key words "MUST", "MUST NOT", "REQUIRED", <!--"SHALL", "SHALL NOT",--> "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in the normative parts of this specification are to be interpreted as described in RFC2119. For readability, these words do not appear in all uppercase letters in this specification. <a href="#refsRFC2119">[RFC2119]</a>
 
 <h3 id="terminology"><span class="secno">2.2 </span>Terminology</h3>
 
@@ -158,11 +149,11 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 
 <h3 id="dependencies"><span class="secno">2.3 </span>Dependencies</h3>
 
-<p>The terms <dfn id="block-container-element">block container element</dfn>, <dfn id="inline-level">inline-level</dfn>, <dfn id="containing-block">containing block</dfn>, <dfn id="initial-containing-block">initial containing block</dfn> and <dfn id="block-container-box">block container box</dfn> are defined in CSS 2.1. <a data-anolis-ref="" href="#refsCSS">[CSS]</a>
+<p>The terms <dfn id="block-container-element">block container element</dfn>, <dfn id="inline-level">inline-level</dfn>, <dfn id="containing-block">containing block</dfn>, <dfn id="initial-containing-block">initial containing block</dfn> and <dfn id="block-container-box">block container box</dfn> are defined in CSS 2.1. <a href="#refsCSS">[CSS]</a>
 
-<p>The terms <dfn id="minimum-intrinsic-width-of-an-inline-formatting-context">minimum intrinsic width of an inline formatting context</dfn> and <dfn id="outer-intrinsic-minimum-width-of-a-table-cell">outer intrinsic minimum width of a table cell</dfn> are defined in More Precise Definitions of Intrinsic Widths and Table Layout (Proposal). <a data-anolis-ref="" href="#refsCSSINTRINSIC">[CSSINTRINSIC]</a>
+<p>The terms <dfn id="minimum-intrinsic-width-of-an-inline-formatting-context">minimum intrinsic width of an inline formatting context</dfn> and <dfn id="outer-intrinsic-minimum-width-of-a-table-cell">outer intrinsic minimum width of a table cell</dfn> are defined in More Precise Definitions of Intrinsic Widths and Table Layout (Proposal). <a href="#refsCSSINTRINSIC">[CSSINTRINSIC]</a>
 
-<p>Some terms are defined in DOM and HTML. <a data-anolis-ref="" href="#refsDOM">[DOM]</a> <a data-anolis-ref="" href="#refsHTML">[HTML]</a>
+<p>Some terms are defined in DOM and HTML. <a href="#refsDOM">[DOM]</a> <a href="#refsHTML">[HTML]</a>
 
 <h2 id="css"><span class="secno">3 </span>CSS</h2>
 <!--
@@ -658,7 +649,7 @@ https://bugs.webkit.org/show_bug.cgi?id=84469
 
 <p class="status not-tr">Status: Awaiting implementation feedback.
 
-<p>In <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document-quirks" title="concept-document-quirks">quirks mode</a>, a compound selector <var>selector</var> that matches the following conditions must not match elements that would not also match the ':any-link' selector. <a data-anolis-ref="" href="#refsSELECTORS">[SELECTORS]</a>
+<p>In <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document-quirks" title="concept-document-quirks">quirks mode</a>, a compound selector <var>selector</var> that matches the following conditions must not match elements that would not also match the ':any-link' selector. <a href="#refsSELECTORS">[SELECTORS]</a>
 
 <ul>
  <li><var>selector</var> uses the ':active' or ':hover' pseudo-classes.
@@ -722,7 +713,7 @@ http://mxr.mozilla.org/mozilla-central/source/content/base/src/nsGenericElement.
 -->
 <h2 id="quirks-that-have-moved-to-other-specifications"><span class="secno">5 </span>Quirks that have moved to other specifications</h2>
 
-<p><dfn id="the-hashless-hex-color-quirk">The hashless hex color quirk</dfn> and <dfn id="the-unitless-length-quirk">the unitless length quirk</dfn> are now defined in CSS Syntax Module Level 3. <a data-anolis-ref="" href="#refsCSSSYNTAX">[CSSSYNTAX]</a>
+<p><dfn id="the-hashless-hex-color-quirk">The hashless hex color quirk</dfn> and <dfn id="the-unitless-length-quirk">the unitless length quirk</dfn> are now defined in CSS Syntax Module Level 3. <a href="#refsCSSSYNTAX">[CSSSYNTAX]</a>
 
 <h2 class="no-num" id="references">References</h2>
 
