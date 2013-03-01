@@ -530,7 +530,7 @@ Opera supported this quirk (copied from IE), but then dropped it because it brok
 
 <p class="status not-tr">Status: Awaiting implementation feedback. Has <a href="http://w3c-test.org/quirks-mode/tests/js/line-height-calculation.html">tests</a>.
 
-<p>In <span data-anolis-spec=dom title=concept-document-quirks>quirks mode</span> and <span data-anolis-spec=dom title=concept-document-limited-quirks>almost standards mode</span>, an inline box that matches the following conditions, must, for the purpose of line height calculation, act as if the box had a height of zero.
+<p>In <span data-anolis-spec=dom title=concept-document-quirks>quirks mode</span> and <span data-anolis-spec=dom title=concept-document-limited-quirks>almost standards mode</span>, an inline box that matches the following conditions, must, for the purpose of line height calculation, act as if the box had a 'line-height' of zero.
 
 <ul>
  <li><p>The 'border-right-width', 'border-left-width', 'padding-right' and 'padding-left' properties have a used value of zero. <!-- This matches WebKit. Opera and IE9 don't have this [Opera has now implemented this (CORE-19183)]. Gecko has this rule for all margins, paddings and borders. -->
