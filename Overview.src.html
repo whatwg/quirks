@@ -541,7 +541,9 @@ Opera supported this quirk (copied from IE), but then dropped it because it brok
 
 <p class="status not-tr">Status: Awaiting implementation feedback. Has <a href="http://w3c-test.org/quirks-mode/tests/js/blocks-ignore-line-height.html">tests</a>.
 
-<p>In <span data-anolis-spec=dom title=concept-document-quirks>quirks mode</span> and <span data-anolis-spec=dom title=concept-document-limited-quirks>almost standards mode</span>, a <span>block container element</span> whose content is composed of <span>inline-level</span> elements, the element's 'line-height' must be ignored for the purpose of calculating the minimal height of line boxes within the element.
+<p>In <span data-anolis-spec=dom title=concept-document-quirks>quirks mode</span> and <span data-anolis-spec=dom title=concept-document-limited-quirks>almost standards mode</span>, for a <span>block container element</span> whose content is composed of <span>inline-level</span> elements, the element's 'line-height' must be ignored for the purpose of calculating the minimal height of line boxes within the element.
+
+<p class=note>This means that the "strut" is not created.
 
 <h3>The percentage height calculation quirk</h3>
 
