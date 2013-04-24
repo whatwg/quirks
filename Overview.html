@@ -53,7 +53,7 @@
 
 <hgroup>
 <h1>Quirks Mode</h1>
-<h2 class="no-num no-toc not-tr not-fs">Living Standard — 1 March 2013</h2>
+<h2 class="no-num no-toc not-tr not-fs">Living Standard — 24 April 2013</h2>
 </hgroup>
 
 <dl>
@@ -78,7 +78,7 @@
 <p class="copyright not-tr not-fs"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-1 March 2013, the editors have made this specification available
+24 April 2013, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -104,20 +104,21 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
    <li><a href="#dependencies"><span class="secno">2.3 </span>Dependencies</a></ol></li>
  <li><a href="#css"><span class="secno">3 </span>CSS</a>
   <ol>
-   <li><a href="#the-line-height-calculation-quirk"><span class="secno">3.1 </span>The line height calculation quirk</a></li>
-   <li><a href="#the-blocks-ignore-line-height-quirk"><span class="secno">3.2 </span>The blocks ignore line-height quirk</a></li>
-   <li><a href="#the-percentage-height-calculation-quirk"><span class="secno">3.3 </span>The percentage height calculation quirk</a></li>
-   <li><a href="#the-table-cell-width-calculation-quirk"><span class="secno">3.4 </span>The table cell width calculation quirk</a></li>
-   <li><a href="#the-table-cell-nowrap-minimum-width-calculation-quirk"><span class="secno">3.5 </span>The table cell nowrap minimum width calculation quirk</a></li>
-   <li><a href="#the-collapsing-table-quirk"><span class="secno">3.6 </span>The collapsing table quirk</a></li>
-   <li><a href="#the-text-decoration-doesn't-propagate-into-tables-quirk"><span class="secno">3.7 </span>The text decoration doesn't propagate into tables quirk</a></li>
-   <li><a href="#the-font-element-text-decoration-color-quirk"><span class="secno">3.8 </span>The font element text decoration color quirk</a></li>
-   <li><a href="#the-tables-inherit-color-from-body-quirk"><span class="secno">3.9 </span>The tables inherit color from body quirk</a></li>
-   <li><a href="#the-table-cell-height-box-sizing-quirk"><span class="secno">3.10 </span>The table cell height box sizing quirk</a></ol></li>
+   <li><a href="#the-hashless-hex-color-quirk"><span class="secno">3.1 </span>The hashless hex color quirk</a></li>
+   <li><a href="#the-unitless-length-quirk"><span class="secno">3.2 </span>The unitless length quirk</a></li>
+   <li><a href="#the-line-height-calculation-quirk"><span class="secno">3.3 </span>The line height calculation quirk</a></li>
+   <li><a href="#the-blocks-ignore-line-height-quirk"><span class="secno">3.4 </span>The blocks ignore line-height quirk</a></li>
+   <li><a href="#the-percentage-height-calculation-quirk"><span class="secno">3.5 </span>The percentage height calculation quirk</a></li>
+   <li><a href="#the-table-cell-width-calculation-quirk"><span class="secno">3.6 </span>The table cell width calculation quirk</a></li>
+   <li><a href="#the-table-cell-nowrap-minimum-width-calculation-quirk"><span class="secno">3.7 </span>The table cell nowrap minimum width calculation quirk</a></li>
+   <li><a href="#the-collapsing-table-quirk"><span class="secno">3.8 </span>The collapsing table quirk</a></li>
+   <li><a href="#the-text-decoration-doesn't-propagate-into-tables-quirk"><span class="secno">3.9 </span>The text decoration doesn't propagate into tables quirk</a></li>
+   <li><a href="#the-font-element-text-decoration-color-quirk"><span class="secno">3.10 </span>The font element text decoration color quirk</a></li>
+   <li><a href="#the-tables-inherit-color-from-body-quirk"><span class="secno">3.11 </span>The tables inherit color from body quirk</a></li>
+   <li><a href="#the-table-cell-height-box-sizing-quirk"><span class="secno">3.12 </span>The table cell height box sizing quirk</a></ol></li>
  <li><a href="#selectors"><span class="secno">4 </span>Selectors</a>
   <ol>
    <li><a href="#the-:active-and-:hover-quirk"><span class="secno">4.1 </span>The :active and :hover quirk</a></ol></li>
- <li><a href="#quirks-that-have-moved-to-other-specifications"><span class="secno">5 </span>Quirks that have moved to other specifications</a></li>
  <li><a class="no-num" href="#references">References</a></li>
  <li><a class="no-num" href="#acknowledgments">Acknowledgments</a></ol>
 <!--end-toc-->
@@ -162,11 +163,37 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 <p>Some terms are defined in DOM and HTML. <a href="#refsDOM">[DOM]</a> <a href="#refsHTML">[HTML]</a>
 
 <h2 id="css"><span class="secno">3 </span>CSS</h2>
-<!--
-<h3>The hashless hex color quirk</h3>
+
+<h3 id="the-hashless-hex-color-quirk"><span class="secno">3.1 </span>The hashless hex color quirk</h3>
 
 <p class="status not-tr">Status: Awaiting implementation feedback. Has <a href="http://w3c-test.org/quirks-mode/tests/js/hashless-hex-color.html">tests</a>.
 
+<p>Quirky colors are denoted by <dfn id="quirky-color">&lt;quirky-color&gt;</dfn>. A <dfn id="quirky-color-0">quirky color</dfn> is a sequence of 3 or 6 characters in the range [0-9A-Fa-f] (U+0030 to U+0039, U+0041 to U+0046, U+0061 to U+0066) and correspond to a <span>number token</span>, a <span>dimension token</span> or an <span>ident token</span> in the syntax. The value of a <span>hashless hex color</span> is obtained from the possible tokens as follows:
+
+<dl>
+ <dt><span>number token</span>
+ <dd><p>The value is the token's representation.
+ <dt><span>dimension token</span>
+ <dd><p>The value is the token's representation followed by the token's unit.
+ <dt><span>ident token</span>
+ <dd><p>The value is the token's value.
+</dl>
+
+<p>The value of a <a href="#quirky-color-0">quirky color</a> must be interpreted as an RGB value in hexadecimal notation using the same rules as for <span>&lt;color&gt;</span>, except for the leading "<code>#</code>" character.
+
+<p>In <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document-quirks" title="concept-document-quirks">quirks mode</a>, the following properties must have their "Value" grammar changed by replacing <span>&lt;color&gt;</span> with [ <span>&lt;color&gt;</span> | <a href="#quirky-color">&lt;quirky-color&gt;</a> ]:
+
+<ul class="brief">
+<li>'background-color'
+<li>'border-color'
+<li>'border-top-color'
+<li>'border-right-color'
+<li>'border-bottom-color'
+<li>'border-left-color'
+<li>'color'
+</ul>
+
+<!--
 <p>When a property is said to <dfn>support hashless hex colors</dfn>, all tokens in the property's value <var>tokens</var> must be replaced with the return value of following algorithm prior to interpretation:
 
 <ol>
@@ -249,9 +276,10 @@ Other than typos and scrollbar-* properties, the ones that are used are the ones
 In particular, outline-color did not show up at all.
 
 -->
-<!--
-<h3>The unitless length quirk</h3>
 
+<h3 id="the-unitless-length-quirk"><span class="secno">3.2 </span>The unitless length quirk</h3>
+<p class="XXX">...
+<!--
 <p class="status not-tr">Status: Awaiting implementation feedback. Has <a href="http://w3c-test.org/quirks-mode/tests/js/unitless-length.html">tests</a>.
 
 <p>When a property is said to <dfn>support unitless lengths</dfn>, all tokens in the property's value <var>tokens</var> must be replaced with the return value of following algorithm prior to interpretation:
@@ -517,7 +545,7 @@ Opera supported this quirk (copied from IE), but then dropped it because it brok
 
 -->
 
-<h3 id="the-line-height-calculation-quirk"><span class="secno">3.1 </span>The line height calculation quirk</h3>
+<h3 id="the-line-height-calculation-quirk"><span class="secno">3.3 </span>The line height calculation quirk</h3>
 
 <p class="status not-tr">Status: Awaiting implementation feedback. Has <a href="http://w3c-test.org/quirks-mode/tests/js/line-height-calculation.html">tests</a>.
 
@@ -528,7 +556,7 @@ Opera supported this quirk (copied from IE), but then dropped it because it brok
  <li><p>It either contains no text or it contains only collapsed whitespace. <!-- This matches Gecko and WebKit. IE still uses the quirk in "<pre><img> ". Opera still uses the quirk in "<p><img> <img>". --> <!-- For the purpose of this bullet point, the 'white-space' processing model must not remove a space (U+0020) at the end of a line has 'white-space' set to 'normal', 'nowrap', or 'pre-line' as each line is laid out. (This matches Firefox but not WebKit. Opera had a bug about a site that relied on the Firefox behavior.)-->
 </ul>
 
-<h3 id="the-blocks-ignore-line-height-quirk"><span class="secno">3.2 </span>The blocks ignore line-height quirk</h3>
+<h3 id="the-blocks-ignore-line-height-quirk"><span class="secno">3.4 </span>The blocks ignore line-height quirk</h3>
 
 <p class="status not-tr">Status: Awaiting implementation feedback. Has <a href="http://w3c-test.org/quirks-mode/tests/js/blocks-ignore-line-height.html">tests</a>.
 
@@ -536,7 +564,7 @@ Opera supported this quirk (copied from IE), but then dropped it because it brok
 
 <p class="note">This means that the "strut" is not created.
 
-<h3 id="the-percentage-height-calculation-quirk"><span class="secno">3.3 </span>The percentage height calculation quirk</h3>
+<h3 id="the-percentage-height-calculation-quirk"><span class="secno">3.5 </span>The percentage height calculation quirk</h3>
 
 <p class="status not-tr">Status: Awaiting implementation feedback. Has <a href="http://w3c-test.org/quirks-mode/tests/js/percentage-height-calculation.html">tests</a>.
 
@@ -565,7 +593,7 @@ Opera supported this quirk (copied from IE), but then dropped it because it brok
 
 <p class="note">It is at the time or writing undefined how percentage heights inside tables work in CSS. This specification does not try to specify what to use as the containing block for calculating percentage heights in tables. Godspeed!
 
-<h3 id="the-table-cell-width-calculation-quirk"><span class="secno">3.4 </span>The table cell width calculation quirk</h3>
+<h3 id="the-table-cell-width-calculation-quirk"><span class="secno">3.6 </span>The table cell width calculation quirk</h3>
 
 <p class="status not-tr">Status: Awaiting implementation feedback. Has <a href="http://w3c-test.org/quirks-mode/tests/js/table-cell-width-calculation.html">tests</a>.
 
@@ -573,7 +601,7 @@ Opera supported this quirk (copied from IE), but then dropped it because it brok
 
 <!-- http://mxr.mozilla.org/mozilla-central/source/layout/generic/nsImageFrame.cpp#2053 -->
 
-<h3 id="the-table-cell-nowrap-minimum-width-calculation-quirk"><span class="secno">3.5 </span>The table cell nowrap minimum width calculation quirk</h3>
+<h3 id="the-table-cell-nowrap-minimum-width-calculation-quirk"><span class="secno">3.7 </span>The table cell nowrap minimum width calculation quirk</h3>
 
 <p class="status not-tr">Status: Awaiting implementation feedback.
 
@@ -585,7 +613,7 @@ Opera supported this quirk (copied from IE), but then dropped it because it brok
   <li><p>The computed value of the 'width' property of <var>cell</var> is a &lt;length&gt; that is not zero.
 </ul>
 
-<h3 id="the-collapsing-table-quirk"><span class="secno">3.6 </span>The collapsing table quirk</h3>
+<h3 id="the-collapsing-table-quirk"><span class="secno">3.8 </span>The collapsing table quirk</h3>
 
 <p class="status not-tr">Status: Awaiting implementation feedback.
 
@@ -597,7 +625,7 @@ Opera supported this quirk (copied from IE), but then dropped it because it brok
   <li><p><var>table</var> has no child 'table-column-group' box that itself has a child 'table-column' box.
 </ul>
 
-<h3 id="the-text-decoration-doesn't-propagate-into-tables-quirk"><span class="secno">3.7 </span>The text decoration doesn't propagate into tables quirk</h3>
+<h3 id="the-text-decoration-doesn't-propagate-into-tables-quirk"><span class="secno">3.9 </span>The text decoration doesn't propagate into tables quirk</h3>
 
 <p class="status not-tr">Status: Awaiting implementation feedback.
 
@@ -605,7 +633,7 @@ Opera supported this quirk (copied from IE), but then dropped it because it brok
 
 <!-- http://mxr.mozilla.org/mozilla-central/source/layout/generic/nsTextFrameThebes.cpp#4582 -->
 
-<h3 id="the-font-element-text-decoration-color-quirk"><span class="secno">3.8 </span>The font element text decoration color quirk</h3>
+<h3 id="the-font-element-text-decoration-color-quirk"><span class="secno">3.10 </span>The font element text decoration color quirk</h3>
 
 <p class="status not-tr">Status: Awaiting implementation feedback. Has <a href="http://w3c-test.org/quirks-mode/tests/reftest/font-element-text-decoration-color/">tests</a>.
 
@@ -613,7 +641,7 @@ Opera supported this quirk (copied from IE), but then dropped it because it brok
 
 <p class="note">This applies in all modes.
 
-<h3 id="the-tables-inherit-color-from-body-quirk"><span class="secno">3.9 </span>The tables inherit color from body quirk</h3>
+<h3 id="the-tables-inherit-color-from-body-quirk"><span class="secno">3.11 </span>The tables inherit color from body quirk</h3>
 
 <p class="status not-tr">Status: Awaiting implementation feedback.
 
@@ -645,7 +673,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=747464
 https://bugs.webkit.org/show_bug.cgi?id=84469
 -->
 
-<h3 id="the-table-cell-height-box-sizing-quirk"><span class="secno">3.10 </span>The table cell height box sizing quirk</h3>
+<h3 id="the-table-cell-height-box-sizing-quirk"><span class="secno">3.12 </span>The table cell height box sizing quirk</h3>
 
 <p class="status not-tr">Status: Awaiting implementation feedback.
 
@@ -719,10 +747,11 @@ http://mxr.mozilla.org/mozilla-central/source/layout/style/nsStyleUtil.cpp#172
 http://mxr.mozilla.org/mozilla-central/source/layout/base/nsCSSRendering.cpp#573
 http://mxr.mozilla.org/mozilla-central/source/content/base/src/nsGenericElement.cpp#2110
 -->
-<h2 id="quirks-that-have-moved-to-other-specifications"><span class="secno">5 </span>Quirks that have moved to other specifications</h2>
+<!--
+<h2>Quirks that have moved to other specifications</h2>
 
-<p><dfn id="the-hashless-hex-color-quirk">The hashless hex color quirk</dfn> and <dfn id="the-unitless-length-quirk">the unitless length quirk</dfn> are now defined in CSS Syntax Module Level 3. <a href="#refsCSSSYNTAX">[CSSSYNTAX]</a>
-
+<p><dfn>The hashless hex color quirk</dfn> and <dfn>the unitless length quirk</dfn> are now defined in CSS Syntax Module Level 3. <span data-anolis-ref>CSSSYNTAX</span>
+-->
 <h2 class="no-num" id="references">References</h2>
 
 <div id="anolis-references"><dl><dt id="refsCSS">[CSS]
@@ -730,9 +759,6 @@ http://mxr.mozilla.org/mozilla-central/source/content/base/src/nsGenericElement.
 
 <dt id="refsCSSINTRINSIC">[CSSINTRINSIC]
 <dd><cite><a href="http://dbaron.org/css/intrinsic/">More Precise Definitions of Intrinsic Widths and Table Layout (Proposal)</a></cite>, L. David Baron.
-
-<dt id="refsCSSSYNTAX">[CSSSYNTAX]
-<dd><cite><a href="http://dev.w3.org/csswg/css3-syntax/">CSS Syntax Module Level 3</a></cite>, Tab Atkins Jr. W3C.
 
 <dt id="refsDOM">[DOM]
 <dd><cite><a href="http://dom.spec.whatwg.org/">DOM</a></cite>, Anne van Kesteren, Aryeh Gregor and Ms2ger. WHATWG.
