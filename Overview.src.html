@@ -170,7 +170,7 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 
 <p>The terms <dfn>number token</dfn>, <dfn>dimension token</dfn> and <dfn>ident token</dfn> are defined in CSS Syntax Module. <span data-anolis-ref>CSSSYNTAX</span>
 
-<p>The term <dfn>&lt;color></dfn> is defined in CSS Values and Units Module. <span data-anolis-ref>CSSVALUES</span>
+<p>The terms <dfn>&lt;color></dfn>, <dfn>&lt;length></dfn> and <dfn>number</dfn> are defined in CSS Values and Units Module. <span data-anolis-ref>CSSVALUES</span>
 
 <p>Some terms are defined in DOM and HTML. <span data-anolis-ref>DOM</span> <span data-anolis-ref>HTML</span>
 
@@ -180,7 +180,7 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 
 <p class="status not-tr">Status: Awaiting implementation feedback. Has <a href="http://w3c-test.org/quirks-mode/tests/js/hashless-hex-color.html">tests</a>.
 
-<p>Quirky colors are denoted by <dfn>&lt;quirky-color></dfn>. A <dfn>quirky color</dfn> is a sequence of 3 or 6 characters in the range [0-9A-Fa-f] (U+0030 to U+0039, U+0041 to U+0046, U+0061 to U+0066) and correspond to a <span>number token</span>, a <span>dimension token</span> or an <span>ident token</span> in the syntax. The value of a <span>quirky color</span> is obtained from the possible tokens as follows:
+<p>Quirky colors are denoted by <dfn>&lt;quirky-color></dfn>. A <dfn>quirky color</dfn> is a sequence of 3 or 6 characters in the range [0-9A-Fa-f] (U+0030 to U+0039, U+0041 to U+0046, U+0061 to U+0066) and corresponds to a <span>number token</span>, a <span>dimension token</span> or an <span>ident token</span> in the syntax. The value of a <span>quirky color</span> is obtained from the possible tokens as follows:
 
 <dl class=switch>
  <dt><span>number token</span>
@@ -205,7 +205,7 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 <li>'color'
 </ul>
 
-<p>Any properties that reference the above properties in their "Value" grammar must not support <span>&lt;quirky-color></span>.
+<p>Any properties not listed above that reference the above properties in their "Value" grammar must not support <span>&lt;quirky-color></span>.
 
 <p>The <span>&lt;quirky-color></span> value must not be supported in arguments to CSS expressions.
 
@@ -294,10 +294,57 @@ In particular, outline-color did not show up at all.
 -->
 
 <h3>The unitless length quirk</h3>
-<p class=XXX>...
-<!--
+
 <p class="status not-tr">Status: Awaiting implementation feedback. Has <a href="http://w3c-test.org/quirks-mode/tests/js/unitless-length.html">tests</a>.
 
+<p>Quirky lengths are denoted by <dfn>&lt;quirky-length></dfn>. A <dfn>quirky length</dfn> is a <span>number</span> and corresponds to a <span>number token</span> in the syntax. The value of a <span>quirky length</span> is obtained from the token's value.
+
+<p>The value of a <span>quirky length</span> must be interpreted as a <span>&lt;length></span> where the unit is '<code title>px</code>'.
+
+<p>In <span data-anolis-spec=dom title=concept-document-quirks>quirks mode</span>, the following properties must have their "Value" grammar changed by replacing <span>&lt;length></span> with [ <span>&lt;length></span> | <span>&lt;quirky-length></span> ]:
+
+<ul class=brief>
+<!--<li>'background-position'-->
+<!--<li>'border-spacing'-->
+<li>'border-top-width'
+<li>'border-right-width'
+<li>'border-bottom-width'
+<li>'border-left-width'
+<li>'border-width'
+<li>'bottom'
+<li>'clip'
+<li>'font-size'
+<!--<li class=XXX>'font'-->
+<li>'height'
+<li>'left'
+<li>'letter-spacing'
+<li>'margin-right'
+<li>'margin-left'
+<li>'margin-top'
+<li>'margin-bottom'
+<li>'margin'
+<!--<li>'max-height'-->
+<!--<li>'max-width'-->
+<!--<li>'min-height'-->
+<!--<li>'min-width'-->
+<li>'padding-top'
+<li>'padding-right'
+<li>'padding-bottom'
+<li>'padding-left'
+<li>'padding'
+<li>'right'
+<!--<li>'text-indent'-->
+<li>'top'
+<!--<li>'vertical-align'-->
+<li>'width'
+<li>'word-spacing'
+</ul>
+
+<p>Any properties not listed above that reference the above properties in their "Value" grammar must not support <span>&lt;quirky-length></span>.
+
+<p>The <span>&lt;quirky-length></span> value must not be supported in arguments to CSS expressions other than the <code title>rect()</code> expression.
+
+<!--
 <p>When a property is said to <dfn>support unitless lengths</dfn>, all tokens in the property's value <var>tokens</var> must be replaced with the return value of following algorithm prior to interpretation:
 
 <ol>
