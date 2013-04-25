@@ -53,7 +53,7 @@
 
 <hgroup>
 <h1>Quirks Mode</h1>
-<h2 class="no-num no-toc not-tr not-fs">Living Standard — 24 April 2013</h2>
+<h2 class="no-num no-toc not-tr not-fs">Living Standard — 25 April 2013</h2>
 </hgroup>
 
 <dl>
@@ -78,7 +78,7 @@
 <p class="copyright not-tr not-fs"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-24 April 2013, the editors have made this specification available
+25 April 2013, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -160,6 +160,10 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 
 <p>The terms <dfn id="minimum-intrinsic-width-of-an-inline-formatting-context">minimum intrinsic width of an inline formatting context</dfn> and <dfn id="outer-intrinsic-minimum-width-of-a-table-cell">outer intrinsic minimum width of a table cell</dfn> are defined in More Precise Definitions of Intrinsic Widths and Table Layout (Proposal). <a href="#refsCSSINTRINSIC">[CSSINTRINSIC]</a>
 
+<p>The terms <dfn id="number-token">number token</dfn>, <dfn id="dimension-token">dimension token</dfn> and <dfn id="ident-token">ident token</dfn> are defined in CSS Syntax Module. <a href="#refsCSSSYNTAX">[CSSSYNTAX]</a>
+
+<p>The term <dfn id="color">&lt;color&gt;</dfn> is defined in CSS Values and Units Module. <a href="#refsCSSVALUES">[CSSVALUES]</a>
+
 <p>Some terms are defined in DOM and HTML. <a href="#refsDOM">[DOM]</a> <a href="#refsHTML">[HTML]</a>
 
 <h2 id="css"><span class="secno">3 </span>CSS</h2>
@@ -168,20 +172,20 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 
 <p class="status not-tr">Status: Awaiting implementation feedback. Has <a href="http://w3c-test.org/quirks-mode/tests/js/hashless-hex-color.html">tests</a>.
 
-<p>Quirky colors are denoted by <dfn id="quirky-color">&lt;quirky-color&gt;</dfn>. A <dfn id="quirky-color-0">quirky color</dfn> is a sequence of 3 or 6 characters in the range [0-9A-Fa-f] (U+0030 to U+0039, U+0041 to U+0046, U+0061 to U+0066) and correspond to a <span>number token</span>, a <span>dimension token</span> or an <span>ident token</span> in the syntax. The value of a <span>hashless hex color</span> is obtained from the possible tokens as follows:
+<p>Quirky colors are denoted by <dfn id="quirky-color">&lt;quirky-color&gt;</dfn>. A <dfn id="quirky-color-0">quirky color</dfn> is a sequence of 3 or 6 characters in the range [0-9A-Fa-f] (U+0030 to U+0039, U+0041 to U+0046, U+0061 to U+0066) and correspond to a <a href="#number-token">number token</a>, a <a href="#dimension-token">dimension token</a> or an <a href="#ident-token">ident token</a> in the syntax. The value of a <a href="#quirky-color-0">quirky color</a> is obtained from the possible tokens as follows:
 
-<dl>
- <dt><span>number token</span>
+<dl class="switch">
+ <dt><a href="#number-token">number token</a>
  <dd><p>The value is the token's representation.
- <dt><span>dimension token</span>
+ <dt><a href="#dimension-token">dimension token</a>
  <dd><p>The value is the token's representation followed by the token's unit.
- <dt><span>ident token</span>
+ <dt><a href="#ident-token">ident token</a>
  <dd><p>The value is the token's value.
 </dl>
 
-<p>The value of a <a href="#quirky-color-0">quirky color</a> must be interpreted as an RGB value in hexadecimal notation using the same rules as for <span>&lt;color&gt;</span>, except for the leading "<code>#</code>" character.
+<p>The value of a <a href="#quirky-color-0">quirky color</a> must be interpreted as an RGB value in hexadecimal notation using the same rules as for <a href="#color">&lt;color&gt;</a>, except for the leading "<code>#</code>" character.
 
-<p>In <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document-quirks" title="concept-document-quirks">quirks mode</a>, the following properties must have their "Value" grammar changed by replacing <span>&lt;color&gt;</span> with [ <span>&lt;color&gt;</span> | <a href="#quirky-color">&lt;quirky-color&gt;</a> ]:
+<p>In <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document-quirks" title="concept-document-quirks">quirks mode</a>, the following properties must have their "Value" grammar changed by replacing <a href="#color">&lt;color&gt;</a> with [ <a href="#color">&lt;color&gt;</a> | <a href="#quirky-color">&lt;quirky-color&gt;</a> ]:
 
 <ul class="brief">
 <li>'background-color'
@@ -192,6 +196,10 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 <li>'border-left-color'
 <li>'color'
 </ul>
+
+<p>Any properties that reference the above properties in their "Value" grammar must not support <a href="#quirky-color">&lt;quirky-color&gt;</a>.
+
+<p>The <a href="#quirky-color">&lt;quirky-color&gt;</a> value must not be supported in arguments to CSS expressions.
 
 <!--
 <p>When a property is said to <dfn>support hashless hex colors</dfn>, all tokens in the property's value <var>tokens</var> must be replaced with the return value of following algorithm prior to interpretation:
@@ -759,6 +767,12 @@ http://mxr.mozilla.org/mozilla-central/source/content/base/src/nsGenericElement.
 
 <dt id="refsCSSINTRINSIC">[CSSINTRINSIC]
 <dd><cite><a href="http://dbaron.org/css/intrinsic/">More Precise Definitions of Intrinsic Widths and Table Layout (Proposal)</a></cite>, L. David Baron.
+
+<dt id="refsCSSSYNTAX">[CSSSYNTAX]
+<dd><cite><a href="http://dev.w3.org/csswg/css3-syntax/">CSS Syntax Module Level 3</a></cite>, Tab Atkins Jr. W3C.
+
+<dt id="refsCSSVALUES">[CSSVALUES]
+<dd><cite><a href="http://dev.w3.org/csswg/css-values/">CSS Values and Units Module Level 3</a></cite>, Håkon Wium Lie, Tab Atkins and Elika J. Etemad. W3C.
 
 <dt id="refsDOM">[DOM]
 <dd><cite><a href="http://dom.spec.whatwg.org/">DOM</a></cite>, Anne van Kesteren, Aryeh Gregor and Ms2ger. WHATWG.
