@@ -1,4 +1,5 @@
 <!DOCTYPE html><html lang="en-US"><meta charset="utf-8">
+
 <title class="not-tr not-fs">Quirks Mode Standard</title>
 <meta content="width=device-width" name="viewport">
 <style>
@@ -45,6 +46,8 @@
  }
 </style>
 <link class="not-tr" href="http://www.whatwg.org/style/specification" rel="stylesheet">
+
+
 <link href="http://resources.whatwg.org/logo.svg" rel="icon">
 
 <div class="head">
@@ -53,7 +56,9 @@
 
 <hgroup>
 <h1>Quirks Mode</h1>
-<h2 class="no-num no-toc not-tr not-fs">Living Standard — 25 April 2013</h2>
+<h2 class="no-num no-toc not-tr not-fs">Living Standard — 27 June 2013</h2>
+
+
 </hgroup>
 
 <dl>
@@ -78,15 +83,21 @@
 <p class="copyright not-tr not-fs"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-25 April 2013, the editors have made this specification available
+27 June 2013, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
 http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 
+</p>
 </div>
 
 <hr class="top">
+
+
+
+
+
 
 <h2 class="no-num no-toc" id="table-of-contents">Table of Contents</h2>
 
@@ -160,7 +171,7 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 
 <p>The terms <dfn id="minimum-intrinsic-width-of-an-inline-formatting-context">minimum intrinsic width of an inline formatting context</dfn> and <dfn id="outer-intrinsic-minimum-width-of-a-table-cell">outer intrinsic minimum width of a table cell</dfn> are defined in More Precise Definitions of Intrinsic Widths and Table Layout (Proposal). <a href="#refsCSSINTRINSIC">[CSSINTRINSIC]</a>
 
-<p>The terms <dfn id="number-token">number token</dfn>, <dfn id="dimension-token">dimension token</dfn> and <dfn id="ident-token">ident token</dfn> are defined in CSS Syntax Module. <a href="#refsCSSSYNTAX">[CSSSYNTAX]</a>
+<p>The terms <dfn id="〈number〉">〈number〉</dfn>, <dfn id="〈dimension〉">〈dimension〉</dfn> and <dfn id="〈ident〉">〈ident〉</dfn> are defined in CSS Syntax Module. <a href="#refsCSSSYNTAX">[CSSSYNTAX]</a>
 
 <p>The terms <dfn id="color">&lt;color&gt;</dfn>, <dfn id="length">&lt;length&gt;</dfn> and <dfn id="number">number</dfn> are defined in CSS Values and Units Module. <a href="#refsCSSVALUES">[CSSVALUES]</a>
 
@@ -172,15 +183,15 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 
 <p class="status not-tr">Status: Awaiting implementation feedback. Has <a href="http://w3c-test.org/quirks-mode/tests/js/hashless-hex-color.html">tests</a>.
 
-<p>Quirky colors are denoted by <dfn id="quirky-color">&lt;quirky-color&gt;</dfn>. A <dfn id="quirky-color-0">quirky color</dfn> is a sequence of 3 or 6 characters in the range [0-9A-Fa-f] (U+0030 to U+0039, U+0041 to U+0046, U+0061 to U+0066) and corresponds to a <a href="#number-token">number token</a>, a <a href="#dimension-token">dimension token</a> or an <a href="#ident-token">ident token</a> in the syntax. The value of a <a href="#quirky-color-0">quirky color</a> is obtained from the possible tokens as follows:
+<p>Quirky colors are denoted by <dfn id="quirky-color">&lt;quirky-color&gt;</dfn>. A <dfn id="quirky-color-0">quirky color</dfn> is a sequence of 3 or 6 characters in the range [0-9A-Fa-f] (U+0030 to U+0039, U+0041 to U+0046, U+0061 to U+0066) and corresponds to a <a href="#〈number〉">〈number〉</a>, a <a href="#〈dimension〉">〈dimension〉</a> or an <a href="#〈ident〉">〈ident〉</a> component value in the syntax. The value of a <a href="#quirky-color-0">quirky color</a> is obtained from the possible component values as follows:
 
 <dl class="switch">
- <dt><a href="#number-token">number token</a>
- <dd><p>The value is the token's representation.
- <dt><a href="#dimension-token">dimension token</a>
- <dd><p>The value is the token's representation followed by the token's unit.
- <dt><a href="#ident-token">ident token</a>
- <dd><p>The value is the token's value.
+ <dt><a href="#〈number〉">〈number〉</a>
+ <dd><p>The value is the component value's representation.
+ <dt><a href="#〈dimension〉">〈dimension〉</a>
+ <dd><p>The value is the component value's representation followed by the component value's unit.
+ <dt><a href="#〈ident〉">〈ident〉</a>
+ <dd><p>The value is the component value's value.
 </dl>
 
 <p>The value of a <a href="#quirky-color-0">quirky color</a> must be interpreted as an RGB value in hexadecimal notation using the same rules as for <a href="#color">&lt;color&gt;</a>, except for the leading "<code>#</code>" character.
@@ -289,7 +300,7 @@ In particular, outline-color did not show up at all.
 
 <p class="status not-tr">Status: Awaiting implementation feedback. Has <a href="http://w3c-test.org/quirks-mode/tests/js/unitless-length.html">tests</a>.
 
-<p>Quirky lengths are denoted by <dfn id="quirky-length">&lt;quirky-length&gt;</dfn>. A <dfn id="quirky-length-0">quirky length</dfn> is a <a href="#number">number</a> and corresponds to a <a href="#number-token">number token</a> in the syntax. The value of a <a href="#quirky-length-0">quirky length</a> is obtained from the token's value.
+<p>Quirky lengths are denoted by <dfn id="quirky-length">&lt;quirky-length&gt;</dfn>. A <dfn id="quirky-length-0">quirky length</dfn> is a <a href="#number">number</a> and corresponds to a <a href="#〈number〉">〈number〉</a> component value in the syntax. The value of a <a href="#quirky-length-0">quirky length</a> is obtained from the component value's value.
 
 <p>The value of a <a href="#quirky-length-0">quirky length</a> must be interpreted as a <a href="#length">&lt;length&gt;</a> where the unit is '<code title="">px</code>'.
 
@@ -816,7 +827,7 @@ http://mxr.mozilla.org/mozilla-central/source/content/base/src/nsGenericElement.
 <dd><cite><a href="http://dbaron.org/css/intrinsic/">More Precise Definitions of Intrinsic Widths and Table Layout (Proposal)</a></cite>, L. David Baron.
 
 <dt id="refsCSSSYNTAX">[CSSSYNTAX]
-<dd><cite><a href="http://dev.w3.org/csswg/css3-syntax/">CSS Syntax Module Level 3</a></cite>, Tab Atkins Jr. W3C.
+<dd><cite><a href="http://dev.w3.org/csswg/css-syntax/">CSS Syntax Module Level 3</a></cite>, Tab Atkins Jr. W3C.
 
 <dt id="refsCSSVALUES">[CSSVALUES]
 <dd><cite><a href="http://dev.w3.org/csswg/css-values/">CSS Values and Units Module Level 3</a></cite>, Håkon Wium Lie, Tab Atkins and Elika J. Etemad. W3C.
@@ -844,7 +855,8 @@ Anne van Kesteren,
 Boris Zbarsky,
 David Baron,
 Kang-Hao Lu,
-Ms2ger
+Ms2ger,
+Simon Sapin
 and
 Tab Atkins
 
