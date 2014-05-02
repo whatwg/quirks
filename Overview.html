@@ -56,7 +56,7 @@
 
 <hgroup>
 <h1>Quirks Mode</h1>
-<h2 class="no-num no-toc not-tr not-fs">Living Standard — 30 April 2014</h2>
+<h2 class="no-num no-toc not-tr not-fs">Living Standard — 2 May 2014</h2>
 
 
 </hgroup>
@@ -83,7 +83,7 @@
 <p class="copyright not-tr not-fs"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-30 April 2014, the editors have made this specification available
+2 May 2014, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -129,7 +129,8 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
    <li><a href="#the-table-cell-height-box-sizing-quirk"><span class="secno">3.12 </span>The table cell height box sizing quirk</a></ol></li>
  <li><a href="#selectors"><span class="secno">4 </span>Selectors</a>
   <ol>
-   <li><a href="#the-:active-and-:hover-quirk"><span class="secno">4.1 </span>The :active and :hover quirk</a></ol></li>
+   <li><a href="#the-:active-and-:hover-quirk"><span class="secno">4.1 </span>The :active and :hover quirk</a></li>
+   <li><a href="#the-case-insensitive-class-and-id-selectors-quirk"><span class="secno">4.2 </span>The case-insensitive class and ID selectors quirk</a></ol></li>
  <li><a class="no-num" href="#references">References</a></li>
  <li><a class="no-num" href="#acknowledgments">Acknowledgments</a></ol>
 <!--end-toc-->
@@ -763,6 +764,19 @@ https://bugs.webkit.org/show_bug.cgi?id=84469
  <li><var>selector</var> does not use a pseudo-element selector.
  <li><var>selector</var> is not part of an argument to a functional pseudo-class or pseudo-element.
 </ul>
+
+<h3 id="the-case-insensitive-class-and-id-selectors-quirk"><span class="secno">4.2 </span>The case-insensitive class and ID selectors quirk</h3>
+
+<p class="status not-tr">Status: Awaiting implementation feedback.
+
+<p>In <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document-quirks" title="concept-document-quirks">quirks mode</a>,
+<a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-id" title="concept-id">unique identifiers</a> and
+<a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-class" title="concept-class">classes</a>
+must be treated as <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#ascii-case-insensitive">ASCII case-insensitive</a>
+for the purposes of selector matching.
+<a href="#refsSELECTORS">[SELECTORS]</a>
+
+<p class="note">This also applies to non-HTML elements.
 
 <!--<h2>HTML</h2>-->
 <!--
