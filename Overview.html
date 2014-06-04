@@ -1,49 +1,12 @@
 <!DOCTYPE html><html lang="en-US"><meta charset="utf-8">
 
 <title class="not-tr not-fs">Quirks Mode Standard</title>
-<meta content="width=device-width" name="viewport">
 <style>
- pre.idl { border:solid thin; background:#eee; color:#000; padding:0.5em }
- pre.idl :link, pre.idl :visited { color:inherit; background:transparent }
- pre code { color:inherit; background:transparent }
- .example { margin-left:1em; padding-left:1em; border-left:double; color:#222; background:#fcfcfc }
- .note { margin-left:2em; font-weight:bold; font-style:italic; color:#008000 }
- p.note::before { content:"Note: " }
- .XXX { padding:.5em; border:solid #f00 }
- dl.switch { padding-left:2em }
- dl.switch > dt { text-indent:-1.5em }
- dl.switch > dt:before { content:'\21AA'; padding:0 0.5em 0 0; display:inline-block; width:1em; text-align:right; line-height:0.5em }
- dfn { font-weight:bold; font-style:normal }
- code { color:orangered }
- code :link, code :visited { color:inherit }
- hr:not(.top) { display:block; background:none; border:none; padding:0; margin:2em 0; height:auto }
- table { border-collapse:collapse; border-style:hidden hidden none hidden }
- table thead { border-bottom:solid }
- table tbody th:first-child { border-left:solid }
- table td, table th { border-left:solid; border-right:solid; border-bottom:solid thin; vertical-align:top; padding:0.2em }
-
- .warning { color: red; background: transparent; font-weight: bolder; font-style: italic; }
- .warning p:first-child { margin-top: 0; }
- .warning p:last-child { margin-bottom: 0; }
- .warning:before { font-style: normal; }
- p.warning:before { content: '\26A0 Warning! '; }
-
  p.status { position:absolute; margin:-2em 0 0 -125px; width:100px; padding:5px; border:thin solid; font-size:smaller; background:papayawhip; color:black; border-radius:5px }
  p.status::after { content:'\25BA'; position:absolute; top:5px; right:3px; width:0; color:papayawhip; text-shadow:black 2px 0 0; cursor:default }
 
- .logo { border:1px outset gray; padding:2px; box-shadow:inset 0 0 0 4px white }
- div.head .logo > img { border:1px inset gray; padding:1px; }
-
- @media print { [data-anolis-spec]::after { content:"[" attr(data-anolis-spec) "]"; font-size:.6em; vertical-align:super; text-transform:uppercase } }
-
- @media (max-width:500px) {
-  html body { padding-left:8px }
-  p.status { position:static; margin:-1em 0; width:auto; display:table }
-  p.status::after { content:none }
-  html .toc { margin-left:0; padding-left:0 }
-  html ol, html ul, html dd, html p.note { margin-left:0.5em; padding-left:5% }
-  html p.note { padding-right:0 }
- }
+ .logo { position:absolute; top:1em; right:1em; width:106px; height:106px; border:1px outset gray; margin-top:-4px; margin-right:-4px }
+ div.head .logo > img { top:2px; right:2px; border:1px inset gray }
 </style>
 <link class="not-tr" href="http://www.whatwg.org/style/specification" rel="stylesheet">
 
@@ -56,7 +19,7 @@
 
 <hgroup>
 <h1>Quirks Mode</h1>
-<h2 class="no-num no-toc not-tr not-fs">Living Standard — 8 May 2014</h2>
+<h2 class="no-num no-toc not-tr not-fs">Living Standard — 4 June 2014</h2>
 
 
 </hgroup>
@@ -83,7 +46,7 @@
 <p class="copyright not-tr not-fs"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-8 May 2014, the editors have made this specification available
+4 June 2014, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
