@@ -2,8 +2,8 @@
 
 <title class="not-tr not-fs">Quirks Mode Standard</title>
 <style>
- p.status { position:absolute; margin:-2em 0 0 -125px; width:100px; padding:5px; border:thin solid; font-size:smaller; background:papayawhip; color:black; border-radius:5px }
- p.status::after { content:'\25BA'; position:absolute; top:5px; right:3px; width:0; color:papayawhip; text-shadow:black 2px 0 0; cursor:default }
+ p.status { position:absolute; margin:-2em 0 0 -125px; width:100px; text-align:center; line-height:3; border:thin solid; font-size:smaller; background:papayawhip; color:black; border-radius:5px }
+ p.status::after { content:'\25BA'; position:absolute; right:3px; width:0; color:papayawhip; text-shadow:black 2px 0 0; cursor:default }
 
  .logo { position:absolute; top:1em; right:1em; width:106px; height:106px; border:1px outset gray; margin-top:-4px; margin-right:-4px }
  div.head .logo > img { top:2px; right:2px; border:1px inset gray }
@@ -19,7 +19,7 @@
 
 <hgroup>
 <h1>Quirks Mode</h1>
-<h2 class="no-num no-toc not-tr not-fs">Living Standard — 30 September 2014</h2>
+<h2 class="no-num no-toc not-tr not-fs">Living Standard — 25 November 2014</h2>
 
 
 </hgroup>
@@ -46,7 +46,7 @@
 <p class="copyright not-tr not-fs"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="https://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-30 September 2014, the editors have made this specification available
+25 November 2014, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -141,7 +141,7 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 
 <h3 id="the-hashless-hex-color-quirk"><span class="secno">3.1 </span>The hashless hex color quirk</h3>
 
-<p class="status not-tr">Status: Awaiting implementation feedback. Has <a href="http://w3c-test.org/quirks-mode/hashless-hex-color.html">tests</a>.
+<p class="status not-tr">Run <a href="http://w3c-test.org/quirks-mode/hashless-hex-color.html">tests</a>
 
 <p>Quirky colors are denoted by <dfn id="quirky-color">&lt;quirky-color&gt;</dfn>. A <dfn id="quirky-color-0">quirky color</dfn> is a sequence of 3 or 6 characters in the range [0-9A-Fa-f] (U+0030 to U+0039, U+0041 to U+0046, U+0061 to U+0066) and corresponds to a <a href="#〈number〉">〈number〉</a>, a <a href="#〈dimension〉">〈dimension〉</a> or an <a href="#〈ident〉">〈ident〉</a> component value in the syntax. The value of a <a href="#quirky-color-0">quirky color</a> is obtained from the possible component values as follows:
 
@@ -258,7 +258,7 @@ In particular, outline-color did not show up at all.
 
 <h3 id="the-unitless-length-quirk"><span class="secno">3.2 </span>The unitless length quirk</h3>
 
-<p class="status not-tr">Status: Awaiting implementation feedback. Has <a href="http://w3c-test.org/quirks-mode/unitless-length.html">tests</a>.
+<p class="status not-tr">Run <a href="http://w3c-test.org/quirks-mode/unitless-length.html">tests</a>
 
 <p>Quirky lengths are denoted by <dfn id="quirky-length">&lt;quirky-length&gt;</dfn>. A <dfn id="quirky-length-0">quirky length</dfn> is a <a href="#number">number</a> and corresponds to a <a href="#〈number〉">〈number〉</a> component value in the syntax. The value of a <a href="#quirky-length-0">quirky length</a> is obtained from the component value's value.
 
@@ -573,7 +573,7 @@ Opera supported this quirk (copied from IE), but then dropped it because it brok
 
 <h3 id="the-line-height-calculation-quirk"><span class="secno">3.3 </span>The line height calculation quirk</h3>
 
-<p class="status not-tr">Status: Awaiting implementation feedback. Has <a href="http://w3c-test.org/quirks-mode/line-height-calculation.html">tests</a>.
+<p class="status not-tr">Run <a href="http://w3c-test.org/quirks-mode/line-height-calculation.html">tests</a>
 
 <p>In <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-quirks" title="concept-document-quirks">quirks mode</a> and <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-limited-quirks" title="concept-document-limited-quirks">almost standards mode</a>, an inline box that matches the following conditions, must, for the purpose of line height calculation, act as if the box had a 'line-height' of zero.
 
@@ -584,7 +584,7 @@ Opera supported this quirk (copied from IE), but then dropped it because it brok
 
 <h3 id="the-blocks-ignore-line-height-quirk"><span class="secno">3.4 </span>The blocks ignore line-height quirk</h3>
 
-<p class="status not-tr">Status: Awaiting implementation feedback. Has <a href="http://w3c-test.org/quirks-mode/blocks-ignore-line-height.html">tests</a>.
+<p class="status not-tr">Run <a href="http://w3c-test.org/quirks-mode/blocks-ignore-line-height.html">tests</a>
 
 <p>In <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-quirks" title="concept-document-quirks">quirks mode</a> and <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-limited-quirks" title="concept-document-limited-quirks">almost standards mode</a>, for a <a href="#block-container-element">block container element</a> whose content is composed of <a href="#inline-level">inline-level</a> elements, the element's 'line-height' must be ignored for the purpose of calculating the minimal height of line boxes within the element.
 
@@ -592,7 +592,7 @@ Opera supported this quirk (copied from IE), but then dropped it because it brok
 
 <h3 id="the-percentage-height-calculation-quirk"><span class="secno">3.5 </span>The percentage height calculation quirk</h3>
 
-<p class="status not-tr">Status: Awaiting implementation feedback. Has <a href="http://w3c-test.org/quirks-mode/percentage-height-calculation.html">tests</a>.
+<p class="status not-tr">Run <a href="http://w3c-test.org/quirks-mode/percentage-height-calculation.html">tests</a>
 
 <p>In <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-quirks" title="concept-document-quirks">quirks mode</a>, for the purpose of calculating the 'height' of an element <var>element</var>, if the computed value of the 'position' property of <var>element</var> is 'relative' or 'static', the specified value for the 'height' property of <var>element</var> is a &lt;percentage&gt;, and <var>element</var> does not have a computed value of the 'display' property that is 'table-row', 'table-row-group', 'table-header-group', 'table-footer-group', 'table-cell' or 'table-caption', the <a href="#containing-block">containing block</a> of <var>element</var> must be calculated using the following algorithm, aborting on the first step that returns a value:
 
@@ -621,15 +621,13 @@ Opera supported this quirk (copied from IE), but then dropped it because it brok
 
 <h3 id="the-table-cell-width-calculation-quirk"><span class="secno">3.6 </span>The table cell width calculation quirk</h3>
 
-<p class="status not-tr">Status: Awaiting implementation feedback. Has <a href="http://w3c-test.org/quirks-mode/table-cell-width-calculation.html">tests</a>.
+<p class="status not-tr">Run <a href="http://w3c-test.org/quirks-mode/table-cell-width-calculation.html">tests</a>
 
 <p>In <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-quirks" title="concept-document-quirks">quirks mode</a>, for the purpose of calculating the <a href="#minimum-intrinsic-width-of-an-inline-formatting-context">minimum intrinsic width of an inline formatting context</a> for which a table cell <var>cell</var> is the <a href="#containing-block">containing block</a>, if <var>cell</var> has a computed value of the 'width' property that is 'auto', <code>img</code> elements that are inline replaced elements or inline-block replaced elements in that inline formatting context must not have a line breaking opportunity before or after them.
 
 <!-- http://mxr.mozilla.org/mozilla-central/source/layout/generic/nsImageFrame.cpp#2053 -->
 
 <h3 id="the-table-cell-nowrap-minimum-width-calculation-quirk"><span class="secno">3.7 </span>The table cell nowrap minimum width calculation quirk</h3>
-
-<p class="status not-tr">Status: Awaiting implementation feedback.
 
 <p>In <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-quirks" title="concept-document-quirks">quirks mode</a>, an element <var>cell</var> that matches the following conditions must act as if it had an <a href="#outer-intrinsic-minimum-width-of-a-table-cell">outer intrinsic minimum width of a table cell</a> in the automatic table layout algorithm that is the bigger value of <var>cell</var>'s computed value of the 'width' property and the <a href="#outer-intrinsic-minimum-width-of-a-table-cell">outer intrinsic minimum width of a table cell</a>.
 
@@ -641,8 +639,6 @@ Opera supported this quirk (copied from IE), but then dropped it because it brok
 
 <h3 id="the-collapsing-table-quirk"><span class="secno">3.8 </span>The collapsing table quirk</h3>
 
-<p class="status not-tr">Status: Awaiting implementation feedback.
-
 <p>In <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-quirks" title="concept-document-quirks">quirks mode</a>, an element <var>table</var> that matches the following conditions must have a used value of the 'height' property of '0' and a used value of the 'border-style' property of 'none'.
 
 <ul>
@@ -653,23 +649,19 @@ Opera supported this quirk (copied from IE), but then dropped it because it brok
 
 <h3 id="the-text-decoration-doesn't-propagate-into-tables-quirk"><span class="secno">3.9 </span>The text decoration doesn't propagate into tables quirk</h3>
 
-<p class="status not-tr">Status: Awaiting implementation feedback.
-
 <p>In <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-quirks" title="concept-document-quirks">quirks mode</a>, text decoration must not propagate into <code>table</code> elements.
 
 <!-- http://mxr.mozilla.org/mozilla-central/source/layout/generic/nsTextFrameThebes.cpp#4582 -->
 
 <h3 id="the-font-element-text-decoration-color-quirk"><span class="secno">3.10 </span>The font element text decoration color quirk</h3>
 
-<p class="status not-tr">Status: Awaiting implementation feedback. Has <a href="http://w3c-test.org/quirks-mode/font-element-text-decoration-color/">tests</a>.
+<p class="status not-tr">Run <a href="http://w3c-test.org/quirks-mode/font-element-text-decoration-color/">tests</a>
 
 <p><!--In <span data-anolis-spec=dom title=concept-document-quirks>quirks mode</span>, t-->The <code>font</code> element must override the color of any text decoration that spans the text of the element to the used value of the element's 'color' property.
 
 <p class="note">This applies in all modes.
 
 <h3 id="the-tables-inherit-color-from-body-quirk"><span class="secno">3.11 </span>The tables inherit color from body quirk</h3>
-
-<p class="status not-tr">Status: Awaiting implementation feedback.
 
 <p>In <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-quirks" title="concept-document-quirks">quirks mode</a>, the initial value of the 'color' property must be 'quirk-inherit', a special value that has no keyword mapping to it.
 
@@ -701,15 +693,11 @@ https://bugs.webkit.org/show_bug.cgi?id=84469
 
 <h3 id="the-table-cell-height-box-sizing-quirk"><span class="secno">3.12 </span>The table cell height box sizing quirk</h3>
 
-<p class="status not-tr">Status: Awaiting implementation feedback.
-
 <p>In <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-quirks" title="concept-document-quirks">quirks mode</a>, elements that have a computed value of the 'display' property of 'table-cell' must act as they have used value of the 'box-sizing' property of 'border-box', but only for the purpose of the 'height', 'min-height' and 'max-height' properties.
 
 <h2 id="selectors"><span class="secno">4 </span>Selectors</h2>
 
 <h3 id="the-:active-and-:hover-quirk"><span class="secno">4.1 </span>The :active and :hover quirk</h3>
-
-<p class="status not-tr">Status: Awaiting implementation feedback.
 
 <p>In <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-quirks" title="concept-document-quirks">quirks mode</a>, a compound selector <var>selector</var> that matches the following conditions must not match elements that would not also match the ':any-link' selector. <a href="#refsSELECTORS">[SELECTORS]</a>
 
