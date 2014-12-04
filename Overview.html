@@ -19,7 +19,7 @@
 
 <hgroup>
 <h1>Quirks Mode</h1>
-<h2 class="no-num no-toc not-tr not-fs">Living Standard — 25 November 2014</h2>
+<h2 class="no-num no-toc not-tr not-fs">Living Standard — 4 December 2014</h2>
 
 
 </hgroup>
@@ -46,7 +46,7 @@
 <p class="copyright not-tr not-fs"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="https://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-25 November 2014, the editors have made this specification available
+4 December 2014, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -127,11 +127,11 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 
 <h3 id="dependencies"><span class="secno">2.3 </span>Dependencies</h3>
 
-<p>The terms <dfn id="block-container-element">block container element</dfn>, <dfn id="inline-level">inline-level</dfn>, <dfn id="containing-block">containing block</dfn>, <dfn id="initial-containing-block">initial containing block</dfn> and <dfn id="block-container-box">block container box</dfn> are defined in CSS 2.1. <a href="#refsCSS">[CSS]</a>
+<p>The terms <dfn id="illegal-value">illegal value</dfn>, <dfn id="block-container-element">block container element</dfn>, <dfn id="inline-level">inline-level</dfn>, <dfn id="containing-block">containing block</dfn>, <dfn id="initial-containing-block">initial containing block</dfn> and <dfn id="block-container-box">block container box</dfn> are defined in CSS 2.1. <a href="#refsCSS">[CSS]</a>
 
 <p>The terms <dfn id="minimum-intrinsic-width-of-an-inline-formatting-context">minimum intrinsic width of an inline formatting context</dfn> and <dfn id="outer-intrinsic-minimum-width-of-a-table-cell">outer intrinsic minimum width of a table cell</dfn> are defined in More Precise Definitions of Intrinsic Widths and Table Layout (Proposal). <a href="#refsCSSINTRINSIC">[CSSINTRINSIC]</a>
 
-<p>The terms <dfn id="〈number〉">〈number〉</dfn>, <dfn id="〈dimension〉">〈dimension〉</dfn> and <dfn id="〈ident〉">〈ident〉</dfn> are defined in CSS Syntax Module. <a href="#refsCSSSYNTAX">[CSSSYNTAX]</a>
+<p>The terms <dfn id="number-token">&lt;number-token&gt;</dfn>, <dfn id="dimension-token">&lt;dimension-token&gt;</dfn> and <dfn id="ident-token">&lt;ident-token&gt;</dfn> are defined in CSS Syntax Module. <a href="#refsCSSSYNTAX">[CSSSYNTAX]</a>
 
 <p>The terms <dfn id="color">&lt;color&gt;</dfn>, <dfn id="length">&lt;length&gt;</dfn> and <dfn id="number">number</dfn> are defined in CSS Values and Units Module. <a href="#refsCSSVALUES">[CSSVALUES]</a>
 
@@ -143,18 +143,28 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 
 <p class="status not-tr">Run <a href="http://w3c-test.org/quirks-mode/hashless-hex-color.html">tests</a>
 
-<p>Quirky colors are denoted by <dfn id="quirky-color">&lt;quirky-color&gt;</dfn>. A <dfn id="quirky-color-0">quirky color</dfn> is a sequence of 3 or 6 characters in the range [0-9A-Fa-f] (U+0030 to U+0039, U+0041 to U+0046, U+0061 to U+0066) and corresponds to a <a href="#〈number〉">〈number〉</a>, a <a href="#〈dimension〉">〈dimension〉</a> or an <a href="#〈ident〉">〈ident〉</a> component value in the syntax. The value of a <a href="#quirky-color-0">quirky color</a> is obtained from the possible component values as follows:
+<p>Quirky colors are denoted by <dfn id="quirky-color">&lt;quirky-color&gt;</dfn>. A <dfn id="quirky-color-0">quirky color</dfn> corresponds to a <a href="#number-token">&lt;number-token&gt;</a>, a <a href="#dimension-token">&lt;dimension-token&gt;</a> or an <a href="#ident-token">&lt;ident-token&gt;</a> component value in the syntax. The value of a <a href="#quirky-color-0">quirky color</a> is obtained from the possible component values using the following algorithm, aborting on the first step that returns a value:
 
-<dl class="switch">
- <dt><a href="#〈number〉">〈number〉</a>
- <dd><p>The value is the component value's representation.
- <dt><a href="#〈dimension〉">〈dimension〉</a>
- <dd><p>The value is the component value's representation followed by the component value's unit.
- <dt><a href="#〈ident〉">〈ident〉</a>
- <dd><p>The value is the component value's value.
-</dl>
+<ol>
+ <li>Let <var>cv</var> be the component value.
+ <li>
+  <p>If <var>cv</var> is a <a href="#number-token">&lt;number-token&gt;</a> or a <a href="#dimension-token">&lt;dimension-token&gt;</a>, follow these substeps:
+  <ol>
+   <li><p>If <var>cv</var>'s type flag is not "integer", return an error.
+   <li><p>If <var>cv</var>'s value is less than zero, return an error.
+   <li><p>Let <var>serialization</var> be the serialization of <var>cv</var>'s value,
+   as a base-ten integer using digits 0-9 (U+0030 to U+0039) in the shortest form possible.
+   <li><p>If <var>cv</var> is a <a href="#dimension-token">&lt;dimension-token&gt;</a>, append the unit to <var>serialization</var>.
+   <li><p>If <var>serialization</var> consists of fewer than six characters, prepend zeros (U+0030) so that it becomes six characters.
+  </ol>
+ <li><p>Otherwise, <var>cv</var> is an <a href="#ident-token">&lt;ident-token&gt;</a>; let <var>serialization</var> be <var>cv</var>'s value.
+ <li><p>If <var>serialization</var> does not consist of three or six characters, return an error.
+ <li><p>If <var>serialization</var> contains any characters not in the range [0-9A-Fa-f] (U+0030 to U+0039, U+0041 to U+0046, U+0061 to U+0066), return an error.
+ <li><p>Return the concatenation of "<code title="">#</code>" (U+0023) and <var>serialization</var>.
+</ol>
 
-<p>The value of a <a href="#quirky-color-0">quirky color</a> must be interpreted as an RGB value in hexadecimal notation using the same rules as for <a href="#color">&lt;color&gt;</a>, acting as if there was a leading "<code>#</code>" character.
+<p>If the value of a <a href="#quirky-color-0">quirky color</a> is an error, it is an <a href="#illegal-value">illegal value</a>.
+Otherwise, the value of a <a href="#quirky-color-0">quirky color</a> must be interpreted as an RGB value in hexadecimal notation using the same rules as for <a href="#color">&lt;color&gt;</a>.
 
 <p>In <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-quirks" title="concept-document-quirks">quirks mode</a>, the following properties must have their "Value" grammar changed by replacing <a href="#color">&lt;color&gt;</a> with [ <a href="#color">&lt;color&gt;</a> | <a href="#quirky-color">&lt;quirky-color&gt;</a> ]:
 
@@ -260,7 +270,7 @@ In particular, outline-color did not show up at all.
 
 <p class="status not-tr">Run <a href="http://w3c-test.org/quirks-mode/unitless-length.html">tests</a>
 
-<p>Quirky lengths are denoted by <dfn id="quirky-length">&lt;quirky-length&gt;</dfn>. A <dfn id="quirky-length-0">quirky length</dfn> is a <a href="#number">number</a> and corresponds to a <a href="#〈number〉">〈number〉</a> component value in the syntax. The value of a <a href="#quirky-length-0">quirky length</a> is obtained from the component value's value.
+<p>Quirky lengths are denoted by <dfn id="quirky-length">&lt;quirky-length&gt;</dfn>. A <dfn id="quirky-length-0">quirky length</dfn> is a <a href="#number">number</a> and corresponds to a <a href="#number-token">&lt;number-token&gt;</a> component value in the syntax. The value of a <a href="#quirky-length-0">quirky length</a> is obtained from the component value's value.
 
 <p>The value of a <a href="#quirky-length-0">quirky length</a> must be interpreted as a <a href="#length">&lt;length&gt;</a> where the unit is '<code title="">px</code>'.
 
