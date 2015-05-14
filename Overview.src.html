@@ -93,7 +93,7 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 
 <h3>History</h3>
 
-<p>Browsers have several rendering modes to render HTML documents. The reason for this is basically a historical accident. The CSS specification was incompatible with the behavior of existing browsers which existing Web content relied on. In order to comply with the specification while not breaking existing content, browsers introduced a new rendering mode (standards mode). Some browsers still had the shrink-wrapping behavior for images in table cells in their standards mode, and sites started relying on that, so browsers that implemented the specification's behavior introduced a third mode (almost standards mode). In hindsight, it would have been better to make the default CSS behavior be compatible with what the existing content relied on and providing opt-ins to different behavior. The different modes have since gained a few differences outside of CSS.
+<p>Browsers have several rendering modes to render HTML documents. The reason for this is basically a historical accident. The CSS specification was incompatible with the behavior of existing browsers which existing Web content relied on. In order to comply with the specification while not breaking existing content, browsers introduced a new rendering mode (standards mode). Some browsers still had the shrink-wrapping behavior for images in table cells in their standards mode, and sites started relying on that, so browsers that implemented the specification's behavior introduced a third mode (limited-quirks mode). In hindsight, it would have been better to make the default CSS behavior be compatible with what the existing content relied on and providing opt-ins to different behavior. The different modes have since gained a few differences outside of CSS.
 
 <h3>Goals</h3>
 
@@ -579,7 +579,7 @@ Opera supported this quirk (copied from IE), but then dropped it because it brok
 
 <p class="status not-tr">Run <a href="http://w3c-test.org/quirks-mode/line-height-calculation.html">tests</a>
 
-<p>In <span data-anolis-spec=dom title=concept-document-quirks>quirks mode</span> and <span data-anolis-spec=dom title=concept-document-limited-quirks>almost standards mode</span>, an inline box that matches the following conditions, must, for the purpose of line height calculation, act as if the box had a 'line-height' of zero.
+<p>In <span data-anolis-spec=dom title=concept-document-quirks>quirks mode</span> and <span data-anolis-spec=dom title=concept-document-limited-quirks>limited-quirks mode</span>, an inline box that matches the following conditions, must, for the purpose of line height calculation, act as if the box had a 'line-height' of zero.
 
 <ul>
  <li><p>The 'border-right-width', 'border-left-width', 'padding-right' and 'padding-left' properties have a used value of zero. <!-- This matches WebKit. Opera and IE9 don't have this [Opera has now implemented this (CORE-19183)]. Gecko has this rule for all margins, paddings and borders. -->
@@ -590,7 +590,7 @@ Opera supported this quirk (copied from IE), but then dropped it because it brok
 
 <p class="status not-tr">Run <a href="http://w3c-test.org/quirks-mode/blocks-ignore-line-height.html">tests</a>
 
-<p>In <span data-anolis-spec=dom title=concept-document-quirks>quirks mode</span> and <span data-anolis-spec=dom title=concept-document-limited-quirks>almost standards mode</span>, for a <span>block container element</span> whose content is composed of <span>inline-level</span> elements, the element's 'line-height' must be ignored for the purpose of calculating the minimal height of line boxes within the element.
+<p>In <span data-anolis-spec=dom title=concept-document-quirks>quirks mode</span> and <span data-anolis-spec=dom title=concept-document-limited-quirks>limited-quirks mode</span>, for a <span>block container element</span> whose content is composed of <span>inline-level</span> elements, the element's 'line-height' must be ignored for the purpose of calculating the minimal height of line boxes within the element.
 
 <p class=note>This means that the "strut" is not created.
 
