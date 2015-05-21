@@ -19,7 +19,7 @@
 
 <hgroup>
 <h1>Quirks Mode</h1>
-<h2 class="no-num no-toc not-tr not-fs">Living Standard — 12 January 2015</h2>
+<h2 class="no-num no-toc not-tr not-fs">Living Standard — 21 May 2015</h2>
 
 
 </hgroup>
@@ -46,7 +46,7 @@
 <p class="copyright not-tr not-fs"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="https://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-12 January 2015, the editors have made this specification available
+21 May 2015, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -98,7 +98,7 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 
 <h3 id="history"><span class="secno">1.1 </span>History</h3>
 
-<p>Browsers have several rendering modes to render HTML documents. The reason for this is basically a historical accident. The CSS specification was incompatible with the behavior of existing browsers which existing Web content relied on. In order to comply with the specification while not breaking existing content, browsers introduced a new rendering mode (standards mode). Some browsers still had the shrink-wrapping behavior for images in table cells in their standards mode, and sites started relying on that, so browsers that implemented the specification's behavior introduced a third mode (almost standards mode). In hindsight, it would have been better to make the default CSS behavior be compatible with what the existing content relied on and providing opt-ins to different behavior. The different modes have since gained a few differences outside of CSS.
+<p>Browsers have several rendering modes to render HTML documents. The reason for this is basically a historical accident. The CSS specification was incompatible with the behavior of existing browsers which existing Web content relied on. In order to comply with the specification while not breaking existing content, browsers introduced a new rendering mode (no-quirks mode). Some browsers still had the shrink-wrapping behavior for images in table cells in their no-quirks mode, and sites started relying on that, so browsers that implemented the specification's behavior introduced a third mode (limited-quirks mode). In hindsight, it would have been better to make the default CSS behavior be compatible with what the existing content relied on and providing opt-ins to different behavior. The different modes have since gained a few differences outside of CSS.
 
 <h3 id="goals"><span class="secno">1.2 </span>Goals</h3>
 
@@ -516,9 +516,9 @@ $ grep -iaPo "font\s*:\s*[^;\}>]+" web200904 > font.txt
 ^C
 
 I appended a ";" after each line, removed all " and ' (which shouldn't affect the font-size thing)
-and put the whole thing in a ruleset and loaded it in a quirks mode doc vs a standards mode doc in
+and put the whole thing in a ruleset and loaded it in a quirks mode doc vs a no-quirks mode doc in
 Firefox to see what was logged to the error console. There were 120465 lines, supposedly 'font'
-declarations. 157+4+6+1+1+1 errors in the console in both quirks mode and standards mode. This means
+declarations. 157+4+6+1+1+1 errors in the console in both quirks mode and no-quirks mode. This means
 none of them had unitless font-size. Most common error seemed to be to omit the font-size and/or
 font-family. This may need more research, but maybe we don't need this quirk for 'font'.
 
@@ -584,7 +584,7 @@ Opera supported this quirk (copied from IE), but then dropped it because it brok
 
 <p class="status not-tr">Run <a href="http://w3c-test.org/quirks-mode/line-height-calculation.html">tests</a>
 
-<p>In <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-quirks" title="concept-document-quirks">quirks mode</a> and <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-limited-quirks" title="concept-document-limited-quirks">almost standards mode</a>, an inline box that matches the following conditions, must, for the purpose of line height calculation, act as if the box had a 'line-height' of zero.
+<p>In <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-quirks" title="concept-document-quirks">quirks mode</a> and <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-limited-quirks" title="concept-document-limited-quirks">limited-quirks mode</a>, an inline box that matches the following conditions, must, for the purpose of line height calculation, act as if the box had a 'line-height' of zero.
 
 <ul>
  <li><p>The 'border-right-width', 'border-left-width', 'padding-right' and 'padding-left' properties have a used value of zero. <!-- This matches WebKit. Opera and IE9 don't have this [Opera has now implemented this (CORE-19183)]. Gecko has this rule for all margins, paddings and borders. -->
@@ -595,7 +595,7 @@ Opera supported this quirk (copied from IE), but then dropped it because it brok
 
 <p class="status not-tr">Run <a href="http://w3c-test.org/quirks-mode/blocks-ignore-line-height.html">tests</a>
 
-<p>In <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-quirks" title="concept-document-quirks">quirks mode</a> and <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-limited-quirks" title="concept-document-limited-quirks">almost standards mode</a>, for a <a href="#block-container-element">block container element</a> whose content is composed of <a href="#inline-level">inline-level</a> elements, the element's 'line-height' must be ignored for the purpose of calculating the minimal height of line boxes within the element.
+<p>In <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-quirks" title="concept-document-quirks">quirks mode</a> and <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-limited-quirks" title="concept-document-limited-quirks">limited-quirks mode</a>, for a <a href="#block-container-element">block container element</a> whose content is composed of <a href="#inline-level">inline-level</a> elements, the element's 'line-height' must be ignored for the purpose of calculating the minimal height of line boxes within the element.
 
 <p class="note">This means that the "strut" is not created.
 
@@ -747,7 +747,7 @@ grep -iaPo "<[a-z]+\s[^>]*style\s*=\s*[\"']{[^\"'>]+" web200904 > style-braces.t
 <dd><p>Opera, WebKit and IE9 (except in compat view quirks mode) don't support this quirk.</dd>
 
 <dt>The empty-cells property defaults to hide in quirks mode but show (according to CSS2 errata) in strict mode (see  bug 33244 ) (though the correct fix would be to specify it on the HTML TABLE element in quirk.css).</dt>
-<dd><p>WebKit and IE9 (except in compat view quirks and standards modes) do not support this quirk.</dd>
+<dd><p>WebKit and IE9 (except in compat view quirks and no-quirks modes) do not support this quirk.</dd>
 
 <dt>In quirks mode, the CSS parser allows {} around the contents of style attributes ( bug 99554 )</dt>
 <dd><p>WebKit and IE9 (except in compat view quirks mode) don't support this quirk. Its usage in the wild is on the same order as the "space before unit" quirk<!- - see unitless length section - ->, which Firefox doesn't support, and which Opera has dropped support for.</dd>
