@@ -4,9 +4,8 @@
 <title class=not-draft>Quirks Mode</title>
 <title class="not-tr not-fs">Quirks Mode Standard</title>
 <style>
- p.status { position:absolute; margin:-2em 0 0 -125px; width:100px; text-align:center; line-height:3; border:thin solid; font-size:smaller; background:papayawhip; color:black; border-radius:5px }
- p.status::after { content:'\25BA'; position:absolute; right:3px; width:0; color:papayawhip; text-shadow:black 2px 0 0; cursor:default }
-
+ p.status { position:absolute; margin:-0.2em 0 0 -3.4em; width:3em; padding:0.5em 0; text-align:center; font-size:smaller; background-color:papayawhip; color:black; border-radius:50% }
+ p.status > a { padding:0.5em 0 }
  .logo { position:absolute; top:1em; right:1em; width:106px; height:106px; border:1px outset gray; margin-top:-4px; margin-right:-4px }
  div.head .logo > img { top:2px; right:2px; border:1px inset gray }
 </style>
@@ -21,8 +20,8 @@
 
 <hgroup>
 <h1>Quirks Mode</h1>
-<h2 class="no-num no-toc not-tr not-fs">Living Standard &mdash; [DATE: 01 Jan 1901]</h2>
-<h2 class="no-num no-toc not-draft not-tr">Snapshot Specification for Lawyers &mdash; [DATE: 01 Jan 1901]</h2>
+<h2 class="no-num no-toc not-fs">Living Standard &mdash; [DATE: 01 Jan 1901]</h2>
+<h2 class="no-num no-toc not-draft">Snapshot Specification for Lawyers &mdash; [DATE: 01 Jan 1901]</h2>
 <h2 class="no-num no-toc not-draft not-fs">[LONGSTATUS] [DATE: 01 Jan 1901]</h2>
 </hgroup>
 
@@ -30,7 +29,7 @@
  <dt>This Version:
  <dd class="not-tr not-fs"><a href="https://quirks.spec.whatwg.org/">https://quirks.spec.whatwg.org/</a>
  <dd class="not-draft not-fs"><a href="[VERSION]">[VERSION]</a>
- <dd class="not-draft not-tr">XXX
+ <dd class="not-draft">XXX
 
  <dt class="not-draft not-fs">Latest Version:
  <dd class="not-draft not-fs"><a href="[LATEST]">[LATEST]</a>
@@ -54,9 +53,9 @@
 
 <script src=https://resources.whatwg.org/file-bug.js async></script>
 
-<p class="copyright not-draft not-tr">Copyright &copy; [YEAR] the Contributors to the Quirks Mode Specification, published by the <a href="http://www.w3.org/community/whatwg/">WHATCG</a> under the <a href="http://www.w3.org/community/about/agreements/final/">W3C Community Final Specification Agreement (FSA)</a>. A human-readable <a href="http://www.w3.org/community/about/agreements/fsa-deed/">summary</a> is available.
+<p class="copyright not-draft">Copyright &copy; [YEAR] the Contributors to the Quirks Mode Specification, published by the <a href="http://www.w3.org/community/whatwg/">WHATCG</a> under the <a href="http://www.w3.org/community/about/agreements/final/">W3C Community Final Specification Agreement (FSA)</a>. A human-readable <a href="http://www.w3.org/community/about/agreements/fsa-deed/">summary</a> is available.
 
-<p class="copyright not-tr not-fs"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="https://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
+<p class="copyright not-fs"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="https://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
 [DATE: 01 Jan 1901], the editors have made this specification available
@@ -136,7 +135,7 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 
 <h3>The hashless hex color quirk</h3>
 
-<p class="status not-tr">Run <a href="http://w3c-test.org/quirks-mode/hashless-hex-color.html">tests</a>
+<p class="status"><a href="http://w3c-test.org/quirks-mode/hashless-hex-color.html">Run tests</a>
 
 <p>Quirky colors are denoted by <dfn>&lt;quirky-color></dfn>. A <dfn>quirky color</dfn> corresponds to a <span>&lt;number-token></span>, a <span>&lt;dimension-token></span> or an <span>&lt;ident-token></span> component value in the syntax. The value of a <span>quirky color</span> is obtained from the possible component values using the following algorithm, aborting on the first step that returns a value:
 
@@ -263,7 +262,7 @@ In particular, outline-color did not show up at all.
 
 <h3>The unitless length quirk</h3>
 
-<p class="status not-tr">Run <a href="http://w3c-test.org/quirks-mode/unitless-length.html">tests</a>
+<p class="status"><a href="http://w3c-test.org/quirks-mode/unitless-length.html">Run tests</a>
 
 <p>Quirky lengths are denoted by <dfn>&lt;quirky-length></dfn>. A <dfn>quirky length</dfn> is a <span>number</span> and corresponds to a <span>&lt;number-token></span> component value in the syntax. The value of a <span>quirky length</span> is obtained from the component value's value.
 
@@ -577,7 +576,7 @@ Opera supported this quirk (copied from IE), but then dropped it because it brok
 
 <h3>The line height calculation quirk</h3>
 
-<p class="status not-tr">Run <a href="http://w3c-test.org/quirks-mode/line-height-calculation.html">tests</a>
+<p class="status"><a href="http://w3c-test.org/quirks-mode/line-height-calculation.html">Run tests</a>
 
 <p>In <span data-anolis-spec=dom title=concept-document-quirks>quirks mode</span> and <span data-anolis-spec=dom title=concept-document-limited-quirks>limited-quirks mode</span>, an inline box that matches the following conditions, must, for the purpose of line height calculation, act as if the box had a 'line-height' of zero.
 
@@ -588,7 +587,7 @@ Opera supported this quirk (copied from IE), but then dropped it because it brok
 
 <h3>The blocks ignore line-height quirk</h3>
 
-<p class="status not-tr">Run <a href="http://w3c-test.org/quirks-mode/blocks-ignore-line-height.html">tests</a>
+<p class="status"><a href="http://w3c-test.org/quirks-mode/blocks-ignore-line-height.html">Run tests</a>
 
 <p>In <span data-anolis-spec=dom title=concept-document-quirks>quirks mode</span> and <span data-anolis-spec=dom title=concept-document-limited-quirks>limited-quirks mode</span>, for a <span>block container element</span> whose content is composed of <span>inline-level</span> elements, the element's 'line-height' must be ignored for the purpose of calculating the minimal height of line boxes within the element.
 
@@ -596,7 +595,7 @@ Opera supported this quirk (copied from IE), but then dropped it because it brok
 
 <h3>The percentage height calculation quirk</h3>
 
-<p class="status not-tr">Run <a href="http://w3c-test.org/quirks-mode/percentage-height-calculation.html">tests</a>
+<p class="status"><a href="http://w3c-test.org/quirks-mode/percentage-height-calculation.html">Run tests</a>
 
 <p>In <span data-anolis-spec=dom title=concept-document-quirks>quirks mode</span>, for the purpose of calculating the 'height' of an element <var>element</var>, if the computed value of the 'position' property of <var>element</var> is 'relative' or 'static', the specified value for the 'height' property of <var>element</var> is a &lt;percentage>, and <var>element</var> does not have a computed value of the 'display' property that is 'table-row', 'table-row-group', 'table-header-group', 'table-footer-group', 'table-cell' or 'table-caption', the <span>containing block</span> of <var>element</var> must be calculated using the following algorithm, aborting on the first step that returns a value:
 
@@ -625,7 +624,7 @@ Opera supported this quirk (copied from IE), but then dropped it because it brok
 
 <h3>The table cell width calculation quirk</h3>
 
-<p class="status not-tr">Run <a href="http://w3c-test.org/quirks-mode/table-cell-width-calculation.html">tests</a>
+<p class="status"><a href="http://w3c-test.org/quirks-mode/table-cell-width-calculation.html">Run tests</a>
 
 <p>In <span data-anolis-spec=dom title=concept-document-quirks>quirks mode</span>, for the purpose of calculating the <span>minimum intrinsic width of an inline formatting context</span> for which a table cell <var>cell</var> is the <span>containing block</span>, if <var>cell</var> has a computed value of the 'width' property that is 'auto', <code>img</code> elements that are inline replaced elements or inline-block replaced elements in that inline formatting context must not have a line breaking opportunity before or after them.
 
@@ -659,7 +658,7 @@ Opera supported this quirk (copied from IE), but then dropped it because it brok
 
 <h3>The font element text decoration color quirk</h3>
 
-<p class="status not-tr">Run <a href="http://w3c-test.org/quirks-mode/font-element-text-decoration-color/">tests</a>
+<p class="status"><a href="http://w3c-test.org/quirks-mode/font-element-text-decoration-color/">Run tests</a>
 
 <p><!--In <span data-anolis-spec=dom title=concept-document-quirks>quirks mode</span>, t-->The <code>font</code> element must override the color of any text decoration that spans the text of the element to the used value of the element's 'color' property.
 
@@ -684,7 +683,7 @@ Opera supported this quirk (copied from IE), but then dropped it because it brok
 <!--
 <h3>The font size calculation quirk</h3>
 
-<p class="status not-tr">Status: Needs research.
+<p class="status">Status: Needs research.
 
 <pre class=XXX>http://mxr.mozilla.org/mozilla-central/source/layout/style/nsStyleUtil.cpp#64
 http://trac.webkit.org/browser/trunk/Source/WebCore/css/CSSStyleSelector.cpp?rev=113922#L4920</pre>
@@ -703,7 +702,7 @@ https://bugs.webkit.org/show_bug.cgi?id=84469
 
 <h3>The :active and :hover quirk</h3>
 
-<p class="status not-tr">Run <a href="http://w3c-test.org/quirks-mode/active-and-hover-manual.html">tests</a>
+<p class="status"><a href="http://w3c-test.org/quirks-mode/active-and-hover-manual.html">Run tests</a>
 
 <p>In <span data-anolis-spec=dom title=concept-document-quirks>quirks mode</span>, a compound selector <var>selector</var> that matches the following conditions must not match elements that would not also match the ':any-link' selector. <span data-anolis-ref>SELECTORS</span>
 
@@ -722,7 +721,7 @@ https://bugs.webkit.org/show_bug.cgi?id=84469
 <!--
 <h3>The braces in style attribute quirk</h3>
 
-<p class="status not-tr">Status: Needs research.
+<p class="status">Status: Needs research.
 
 <p>In <span data-anolis-spec=dom title=concept-document-quirks>quirks mode</span>, when parsing the <code>style</code> attribute on <span>HTML elements</span>, if the first token is "<code title>{</code>" (U+007B), that token must be ignored. If it was present, and a later matching token "<code title>}</code>" (U+0079) is found, that token, and all tokens after it, must also be ignored.</p>
 
