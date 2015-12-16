@@ -129,6 +129,8 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 
 <p>The terms <dfn>&lt;color></dfn>, <dfn>&lt;length></dfn> and <dfn>number</dfn> are defined in CSS Values and Units Module. <span data-anolis-ref>CSSVALUES</span>
 
+<p>The terms <dfn>@supports</dfn>, <dfn title=dom-css><code>CSS</code></dfn> and <dfn title=dom-css-supports><code>supports()</code></dfn> are defined in CSS Conditional Rules Module. <span data-anolis-ref>CSSCONDITIONAL</span>
+
 <p>Some terms are defined in DOM and HTML. <span data-anolis-ref>DOM</span> <span data-anolis-ref>HTML</span>
 
 <h2>CSS</h2>
@@ -174,7 +176,9 @@ Otherwise, the value of a <span>quirky color</span> must be interpreted as an RG
 
 <p>Any property not listed above must not support <span>&lt;quirky-color></span> even if it references one of the above properties in its "Value" grammar.
 
-<p>The <span>&lt;quirky-color></span> value must not be supported in arguments to CSS expressions.
+<p>This quirk must apply inside an <span>@supports</span> at-rule.
+
+<p>The <span>&lt;quirky-color></span> value must not be supported in arguments to CSS expressions, and must not be supported in the <code title=dom-css-supports>supports()</code> static method of the <code title=dom-css>CSS</code> interface.
 
 <!--
 <p>When a property is said to <dfn>support hashless hex colors</dfn>, all tokens in the property's value <var>tokens</var> must be replaced with the return value of following algorithm prior to interpretation:
@@ -308,7 +312,9 @@ In particular, outline-color did not show up at all.
 
 <p>Any property not listed above must not support <span>&lt;quirky-length></span> even if it references one of the above properties in its "Value" grammar.
 
-<p>The <span>&lt;quirky-length></span> value must not be supported in arguments to CSS expressions other than the <code title>rect()</code> expression.
+<p>This quirk must apply inside an <span>@supports</span> at-rule.
+
+<p>The <span>&lt;quirky-length></span> value must not be supported in arguments to CSS expressions other than the <code title>rect()</code> expression, and must not be supported in the <code title=dom-css-supports>supports()</code> static method of the <code title=dom-css>CSS</code> interface.
 
 <!--
 <p>When a property is said to <dfn>support unitless lengths</dfn>, all tokens in the property's value <var>tokens</var> must be replaced with the return value of following algorithm prior to interpretation:

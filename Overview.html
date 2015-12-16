@@ -18,7 +18,7 @@
 
 <hgroup>
 <h1>Quirks Mode</h1>
-<h2 class="no-num no-toc not-fs">Living Standard — 24 May 2015</h2>
+<h2 class="no-num no-toc not-fs">Living Standard — 16 December 2015</h2>
 
 
 </hgroup>
@@ -45,7 +45,7 @@
 <p class="copyright not-fs"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="https://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-24 May 2015, the editors have made this specification available
+16 December 2015, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -83,9 +83,8 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
    <li><a href="#the-table-cell-nowrap-minimum-width-calculation-quirk"><span class="secno">3.7 </span>The table cell nowrap minimum width calculation quirk</a></li>
    <li><a href="#the-collapsing-table-quirk"><span class="secno">3.8 </span>The collapsing table quirk</a></li>
    <li><a href="#the-text-decoration-doesn't-propagate-into-tables-quirk"><span class="secno">3.9 </span>The text decoration doesn't propagate into tables quirk</a></li>
-   <li><a href="#the-font-element-text-decoration-color-quirk"><span class="secno">3.10 </span>The font element text decoration color quirk</a></li>
-   <li><a href="#the-tables-inherit-color-from-body-quirk"><span class="secno">3.11 </span>The tables inherit color from body quirk</a></li>
-   <li><a href="#the-table-cell-height-box-sizing-quirk"><span class="secno">3.12 </span>The table cell height box sizing quirk</a></ol></li>
+   <li><a href="#the-tables-inherit-color-from-body-quirk"><span class="secno">3.10 </span>The tables inherit color from body quirk</a></li>
+   <li><a href="#the-table-cell-height-box-sizing-quirk"><span class="secno">3.11 </span>The table cell height box sizing quirk</a></ol></li>
  <li><a href="#selectors"><span class="secno">4 </span>Selectors</a>
   <ol>
    <li><a href="#the-:active-and-:hover-quirk"><span class="secno">4.1 </span>The :active and :hover quirk</a></ol></li>
@@ -134,6 +133,8 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 
 <p>The terms <dfn id="color">&lt;color&gt;</dfn>, <dfn id="length">&lt;length&gt;</dfn> and <dfn id="number">number</dfn> are defined in CSS Values and Units Module. <a href="#refsCSSVALUES">[CSSVALUES]</a>
 
+<p>The terms <dfn id="@supports">@supports</dfn>, <dfn id="dom-css" title="dom-css"><code>CSS</code></dfn> and <dfn id="dom-css-supports" title="dom-css-supports"><code>supports()</code></dfn> are defined in CSS Conditional Rules Module. <a href="#refsCSSCONDITIONAL">[CSSCONDITIONAL]</a>
+
 <p>Some terms are defined in DOM and HTML. <a href="#refsDOM">[DOM]</a> <a href="#refsHTML">[HTML]</a>
 
 <h2 id="css"><span class="secno">3 </span>CSS</h2>
@@ -179,7 +180,9 @@ Otherwise, the value of a <a href="#quirky-color-0">quirky color</a> must be int
 
 <p>Any property not listed above must not support <a href="#quirky-color">&lt;quirky-color&gt;</a> even if it references one of the above properties in its "Value" grammar.
 
-<p>The <a href="#quirky-color">&lt;quirky-color&gt;</a> value must not be supported in arguments to CSS expressions.
+<p>This quirk must apply inside an <a href="#@supports">@supports</a> at-rule.
+
+<p>The <a href="#quirky-color">&lt;quirky-color&gt;</a> value must not be supported in arguments to CSS expressions, and must not be supported in the <a href="#dom-css-supports"><code title="dom-css-supports">supports()</code></a> static method of the <a href="#dom-css"><code title="dom-css">CSS</code></a> interface.
 
 <!--
 <p>When a property is said to <dfn>support hashless hex colors</dfn>, all tokens in the property's value <var>tokens</var> must be replaced with the return value of following algorithm prior to interpretation:
@@ -313,7 +316,9 @@ In particular, outline-color did not show up at all.
 
 <p>Any property not listed above must not support <a href="#quirky-length">&lt;quirky-length&gt;</a> even if it references one of the above properties in its "Value" grammar.
 
-<p>The <a href="#quirky-length">&lt;quirky-length&gt;</a> value must not be supported in arguments to CSS expressions other than the <code title="">rect()</code> expression.
+<p>This quirk must apply inside an <a href="#@supports">@supports</a> at-rule.
+
+<p>The <a href="#quirky-length">&lt;quirky-length&gt;</a> value must not be supported in arguments to CSS expressions other than the <code title="">rect()</code> expression, and must not be supported in the <a href="#dom-css-supports"><code title="dom-css-supports">supports()</code></a> static method of the <a href="#dom-css"><code title="dom-css">CSS</code></a> interface.
 
 <!--
 <p>When a property is said to <dfn>support unitless lengths</dfn>, all tokens in the property's value <var>tokens</var> must be replaced with the return value of following algorithm prior to interpretation:
@@ -661,15 +666,7 @@ Opera supported this quirk (copied from IE), but then dropped it because it brok
 
 <!-- http://mxr.mozilla.org/mozilla-central/source/layout/generic/nsTextFrameThebes.cpp#4582 -->
 
-<h3 id="the-font-element-text-decoration-color-quirk"><span class="secno">3.10 </span>The font element text decoration color quirk</h3>
-
-<p class="status"><a href="http://w3c-test.org/quirks-mode/font-element-text-decoration-color/">Run tests</a>
-
-<p><!--In <span data-anolis-spec=dom title=concept-document-quirks>quirks mode</span>, t-->The <code>font</code> element must override the color of any text decoration that spans the text of the element to the used value of the element's 'color' property.
-
-<p class="note">This applies in all modes.
-
-<h3 id="the-tables-inherit-color-from-body-quirk"><span class="secno">3.11 </span>The tables inherit color from body quirk</h3>
+<h3 id="the-tables-inherit-color-from-body-quirk"><span class="secno">3.10 </span>The tables inherit color from body quirk</h3>
 
 <p>In <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-quirks" title="concept-document-quirks">quirks mode</a>, the initial value of the 'color' property must be 'quirk-inherit', a special value that has no keyword mapping to it.
 
@@ -699,7 +696,7 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=747464
 https://bugs.webkit.org/show_bug.cgi?id=84469
 -->
 
-<h3 id="the-table-cell-height-box-sizing-quirk"><span class="secno">3.12 </span>The table cell height box sizing quirk</h3>
+<h3 id="the-table-cell-height-box-sizing-quirk"><span class="secno">3.11 </span>The table cell height box sizing quirk</h3>
 
 <p>In <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-quirks" title="concept-document-quirks">quirks mode</a>, elements that have a computed value of the 'display' property of 'table-cell' must act as they have used value of the 'box-sizing' property of 'border-box', but only for the purpose of the 'height', 'min-height' and 'max-height' properties.
 
@@ -780,6 +777,9 @@ http://mxr.mozilla.org/mozilla-central/source/content/base/src/nsGenericElement.
 
 <div id="anolis-references"><dl><dt id="refsCSS">[CSS]
 <dd><cite><a href="http://www.w3.org/TR/CSS2/">CSS</a></cite>, Bert Bos, Tantek Çelik, Ian Hickson et al.. W3C.
+
+<dt id="refsCSSCONDITIONAL">[CSSCONDITIONAL]
+<dd><cite><a href="http://dev.w3.org/csswg/css-conditional/">CSS Conditional Rules Module</a></cite>, L. David Baron.
 
 <dt id="refsCSSINTRINSIC">[CSSINTRINSIC]
 <dd><cite><a href="http://dbaron.org/css/intrinsic/">More Precise Definitions of Intrinsic Widths and Table Layout (Proposal)</a></cite>, L. David Baron.
