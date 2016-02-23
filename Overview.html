@@ -150,7 +150,10 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
  <li>
   <p>If <var>cv</var> is a <a href="#number-token">&lt;number-token&gt;</a> or a <a href="#dimension-token">&lt;dimension-token&gt;</a>, follow these substeps:
   <ol>
-   <li><p>If <var>cv</var>'s type flag is not "integer", return an error.
+   <li>
+    <p>If <var>cv</var>'s type flag is not "integer", return an error.
+    <p class="note">This means that values that happen to use scientific notation, e.g., <code title="">5e5e5e</code>, will fail to parse.
+    <!-- https://www.w3.org/Bugs/Public/show_bug.cgi?id=29489 -->
    <li><p>If <var>cv</var>'s value is less than zero, return an error.
    <li><p>Let <var>serialization</var> be the serialization of <var>cv</var>'s value,
    as a base-ten integer using digits 0-9 (U+0030 to U+0039) in the shortest form possible.
