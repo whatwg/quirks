@@ -275,7 +275,7 @@ box had a 'line-height' of zero.
 <ul>
 
  <li><p>The 'border-right-width', 'border-left-width', 'padding-right' and 'padding-left' properties
- have a used value of zero.
+ have a <a>used value</a> of zero.
 
  <!-- This matches WebKit. Presto and IE9 don't have this [Presto has now implemented this
 (CORE-19183)]. Gecko has this rule for all margins, paddings and borders. -->
@@ -311,10 +311,10 @@ quirk</h3>
 <p class="note"><a href="http://w3c-test.org/quirks-mode/percentage-height-calculation.html">Tests
 are available</a>.
 
-<p>In <a spec=dom>quirks mode</a>, for the purpose of calculating the
-'height' of an element |element|, if the computed value of the 'position' property of |element| is
+<p>In <a spec=dom>quirks mode</a>, for the purpose of calculating the 'height' of an element
+|element|, if the <a>computed value</a> of the 'position' property of |element| is
 ''position/relative'' or ''position/static'', the specified value for the 'height' property of
-|element| is a <<percentage>>, and |element| does not have a computed value of the 'display'
+|element| is a <<percentage>>, and |element| does not have a <a>computed value</a> of the 'display'
 property that is ''display/table-row'', ''display/table-row-group'', ''display/table-header-group'',
 ''display/table-footer-group'', ''display/table-cell'' or ''display/table-caption'', the
 <a>containing block</a> of |element| must be calculated using the following algorithm, aborting on
@@ -325,14 +325,14 @@ the first step that returns a value:
  <li><p>Let |element| be the nearest ancestor <a>block container box</a> of |element|, if there is
  one. Otherwise, return the <a>initial containing block</a>.
 
- <li><p>If |element| has a computed value of the 'display' property that is ''display/table-cell'',
- return a UA-defined value.
+ <li><p>If |element| has a <a>computed value</a> of the 'display' property that is
+ ''display/table-cell'', return a UA-defined value.
 
- <li><p>If |element| has a computed value of the 'height' property that is not ''height/auto'',
- return |element|.
+ <li><p>If |element| has a <a>computed value</a> of the 'height' property that is not
+ ''height/auto'', return |element|.
 
- <li><p>If |element| has a computed value of the 'position' property that is ''position/absolute'',
- return |element|.
+ <li><p>If |element| has a <a>computed value</a> of the 'position' property that is
+ ''position/absolute'', return |element|.
 
  <li><p>If |element| is a <{body}> element, and its <a spec=dom>parent</a> is the <a
  spec=dom>document element</a>, and that is an <{html}> element, let |element| have a <a>quirky
@@ -404,7 +404,8 @@ algorithm that is the bigger value of |cell|'s <a>computed value</a> of the 'wid
 
  <li><p>|cell| has a <code>nowrap</code> attribute.
 
- <li><p>The <a>computed value</a> of the 'width' property of |cell| is a <<length>> that is not zero.
+ <li><p>The <a>computed value</a> of the 'width' property of |cell| is a <<length>> that is not
+ zero.
 
 </ul>
 
@@ -443,8 +444,8 @@ quirk</h3>
 <p>In <a spec=dom>quirks mode</a>, the initial value of the 'color'
 property must be ''quirk-inherit'', a special value that has no keyword mapping to it.
 
-<p>The computed value of the 'color' property of an element |element| must be calculated using the
-following algorithm:
+<p>The <a>computed value</a> of the 'color' property of an element |element| must be calculated
+using the following algorithm:
 
 <ol>
 
@@ -455,13 +456,13 @@ following algorithm:
 
  <li><p>If the <a>document's body element</a> is null, jump to the last step.
 
- <li><p>Return the used value of the 'color' property of the <a>document's body element</a>.
+ <li><p>Return the <a>used value</a> of the 'color' property of the <a>document's body element</a>.
  Abort these steps.
 
- <li><p>If the specified value of the 'color' property of |element| is ''quirk-inherit'',
- let the specified value of the 'color' property of |element| be the initial value of the
- 'color' property according to the CSS specification. Return the computed value of the 'color'
- property of |element| as specified in the CSS specification.
+ <li><p>If the specified value of the 'color' property of |element| is ''quirk-inherit'', let the
+ specified value of the 'color' property of |element| be the initial value of the 'color' property
+ according to the CSS specification. Return the <a>computed value</a> of the 'color' property of
+ |element| as specified in the CSS specification.
 
 </ol>
 
@@ -517,7 +518,8 @@ conditions must not match elements that would not also match the '':any-link'' s
 
  <li><p>|selector| does not use a <a>class selector</a>.
 
- <li><p>|selector| does not use a <a>pseudo-class</a> selector other than '':active'' and '':hover''.
+ <li><p>|selector| does not use a <a>pseudo-class</a> selector other than '':active'' and
+ '':hover''.
 
  <li><p>|selector| does not use a <a>pseudo-element</a> selector.
 
