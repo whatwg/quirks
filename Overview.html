@@ -1,833 +1,652 @@
-<!DOCTYPE html><html lang="en-US"><meta charset="utf-8">
-
-<title class="not-tr not-fs">Quirks Mode Standard</title>
+<!doctype html><html lang="en">
+ <head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+  <meta content="#3c790a" name="theme-color">
+  <title>Quirks Mode Standard</title>
+  <link href="https://resources.whatwg.org/standard.css" rel="stylesheet">
+  <link href="https://resources.whatwg.org/bikeshed.css" rel="stylesheet">
+  <link href="https://resources.whatwg.org/logo.svg" rel="icon">
+  <meta content="Bikeshed 1.0.0" name="generator">
 <style>
- p.status { position:absolute; margin:-0.2em 0 0 -3.4em; width:3em; padding:0.5em 0; text-align:center; font-size:smaller; background-color:papayawhip; color:black; border-radius:50% }
- p.status > a { padding:0.5em 0 }
  .logo { position:absolute; top:1em; right:1em; width:106px; height:106px; border:1px outset gray; margin-top:-4px; margin-right:-4px }
  div.head .logo > img { top:2px; right:2px; border:1px inset gray }
+ a.css::before, a.css::after, a.property::before, a.property::after { content:"'" }
+	[data-link-type].production::before,	[data-link-type].production::after,	.prod [data-link-type]::before, .prod [data-link-type]::after { content: "" }
 </style>
-<link class="not-tr" href="https://whatwg.org/style/specification" rel="stylesheet">
-
-
-<link href="https://resources.whatwg.org/logo.svg" rel="icon">
-
-<div class="head">
-
-<p><a class="logo" href="https://whatwg.org/"><img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo.svg" width="100"></a></p>
-
-<hgroup>
-<h1>Quirks Mode</h1>
-<h2 class="no-num no-toc not-fs">Living Standard — 23 February 2016</h2>
-
-
-</hgroup>
-
-<dl>
- <dt>This Version:
- <dd class="not-tr not-fs"><a href="https://quirks.spec.whatwg.org/">https://quirks.spec.whatwg.org/</a>
- <dt class="not-tr">Participate:</dt>
- <dd class="not-tr">Send feedback to <a href="https://whatwg.org/mailing-list">whatwg@whatwg.org</a>
- or <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WHATWG&amp;component=Quirks%20Mode">file a bug</a> (<a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WHATWG&amp;component=Quirks%20Mode&amp;resolution=---">open bugs</a>)
- <dd class="no-tr"><a href="https://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
-
- <dt>Version History:
- <dd><a href="https://github.com/whatwg/quirks/commits">https://github.com/whatwg/quirks/commits</a></dd>
- <dt>Editor:
- <dd>
-  Simon Pieters
-  (<a href="http://www.opera.com/">Opera Software ASA</a>)
-  &lt;<a href="mailto:simonp@opera.com">simonp@opera.com</a>&gt;
-</dl>
-
-<script async="" src="https://resources.whatwg.org/file-bug.js"></script>
-
-<p class="copyright not-fs"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="https://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
-To the extent possible under law, the editors have waived all copyright and
-related or neighboring rights to this work. In addition, as of
-23 February 2016, the editors have made this specification available
-under the
-<a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
-which is available at
-http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
-
-</p>
-</div>
-
-<hr class="top">
-
-
-
-<h2 class="no-num no-toc" id="table-of-contents">Table of Contents</h2>
-
-
-<!--begin-toc-->
-<ol class="toc">
- <li><a href="#introduction"><span class="secno">1 </span>Introduction</a>
-  <ol>
-   <li><a href="#history"><span class="secno">1.1 </span>History</a></li>
-   <li><a href="#goals"><span class="secno">1.2 </span>Goals</a></ol></li>
- <li><a href="#common-infrastructure"><span class="secno">2 </span>Common infrastructure</a>
-  <ol>
-   <li><a href="#conformance"><span class="secno">2.1 </span>Conformance</a></li>
-   <li><a href="#terminology"><span class="secno">2.2 </span>Terminology</a></li>
-   <li><a href="#dependencies"><span class="secno">2.3 </span>Dependencies</a></ol></li>
- <li><a href="#css"><span class="secno">3 </span>CSS</a>
-  <ol>
-   <li><a href="#the-hashless-hex-color-quirk"><span class="secno">3.1 </span>The hashless hex color quirk</a></li>
-   <li><a href="#the-unitless-length-quirk"><span class="secno">3.2 </span>The unitless length quirk</a></li>
-   <li><a href="#the-line-height-calculation-quirk"><span class="secno">3.3 </span>The line height calculation quirk</a></li>
-   <li><a href="#the-blocks-ignore-line-height-quirk"><span class="secno">3.4 </span>The blocks ignore line-height quirk</a></li>
-   <li><a href="#the-percentage-height-calculation-quirk"><span class="secno">3.5 </span>The percentage height calculation quirk</a></li>
-   <li><a href="#the-table-cell-width-calculation-quirk"><span class="secno">3.6 </span>The table cell width calculation quirk</a></li>
-   <li><a href="#the-table-cell-nowrap-minimum-width-calculation-quirk"><span class="secno">3.7 </span>The table cell nowrap minimum width calculation quirk</a></li>
-   <li><a href="#the-collapsing-table-quirk"><span class="secno">3.8 </span>The collapsing table quirk</a></li>
-   <li><a href="#the-text-decoration-doesn't-propagate-into-tables-quirk"><span class="secno">3.9 </span>The text decoration doesn't propagate into tables quirk</a></li>
-   <li><a href="#the-tables-inherit-color-from-body-quirk"><span class="secno">3.10 </span>The tables inherit color from body quirk</a></li>
-   <li><a href="#the-table-cell-height-box-sizing-quirk"><span class="secno">3.11 </span>The table cell height box sizing quirk</a></ol></li>
- <li><a href="#selectors"><span class="secno">4 </span>Selectors</a>
-  <ol>
-   <li><a href="#the-:active-and-:hover-quirk"><span class="secno">4.1 </span>The :active and :hover quirk</a></ol></li>
- <li><a class="no-num" href="#references">References</a></li>
- <li><a class="no-num" href="#acknowledgments">Acknowledgments</a></ol>
-<!--end-toc-->
-
-<h2 id="introduction"><span class="secno">1 </span>Introduction</h2>
-
-<h3 id="history"><span class="secno">1.1 </span>History</h3>
-
-<p>Browsers have several rendering modes to render HTML documents. The reason for this is basically a historical accident. The CSS specification was incompatible with the behavior of existing browsers which existing Web content relied on. In order to comply with the specification while not breaking existing content, browsers introduced a new rendering mode (no-quirks mode). Some browsers still had the shrink-wrapping behavior for images in table cells in their no-quirks mode, and sites started relying on that, so browsers that implemented the specification's behavior introduced a third mode (limited-quirks mode). In hindsight, it would have been better to make the default CSS behavior be compatible with what the existing content relied on and providing opt-ins to different behavior. The different modes have since gained a few differences outside of CSS.
-
-<h3 id="goals"><span class="secno">1.2 </span>Goals</h3>
-
-<ul>
-<li>Create a specification for rendering old (or indeed new, if they happen to have a particular pragma) HTML documents.
-<li>Remove quirks from implementations that are not needed for Web compatibility.
-<li>Get interoperability on quirks that <em>are</em> needed for Web compatibility.
-<li>Where possible, limit quirks to a fixed set of legacy features so they don't propagate into new features.
-</ul>
-
-<p class="note">This specification does not enumerate all quirks that currently exist in browsers. A number of quirks are specified in HTML, DOM, CSSOM and CSSOM View. <a class="informative" href="#refsHTML">[HTML]</a> <a class="informative" href="#refsDOM">[DOM]</a> <a class="informative" href="#refsCSSOM">[CSSOM]</a> <a class="informative" href="#refsCSSOMVIEW">[CSSOMVIEW]</a> If a quirk is not specified anywhere, it is probably due to the second bullet point above.
-
-<h2 id="common-infrastructure"><span class="secno">2 </span>Common infrastructure</h2>
-
-<h3 id="conformance"><span class="secno">2.1 </span>Conformance</h3>
-
-<p>All diagrams, examples, and notes in this specification are non-normative, as are all sections explicitly marked non-normative. Everything else in this specification is normative.
-
-<p>The key words "MUST", "MUST NOT", "REQUIRED", <!--"SHALL", "SHALL NOT",--> "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in the normative parts of this specification are to be interpreted as described in RFC2119. For readability, these words do not appear in all uppercase letters in this specification. <a href="#refsRFC2119">[RFC2119]</a>
-
-<h3 id="terminology"><span class="secno">2.2 </span>Terminology</h3>
-
-<p>When this specification refers to a "<code><var>foo</var></code> element", it means an element with the local name <code><var>foo</var></code> and having the namespace <code>http://www.w3.org/1999/xhtml</code>.
-
-<p>When this specification refers to a "<code><var>foo</var></code> attribute", it means an attribute with the local name <code><var>foo</var></code> and having no namespace.
-
-<h3 id="dependencies"><span class="secno">2.3 </span>Dependencies</h3>
-
-<p>The terms <dfn id="illegal-value">illegal value</dfn>, <dfn id="block-container-element">block container element</dfn>, <dfn id="inline-level">inline-level</dfn>, <dfn id="containing-block">containing block</dfn>, <dfn id="initial-containing-block">initial containing block</dfn> and <dfn id="block-container-box">block container box</dfn> are defined in CSS 2.1. <a href="#refsCSS">[CSS]</a>
-
-<p>The terms <dfn id="minimum-intrinsic-width-of-an-inline-formatting-context">minimum intrinsic width of an inline formatting context</dfn> and <dfn id="outer-intrinsic-minimum-width-of-a-table-cell">outer intrinsic minimum width of a table cell</dfn> are defined in More Precise Definitions of Intrinsic Widths and Table Layout (Proposal). <a href="#refsCSSINTRINSIC">[CSSINTRINSIC]</a>
-
-<p>The terms <dfn id="number-token">&lt;number-token&gt;</dfn>, <dfn id="dimension-token">&lt;dimension-token&gt;</dfn> and <dfn id="ident-token">&lt;ident-token&gt;</dfn> are defined in CSS Syntax Module. <a href="#refsCSSSYNTAX">[CSSSYNTAX]</a>
-
-<p>The terms <dfn id="color">&lt;color&gt;</dfn>, <dfn id="length">&lt;length&gt;</dfn> and <dfn id="number">number</dfn> are defined in CSS Values and Units Module. <a href="#refsCSSVALUES">[CSSVALUES]</a>
-
-<p>The terms <dfn id="@supports">@supports</dfn>, <dfn id="dom-css" title="dom-css"><code>CSS</code></dfn> and <dfn id="dom-css-supports" title="dom-css-supports"><code>supports()</code></dfn> are defined in CSS Conditional Rules Module. <a href="#refsCSSCONDITIONAL">[CSSCONDITIONAL]</a>
-
-<p>Some terms are defined in DOM and HTML. <a href="#refsDOM">[DOM]</a> <a href="#refsHTML">[HTML]</a>
-
-<h2 id="css"><span class="secno">3 </span>CSS</h2>
-
-<h3 id="the-hashless-hex-color-quirk"><span class="secno">3.1 </span>The hashless hex color quirk</h3>
-
-<p class="status"><a href="http://w3c-test.org/quirks-mode/hashless-hex-color.html">Run tests</a>
-
-<p>Quirky colors are denoted by <dfn id="quirky-color">&lt;quirky-color&gt;</dfn>. A <dfn id="quirky-color-0">quirky color</dfn> corresponds to a <a href="#number-token">&lt;number-token&gt;</a>, a <a href="#dimension-token">&lt;dimension-token&gt;</a> or an <a href="#ident-token">&lt;ident-token&gt;</a> component value in the syntax. The value of a <a href="#quirky-color-0">quirky color</a> is obtained from the possible component values using the following algorithm, aborting on the first step that returns a value:
-
-<ol>
- <li>Let <var>cv</var> be the component value.
- <li>
-  <p>If <var>cv</var> is a <a href="#number-token">&lt;number-token&gt;</a> or a <a href="#dimension-token">&lt;dimension-token&gt;</a>, follow these substeps:
-  <ol>
-   <li>
-    <p>If <var>cv</var>'s type flag is not "integer", return an error.
-    <p class="note">This means that values that happen to use scientific notation, e.g., <code title="">5e5e5e</code>, will fail to parse.
-    <!-- https://www.w3.org/Bugs/Public/show_bug.cgi?id=29489 -->
-   <li><p>If <var>cv</var>'s value is less than zero, return an error.
-   <li><p>Let <var>serialization</var> be the serialization of <var>cv</var>'s value,
-   as a base-ten integer using digits 0-9 (U+0030 to U+0039) in the shortest form possible.
-   <li><p>If <var>cv</var> is a <a href="#dimension-token">&lt;dimension-token&gt;</a>, append the unit to <var>serialization</var>.
-   <li><p>If <var>serialization</var> consists of fewer than six characters, prepend zeros (U+0030) so that it becomes six characters.
-  </ol>
- <li><p>Otherwise, <var>cv</var> is an <a href="#ident-token">&lt;ident-token&gt;</a>; let <var>serialization</var> be <var>cv</var>'s value.
- <li><p>If <var>serialization</var> does not consist of three or six characters, return an error.
- <li><p>If <var>serialization</var> contains any characters not in the range [0-9A-Fa-f] (U+0030 to U+0039, U+0041 to U+0046, U+0061 to U+0066), return an error.
- <li><p>Return the concatenation of "<code title="">#</code>" (U+0023) and <var>serialization</var>.
-</ol>
-
-<p>If the value of a <a href="#quirky-color-0">quirky color</a> is an error, it is an <a href="#illegal-value">illegal value</a>.
-Otherwise, the value of a <a href="#quirky-color-0">quirky color</a> must be interpreted as an RGB value in hexadecimal notation using the same rules as for <a href="#color">&lt;color&gt;</a>.
-
-<p>In <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-quirks" title="concept-document-quirks">quirks mode</a>, the following properties must have their "Value" grammar changed by replacing <a href="#color">&lt;color&gt;</a> with [ <a href="#color">&lt;color&gt;</a> | <a href="#quirky-color">&lt;quirky-color&gt;</a> ]:
-
-<ul class="brief">
-<li>'background-color'
-<li>'border-color'
-<li>'border-top-color'
-<li>'border-right-color'
-<li>'border-bottom-color'
-<li>'border-left-color'
-<li>'color'
-</ul>
-
-<p>Any property not listed above must not support <a href="#quirky-color">&lt;quirky-color&gt;</a> even if it references one of the above properties in its "Value" grammar.
-
-<p>This quirk must apply inside an <a href="#@supports">@supports</a> at-rule.
-
-<p>The <a href="#quirky-color">&lt;quirky-color&gt;</a> value must not be supported in arguments to CSS expressions, and must not be supported in the <a href="#dom-css-supports"><code title="dom-css-supports">supports()</code></a> static method of the <a href="#dom-css"><code title="dom-css">CSS</code></a> interface.
-
-<!--
-<p>When a property is said to <dfn>support hashless hex colors</dfn>, all tokens in the property's value <var>tokens</var> must be replaced with the return value of following algorithm prior to interpretation:
-
-<ol>
- <li><p>Let <var>output</var> be an empty array.
- <li><p>Let <var>func</var> be zero.
- <li><p>For each token <var>token</var> in <var>tokens</var>:
-  <ol>
-   <li><p>If <var>token</var> is a <span>) token</span> and <var>func</var> is greater than zero, decrement <var>func</var> by one and jump to the step labeled <var>append</var>.
-   <li><p>If <var>token</var> is a <span>function token</span> or <span>( token</span>, increment <var>func</var> by one and jump to the step labeled <var>append</var>.
-   <li><p>Let <var>value</var> be the representation of <var>token</var> if <var>token</var> is a <span>number token</span>, the representation of <var>token</var> followed by the unit of <var>token</var> if <var>token</var> is a <span>dimension token</span>, or the value of <var>token</var> otherwise.
-   <li><p>If the following conditions are true, let <var>token</var> be a new <span>hash token</span> token with its value set to <var>value</var>.
-    <ul>
-     <li><p><var>func</var> is zero.
-     <li><p><var>token</var> is a <span>number token</span>, <span>dimension token</span> or <span>identifier token</span>.
-     <li><p><var>value</var> has a length that is 3 or 6.
-     <li><p><var>value</var> consists of only characters in the range [0-9A-Fa-f] (U+0030 to U+0039, U+0041 to U+0046, U+0061 to U+0066).
-    </ul>
-   <li><p><i>Append:</i> Append <var>token</var> to <var>output</var>.
-  </ol>
- <li><p>Return <var>output</var>.
-</ol>
-
-<p>In <span data-anolis-spec=dom title=concept-document-quirks>quirks mode</span>, the following properties <span>support hashless hex colors</span>:
-
-<ul class=brief>
-<li>'background-color'
-<li>'border-color'
-<li>'border-top-color'
-<li>'border-right-color'
-<li>'border-bottom-color'
-<li>'border-left-color'
-<li>'color'
-</ul>
--->
-<!-- research 2012-02-17 using dotnetdotcom's web200904:
-
-$ grep -iaPo "([a-z]+-)?color\s*:\s*[0-9a-f]{3}([0-9a-f]{3})?(\s|\"|\'|;|$)" web200904 > color.txt
-
->>> f = open('color.txt', 'r')
->>> props = {}
->>> for line in f:
->>> 	prop = line.split(':')[0].rstrip().lower()
->>> 	if prop in props:
->>> 		props[prop] += 1
->>> 	else:
->>> 		props[prop] = 1
->>>
->>> f.close()
->>>
->>> for prop in props:
->>> 	print prop + ':' + str(props[prop])
-:28
-border-color:2515
-color:40731
-backgound-color:1
-backgroun-color:13
-dshadow-color:1
-nbackground-color:6
-000000;:1
-shadow-color:242
-face-color:230
-text-color:2
-dlight-color:216
-bottom-color:543
-tbackground-color:1
-highlight-color:239
-arrow-color:228
-right-color:326
-top-color:304
-track-color:272
-left-color:330
-background-color:8658
-font-color:73
-darkshadow-color:217
-base-color:85
-light-color:15
-
-Obviously I made a mistake in the regexp and so e.g. border-right-color shows up as right-color.
-Other than typos and scrollbar-* properties, the ones that are used are the ones that are specced.
-In particular, outline-color did not show up at all.
-
--->
-
-<h3 id="the-unitless-length-quirk"><span class="secno">3.2 </span>The unitless length quirk</h3>
-
-<p class="status"><a href="http://w3c-test.org/quirks-mode/unitless-length.html">Run tests</a>
-
-<p>Quirky lengths are denoted by <dfn id="quirky-length">&lt;quirky-length&gt;</dfn>. A <dfn id="quirky-length-0">quirky length</dfn> is a <a href="#number">number</a> and corresponds to a <a href="#number-token">&lt;number-token&gt;</a> component value in the syntax. The value of a <a href="#quirky-length-0">quirky length</a> is obtained from the component value's value.
-
-<p>The value of a <a href="#quirky-length-0">quirky length</a> must be interpreted as a <a href="#length">&lt;length&gt;</a> where the unit is '<code title="">px</code>'.
-
-<p>In <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-quirks" title="concept-document-quirks">quirks mode</a>, the following properties must have their "Value" grammar changed by replacing <a href="#length">&lt;length&gt;</a> with [ <a href="#length">&lt;length&gt;</a> | <a href="#quirky-length">&lt;quirky-length&gt;</a> ]:
-
-<ul class="brief">
-<li>'background-position'
-<li>'border-spacing'
-<li>'border-top-width'
-<li>'border-right-width'
-<li>'border-bottom-width'
-<li>'border-left-width'
-<li>'border-width'
-<li>'bottom'
-<li>'clip'
-<li>'font-size'
-<li>'height'
-<li>'left'
-<li>'letter-spacing'
-<li>'margin-right'
-<li>'margin-left'
-<li>'margin-top'
-<li>'margin-bottom'
-<li>'margin'
-<li>'max-height'
-<li>'max-width'
-<li>'min-height'
-<li>'min-width'
-<li>'padding-top'
-<li>'padding-right'
-<li>'padding-bottom'
-<li>'padding-left'
-<li>'padding'
-<li>'right'
-<li>'text-indent'
-<li>'top'
-<li>'vertical-align'
-<li>'width'
-<li>'word-spacing'
-</ul>
-
-<p>Any property not listed above must not support <a href="#quirky-length">&lt;quirky-length&gt;</a> even if it references one of the above properties in its "Value" grammar.
-
-<p>This quirk must apply inside an <a href="#@supports">@supports</a> at-rule.
-
-<p>The <a href="#quirky-length">&lt;quirky-length&gt;</a> value must not be supported in arguments to CSS expressions other than the <code title="">rect()</code> expression, and must not be supported in the <a href="#dom-css-supports"><code title="dom-css-supports">supports()</code></a> static method of the <a href="#dom-css"><code title="dom-css">CSS</code></a> interface.
-
-<!--
-<p>When a property is said to <dfn>support unitless lengths</dfn>, all tokens in the property's value <var>tokens</var> must be replaced with the return value of following algorithm prior to interpretation:
-
-<ol>
- <li><p>Let <var>output</var> be an empty array.
- <li><p>Let <var>func</var> be zero.
- <li><p>For each token <var>token</var> in <var>tokens</var>:
-  <ol>
-   <li><p>If <var>token</var> is a <span>) token</span> and <var>func</var> is greater than zero, decrement <var>func</var> by one and jump to the step labeled <var>append</var>.
-   <li><p>If <var>token</var> is a <span>function token</span> or <span>( token</span>, and <var>token</var>'s value does not <span data-anolis-spec=html title="ASCII case-insensitive">ASCII-case-insensitively</span> consist of the characters "<code title>rect</code>" (U+0072 U+0065 U+0063 U+0074), increment <var>func</var> by one and jump to the step labeled <var>append</var>.
-   <li><p>If <var>func</var> is zero and <var>token</var> is a <span>number token</span>, let <var>token</var> be a new <span>dimension token</span> token with the representation set to <var>token</var>'s representation, the value set to <var>token</var>'s value, and the unit set to "<code title>px</code>" (U+0070 U+0078).
-   <li><p><i>Append:</i> Append <var>token</var> to <var>output</var>.
-  </ol>
- <li><p>Return <var>output</var>.
-</ol>
-
-<p>In <span data-anolis-spec=dom title=concept-document-quirks>quirks mode</span>, the following properties <span>support unitless lengths</span>:
-
-<ul class=brief>
-<!- -<li>'background-position'- ->
-<!- -<li>'border-spacing'- ->
-<li>'border-top-width'
-<li>'border-right-width'
-<li>'border-bottom-width'
-<li>'border-left-width'
-<li>'border-width'
-<li>'bottom'
-<li>'clip'
-<li>'font-size'
-<!- -<li class=XXX>'font'- ->
-<li>'height'
-<li>'left'
-<li>'letter-spacing'
-<li>'margin-right'
-<li>'margin-left'
-<li>'margin-top'
-<li>'margin-bottom'
-<li>'margin'
-<!- -<li>'max-height'- ->
-<!- -<li>'max-width'- ->
-<!- -<li>'min-height'- ->
-<!- -<li>'min-width'- ->
-<li>'padding-top'
-<li>'padding-right'
-<li>'padding-bottom'
-<li>'padding-left'
-<li>'padding'
-<li>'right'
-<!- -<li>'text-indent'- ->
-<li>'top'
-<!- -<li>'vertical-align'- ->
-<li>'width'
-<li>'word-spacing'
-</ul>
--->
-<!-- research 2012-02-17 using dotnetdotcom's web200904:
-
-$ grep -iaPo "([a-z]+-)*(position|spacing|width|bottom|clip|size|height|left|right|top|bottom|margin|padding|indent|align|width|end|start|columns|border|shadow)\s*:\s*([1-9][0-9]*(\.[0-9]+)?|[0-9]?\.[0-9]+)(\s|\"|\'|;|$|\/|>)" web200904 > lengths.txt
-^C
-
->>> (see script in hex color quirk section)
-:315
-x-start:2
-3.00":1
-pagging-left:8
-min-height:38
-border-top:842
-v-text-spacing:1
-                2:1
-scrollbar-size:2
-line-width:1
-               24;:1
-border-right:1100
-columns:5
-border-bottom:1725
-border-spacing:7
-																		21:1
-shadow:3
-text-align:8
-                            1/:1
-e-height:1
-8.75":1
-                                    750:1
-xxpadding-top:2
-marging-bottom:2
-line-spacing:7
-x-archive-position:1
-line-height:7209
-5":1
-font-size:35296
-right:1226
-cell-spacing:2
-              100:1
-                              908:1
-word-spacing:381
-mso-columns:2
-padding-top:8168
-border-left-size:1
-scrollbar-border:2
-bottom:101
-fp-font-size:362
-mmargin-left:1
-padding-right:9159
-7:1
-text-size:2
-spacing:243
-xxpadding-left:2
-tab-width:8
-max-width:285
-30":1
-paddin-top:1
-content-size:1
-border-right-width:1891
-y-position:1
-w:1
-padding-left:16898
-1.50":1
-6':1
-border-bottom-width:3505
-height:31132
-max-height:95
-margin-right:8283
-border-top-width:2438
-size:5022
-left-margin:1
-start:49
-bottom-margin:1
-top:10483
-border-width:5602
-min-width:219
-width:46530
-background-position:135
-border-left:887
-padding:18278
-        2:1
-border-height:31
-                              5:1
-margin:5331
-border-left-width:2384
-letter-spacing:874
-vertical-align:47
-clip:5
-0.0:1
-margin-left:11565
-padding-bottom:5279
-week-end:1
-border:4664
-end:68
-installed-size:1
-margin-bottom:11898
-lin-height:12
-																		102:1
-4":1
-nfont-size:10
-z-position:1
-text-indent:378
-midlet-jar-size:1
-one-day-left:1
-margin-top:11393
-position:80
-left:9219
-
-
-Forgot to include "-" before the number in the regex (e.g. text-indent accepts negative values).
-
-$ grep -iaPo "([a-z]+-)*(position|spacing|width|bottom|clip|size|height|left|right|top|bottom|margin|padding|indent|align|width|end|start|columns|border|shadow)\s*:\s*-([1-9][0-9]*(\.[0-9]+)?|[0-9]?\.[0-9]+)(\s|\"|\'|;|$|\/|>)" web200904 > negative-lengths.txt
-^C
-
->>> (see script in hex color quirk section)
-:1
-letter-spacing:31
-right:3
-bottom:2
-top:56
-margin-right:4
-padding-left:1
-margin-bottom:33
-word-spacing:1
-margin-top:68
-margin-left:61
-padding-top:1
-size:2
-margin:6
-left:16
-
-
-'clip'
-
-$ grep -iaPo "clip\s*:\s*rect\([^\)]+\)" web200904 > clip.txt
-^C
-
-Looks like 'clip' is used with and without commas, with and without units.
-
-
-'font'
-
-$ grep -iaPo "font\s*:\s*[^;\}>]+" web200904 > font.txt
-^C
-
-I appended a ";" after each line, removed all " and ' (which shouldn't affect the font-size thing)
-and put the whole thing in a ruleset and loaded it in a quirks mode doc vs a no-quirks mode doc in
-Firefox to see what was logged to the error console. There were 120465 lines, supposedly 'font'
-declarations. 157+4+6+1+1+1 errors in the console in both quirks mode and no-quirks mode. This means
-none of them had unitless font-size. Most common error seemed to be to omit the font-size and/or
-font-family. This may need more research, but maybe we don't need this quirk for 'font'.
-
--->
-
-<!-- XXX
-http://lists.whatwg.org/pipermail/whatwg-whatwg.org/2012-February/034847.html
-
-davidb:
-
-To be exact, they don't apply inside the following shorthands:
-  -moz-border-end
-  -moz-border-start
-  -moz-columns
-  background
-  border
-  border-bottom
-  border-image
-  border-left
-  border-right
-  border-top
-  the size/weight/style and family parts of 'font'
-  list-style
-  outline
-and also don't apply inside the following complex properties:
-  box-shadow
-  text-shadow
-
-
-simonp:
-
-font:60 serif
-
-and has a 60px font size in Firefox Nightly for me.
-
-These also get applied:
-
-font:101 serif
-font:100 60 serif
-font:100 100 serif
-font:bold 100 serif
-font:normal normal normal 100 serif
-
-These don't:
-
-font:100 serif
-font:100/1 serif
-font:normal 100 serif
-font:normal normal 100 serif
-
--->
-
-<!-- the space before unit quirk:
-
-$ grep -iaPo "([a-z]+-)*(position|spacing|width|bottom|clip|size|height|left|right|top|bottom|margin|padding|indent|align|width|end|start|columns|border|shadow)\s*:\s*-?([1-9][0-9]*(\.[0-9]+)?|[0-9]?\.[0-9]+)\s+(px|em|ex|cm|mm|in|pt|pc)" web200904 > space-before-unit.txt
-6265 matches
-
-Opera supported this quirk (copied from IE), but then dropped it because it broke sites that expected IE's different margin collapsing or Firefox's non-support for the quirk, or some such, and was thus dropped. CORE-9273
-
--->
-
-<h3 id="the-line-height-calculation-quirk"><span class="secno">3.3 </span>The line height calculation quirk</h3>
-
-<p class="status"><a href="http://w3c-test.org/quirks-mode/line-height-calculation.html">Run tests</a>
-
-<p>In <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-quirks" title="concept-document-quirks">quirks mode</a> and <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-limited-quirks" title="concept-document-limited-quirks">limited-quirks mode</a>, an inline box that matches the following conditions, must, for the purpose of line height calculation, act as if the box had a 'line-height' of zero.
-
-<ul>
- <li><p>The 'border-right-width', 'border-left-width', 'padding-right' and 'padding-left' properties have a used value of zero. <!-- This matches WebKit. Opera and IE9 don't have this [Opera has now implemented this (CORE-19183)]. Gecko has this rule for all margins, paddings and borders. -->
- <li><p>It either contains no text or it contains only collapsed whitespace. <!-- This matches Gecko and WebKit. IE still uses the quirk in "<pre><img> ". Opera still uses the quirk in "<p><img> <img>". --> <!-- For the purpose of this bullet point, the 'white-space' processing model must not remove a space (U+0020) at the end of a line has 'white-space' set to 'normal', 'nowrap', or 'pre-line' as each line is laid out. (This matches Firefox but not WebKit. Opera had a bug about a site that relied on the Firefox behavior.)-->
-</ul>
-
-<h3 id="the-blocks-ignore-line-height-quirk"><span class="secno">3.4 </span>The blocks ignore line-height quirk</h3>
-
-<p class="status"><a href="http://w3c-test.org/quirks-mode/blocks-ignore-line-height.html">Run tests</a>
-
-<p>In <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-quirks" title="concept-document-quirks">quirks mode</a> and <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-limited-quirks" title="concept-document-limited-quirks">limited-quirks mode</a>, for a <a href="#block-container-element">block container element</a> whose content is composed of <a href="#inline-level">inline-level</a> elements, the element's 'line-height' must be ignored for the purpose of calculating the minimal height of line boxes within the element.
-
-<p class="note">This means that the "strut" is not created.
-
-<h3 id="the-percentage-height-calculation-quirk"><span class="secno">3.5 </span>The percentage height calculation quirk</h3>
-
-<p class="status"><a href="http://w3c-test.org/quirks-mode/percentage-height-calculation.html">Run tests</a>
-
-<p>In <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-quirks" title="concept-document-quirks">quirks mode</a>, for the purpose of calculating the 'height' of an element <var>element</var>, if the computed value of the 'position' property of <var>element</var> is 'relative' or 'static', the specified value for the 'height' property of <var>element</var> is a &lt;percentage&gt;, and <var>element</var> does not have a computed value of the 'display' property that is 'table-row', 'table-row-group', 'table-header-group', 'table-footer-group', 'table-cell' or 'table-caption', the <a href="#containing-block">containing block</a> of <var>element</var> must be calculated using the following algorithm, aborting on the first step that returns a value:
-
-<ol>
-  <li><p>Let <var>element</var> be the nearest ancestor <a href="#block-container-box">block container box</a> of <var>element</var>, if there is one. Otherwise, return the <a href="#initial-containing-block">initial containing block</a>.
-  <li><p>If <var>element</var> has a computed value of the 'display' property that is 'table-cell', return a UA-defined value.
-  <li><p>If <var>element</var> has a computed value of the 'height' property that is not 'auto', return <var>element</var>.
-  <li><p>If <var>element</var> has a computed value of the 'position' property that is 'absolute', return <var>element</var>.
-  <li><p>If <var>element</var> is a <code>body</code> element, and its parent is the root element, and that is an <code>html</code> element, let <var>element</var> have a <a href="#quirky-containing-block-height">quirky containing block height</a> and return <var>element</var>.
-  <li><p>Jump to the first step.
-</ol>
-
-<p>When an element <var>body</var> is said to have a <dfn id="quirky-containing-block-height">quirky containing block height</dfn>, the <a href="#containing-block">containing block</a> the element establishes must act as if it had a height calculated using the following algorithm:
-
-<ol>
-  <li><p>If the root element has a computed value of the 'height' property that is 'auto' and has a computed value of the 'position' property that is 'absolute', return 'auto' and abort these steps.
-  <li><p>Let <var>elements</var> be an array with <var>body</var> as its only item.
-  <li><p>If the root element has a computed value of the 'height' property that is not 'auto', let <var>A</var> be the used value of the 'height' property of the root element. Otherwise, let <var>A</var> be the height of the <a href="#initial-containing-block">initial containing block</a> and append the root element to <var>elements</var>.
-  <li><p>Let <var>B</var> be the sum of the used values of the 'margin-top', 'margin-bottom', 'border-top-width', 'border-bottom-width', 'padding-top' and 'padding-bottom' properties of each element in <var>elements</var>.
-  <li><p>Let <var>result</var> be <var>A</var> minus <var>B</var>.
-  <li><p>If <var>result</var> is negative, let <var>result</var> be zero.
-  <li><p>Return <var>result</var>.
-</ol>
-
-<p class="note">It is at the time or writing undefined how percentage heights inside tables work in CSS. This specification does not try to specify what to use as the containing block for calculating percentage heights in tables. Godspeed!
-
-<h3 id="the-table-cell-width-calculation-quirk"><span class="secno">3.6 </span>The table cell width calculation quirk</h3>
-
-<p class="status"><a href="http://w3c-test.org/quirks-mode/table-cell-width-calculation.html">Run tests</a>
-
-<p>In <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-quirks" title="concept-document-quirks">quirks mode</a>, for the purpose of calculating the <a href="#minimum-intrinsic-width-of-an-inline-formatting-context">minimum intrinsic width of an inline formatting context</a> for which a table cell <var>cell</var> is the <a href="#containing-block">containing block</a>, if <var>cell</var> has a computed value of the 'width' property that is 'auto', <code>img</code> elements that are inline replaced elements or inline-block replaced elements in that inline formatting context must not have a line breaking opportunity before or after them.
-
-<!-- http://mxr.mozilla.org/mozilla-central/source/layout/generic/nsImageFrame.cpp#2053 -->
-
-<h3 id="the-table-cell-nowrap-minimum-width-calculation-quirk"><span class="secno">3.7 </span>The table cell nowrap minimum width calculation quirk</h3>
-
-<p>In <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-quirks" title="concept-document-quirks">quirks mode</a>, an element <var>cell</var> that matches the following conditions must act as if it had an <a href="#outer-intrinsic-minimum-width-of-a-table-cell">outer intrinsic minimum width of a table cell</a> in the automatic table layout algorithm that is the bigger value of <var>cell</var>'s computed value of the 'width' property and the <a href="#outer-intrinsic-minimum-width-of-a-table-cell">outer intrinsic minimum width of a table cell</a>.
-
-<ul>
-  <li><p><var>cell</var> is a <code>td</code> element or a <code>th</code> element.
-  <li><p><var>cell</var> has a <code>nowrap</code> attribute.
-  <li><p>The computed value of the 'width' property of <var>cell</var> is a &lt;length&gt; that is not zero.
-</ul>
-
-<h3 id="the-collapsing-table-quirk"><span class="secno">3.8 </span>The collapsing table quirk</h3>
-
-<p>In <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-quirks" title="concept-document-quirks">quirks mode</a>, an element <var>table</var> that matches the following conditions must have a used value of the 'height' property of '0' and a used value of the 'border-style' property of 'none'.
-
-<ul>
-  <li><p><var>table</var> has a computed value of the 'display' property that is 'table'.
-  <li><p><var>table</var> has no child 'table-row-group', 'table-header-group', 'table-footer-group' or 'table-caption' box.
-  <li><p><var>table</var> has no child 'table-column-group' box that itself has a child 'table-column' box.
-</ul>
-
-<h3 id="the-text-decoration-doesn't-propagate-into-tables-quirk"><span class="secno">3.9 </span>The text decoration doesn't propagate into tables quirk</h3>
-
-<p>In <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-quirks" title="concept-document-quirks">quirks mode</a>, text decoration must not propagate into <code>table</code> elements.
-
-<!-- http://mxr.mozilla.org/mozilla-central/source/layout/generic/nsTextFrameThebes.cpp#4582 -->
-
-<h3 id="the-tables-inherit-color-from-body-quirk"><span class="secno">3.10 </span>The tables inherit color from body quirk</h3>
-
-<p>In <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-quirks" title="concept-document-quirks">quirks mode</a>, the initial value of the 'color' property must be 'quirk-inherit', a special value that has no keyword mapping to it.
-
-<p>The computed value of the 'color' property of an element <var>element</var> must be calculated using the following algorithm:
-
-<ol>
-  <li><p>If the specified value of the 'color' property of <var>element</var> is not 'quirk-inherit', jump to the last step.
-  <li><p>If <var>element</var> is not a <code>table</code> element, jump to the last step.
-  <li><p>If the <a href="#document's-body-element">document's body element</a> is null, jump to the last step.
-  <li><p>Return the used value of the 'color' property of the <a href="#document's-body-element">document's body element</a>. Abort these steps.
-  <li><p>If the specified value of the 'color' property of <var>element</var> is 'quirk-inherit', let the specified value of the 'color' property of <var>element</var> be the initial value of the 'color' property according to the CSS specification. Return the computed value of the 'color' property of <var>element</var> as specified in the CSS specification.
-</ol>
-
-<p>The <dfn id="document's-body-element">document's body element</dfn> is the first child of the root element that is a <code>body</code> element, if there is one, and the root element is an <code>html</code> element. Otherwise it is null.
-
-<!--
-<h3>The font size calculation quirk</h3>
-
-<p class="status">Status: Needs research.
-
-<pre class=XXX>http://mxr.mozilla.org/mozilla-central/source/layout/style/nsStyleUtil.cpp#64
-http://trac.webkit.org/browser/trunk/Source/WebCore/css/CSSStyleSelector.cpp?rev=113922#L4920</pre>
-
-Opera and IE (any mode) don't have this quirk.
-
-https://bugzilla.mozilla.org/show_bug.cgi?id=747464
-https://bugs.webkit.org/show_bug.cgi?id=84469
--->
-
-<h3 id="the-table-cell-height-box-sizing-quirk"><span class="secno">3.11 </span>The table cell height box sizing quirk</h3>
-
-<p>In <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-quirks" title="concept-document-quirks">quirks mode</a>, elements that have a computed value of the 'display' property of 'table-cell' must act as they have used value of the 'box-sizing' property of 'border-box', but only for the purpose of the 'height', 'min-height' and 'max-height' properties.
-
-<h2 id="selectors"><span class="secno">4 </span>Selectors</h2>
-
-<h3 id="the-:active-and-:hover-quirk"><span class="secno">4.1 </span>The :active and :hover quirk</h3>
-
-<p class="status"><a href="http://w3c-test.org/quirks-mode/active-and-hover-manual.html">Run tests</a>
-
-<p>In <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document-quirks" title="concept-document-quirks">quirks mode</a>, a compound selector <var>selector</var> that matches the following conditions must not match elements that would not also match the ':any-link' selector. <a href="#refsSELECTORS">[SELECTORS]</a>
-
-<ul>
- <li><var>selector</var> uses the ':active' or ':hover' pseudo-classes.
- <li><var>selector</var> does not use a type selector.
- <li><var>selector</var> does not use an attribute selector.
- <li><var>selector</var> does not use an ID selector.
- <li><var>selector</var> does not use a class selector.
- <li><var>selector</var> does not use a pseudo-class selector other than ':active' and ':hover'.
- <li><var>selector</var> does not use a pseudo-element selector.
- <li><var>selector</var> is not part of an argument to a functional pseudo-class or pseudo-element.
-</ul>
-
-<!--<h2>HTML</h2>-->
-<!--
-<h3>The braces in style attribute quirk</h3>
-
-<p class="status">Status: Needs research.
-
-<p>In <span data-anolis-spec=dom title=concept-document-quirks>quirks mode</span>, when parsing the <code>style</code> attribute on <span>HTML elements</span>, if the first token is "<code title>{</code>" (U+007B), that token must be ignored. If it was present, and a later matching token "<code title>}</code>" (U+0079) is found, that token, and all tokens after it, must also be ignored.</p>
-
-<p class="XXX">Can we drop this quirk? WebKit and IE9 in non-compat view don't support it. Its usage in the wild is on the same order as the "space before unit" quirk<!- - see unitless length section - ->, which Firefox doesn't support, and which Opera has dropped support for.
--->
-
-<!--
-grep -iaPo "<[a-z]+\s[^>]*style\s*=\s*[\"']{[^\"'>]+" web200904 > style-braces.txt
-6556 matches
--->
-
-<!--
-<h2>Quirks that maybe can be removed from implementations</h2>
-
-<dl>
-<dt>In quirks mode, text-decoration is propagated into floating and absolutely positioned elements</dt>
-<dd><p>Opera, WebKit and IE9 (except in compat view quirks mode) don't support this quirk.</dd>
-
-<dt>The empty-cells property defaults to hide in quirks mode but show (according to CSS2 errata) in strict mode (see  bug 33244 ) (though the correct fix would be to specify it on the HTML TABLE element in quirk.css).</dt>
-<dd><p>WebKit and IE9 (except in compat view quirks and no-quirks modes) do not support this quirk.</dd>
-
-<dt>In quirks mode, the CSS parser allows {} around the contents of style attributes ( bug 99554 )</dt>
-<dd><p>WebKit and IE9 (except in compat view quirks mode) don't support this quirk. Its usage in the wild is on the same order as the "space before unit" quirk<!- - see unitless length section - ->, which Firefox doesn't support, and which Opera has dropped support for.</dd>
-
-</dl>
--->
-<!--
-http://mxr.mozilla.org/mozilla-central/source/layout/generic/nsBlockReflowState.cpp#696
-Opera/WebKit don't have this quirk.
-http://software.hixie.ch/utilities/js/live-dom-viewer/saved/1405
--->
-<!--
-http://mxr.mozilla.org/mozilla-central/source/layout/tables/nsTableFrame.cpp#1309
-Opera/WebKit don't have this quirk.
-http://software.hixie.ch/utilities/js/live-dom-viewer/saved/1406
--->
-<!-- XXX not clear to me what these do:
-http://mxr.mozilla.org/mozilla-central/source/layout/generic/nsBRFrame.cpp#137
-http://mxr.mozilla.org/mozilla-central/source/layout/generic/nsHTMLReflowState.cpp#414
-http://mxr.mozilla.org/mozilla-central/source/layout/style/nsRuleProcessorData.h#234
-http://mxr.mozilla.org/mozilla-central/source/layout/style/nsStyleUtil.cpp#172
-http://mxr.mozilla.org/mozilla-central/source/layout/base/nsCSSRendering.cpp#573
-http://mxr.mozilla.org/mozilla-central/source/content/base/src/nsGenericElement.cpp#2110
--->
-<!--
-<h2>Quirks that have moved to other specifications</h2>
-
-<p><dfn>The hashless hex color quirk</dfn> and <dfn>the unitless length quirk</dfn> are now defined in CSS Syntax Module Level 3. <span data-anolis-ref>CSSSYNTAX</span>
--->
-<h2 class="no-num" id="references">References</h2>
-
-<div id="anolis-references"><dl><dt id="refsCSS">[CSS]
-<dd><cite><a href="http://www.w3.org/TR/CSS2/">CSS</a></cite>, Bert Bos, Tantek Çelik, Ian Hickson et al.. W3C.
-
-<dt id="refsCSSCONDITIONAL">[CSSCONDITIONAL]
-<dd><cite><a href="http://dev.w3.org/csswg/css-conditional/">CSS Conditional Rules Module</a></cite>, L. David Baron.
-
-<dt id="refsCSSINTRINSIC">[CSSINTRINSIC]
-<dd><cite><a href="http://dbaron.org/css/intrinsic/">More Precise Definitions of Intrinsic Widths and Table Layout (Proposal)</a></cite>, L. David Baron.
-
-<dt id="refsCSSOM">[CSSOM]
-<dd>(Non-normative) <cite><a href="http://dev.w3.org/csswg/cssom/">CSS Object Model (CSSOM)</a></cite>, Simon Pieters and Glenn Adams. W3C.
-
-<dt id="refsCSSOMVIEW">[CSSOMVIEW]
-<dd>(Non-normative) <cite><a href="http://dev.w3.org/csswg/cssom-view/">CSSOM View Module</a></cite>, Simon Pieters and Glenn Adams. W3C.
-
-<dt id="refsCSSSYNTAX">[CSSSYNTAX]
-<dd><cite><a href="http://dev.w3.org/csswg/css-syntax/">CSS Syntax Module</a></cite>, Tab Atkins Jr.. W3C.
-
-<dt id="refsCSSVALUES">[CSSVALUES]
-<dd><cite><a href="http://dev.w3.org/csswg/css-values/">CSS Values and Units Module</a></cite>, Håkon Wium Lie, Tab Atkins Jr. and Elika J. Etemad. W3C.
-
-<dt id="refsDOM">[DOM]
-<dd><cite><a href="https://dom.spec.whatwg.org/">DOM</a></cite>, Anne van Kesteren, Aryeh Gregor and Ms2ger. WHATWG.
-
-<dt id="refsHTML">[HTML]
-<dd><cite><a href="https://html.spec.whatwg.org/multipage/">HTML</a></cite>, Ian Hickson. WHATWG.
-
-<dt id="refsRFC2119">[RFC2119]
-<dd><cite><a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a></cite>, Scott Bradner. IETF.
-
-<dt id="refsSELECTORS">[SELECTORS]
-<dd><cite><a href="http://dev.w3.org/csswg/selectors/">Selectors</a></cite>, Elika J. Etemad and Tab Atkins Jr.. W3C.
-
-</dl></div>
-
-
-<h2 class="no-num" id="acknowledgments">Acknowledgments</h2>
-
-<p>Thanks to
-
+ <body class="h-entry status-LS">
+  <div class="head">
+   <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo.svg"> </a> </p>
+   <hgroup>
+    <h1 class="p-name no-ref" id="title">Quirks Mode</h1>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-04-21">21 April 2016</time></span></h2>
+   </hgroup>
+   <div data-fill-with="spec-metadata">
+    <dl>
+     <dt>Participate:
+     <dd><span><a href="https://github.com/whatwg/quirks">GitHub whatwg/quirks</a> (<a href="https://github.com/whatwg/quirks/issues/new">new issue</a>, <a href="https://github.com/whatwg/quirks/issues">open issues</a>)</span>
+     <dd><span><a href="https://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a></span>
+     <dt>Commits:
+     <dd><span><a href="https://github.com/whatwg/quirks/commits">GitHub whatwg/quirks/commits</a></span>
+    </dl>
+   </div>
+   <div data-fill-with="warning"></div>
+  </div>
+  <h2 class="no-num no-toc no-ref heading settled" id="abstract"><span class="content">Abstract</span></h2>
+  <div class="p-summary" data-fill-with="abstract">
+   <p>Quirks Mode defines quirks in CSS and Selectors that are necessary to support for Web browsers compatibility with the Web.</p>
+  </div>
+  <nav data-fill-with="table-of-contents" id="toc">
+   <h2 class="no-num no-toc no-ref" id="contents">Table of Contents</h2>
+   <ol class="toc" role="directory">
+    <li>
+     <a href="#introduction"><span class="secno">1</span> <span class="content">Introduction</span></a>
+     <ol class="toc">
+      <li><a href="#history"><span class="secno">1.1</span> <span class="content">History</span></a>
+      <li><a href="#goals"><span class="secno">1.2</span> <span class="content">Goals</span></a>
+     </ol>
+    <li>
+     <a href="#common-infrastructure"><span class="secno">2</span> <span class="content">Common infrastructure</span></a>
+     <ol class="toc">
+      <li><a href="#conformance"><span class="secno">2.1</span> <span class="content">Conformance</span></a>
+      <li><a href="#terminology"><span class="secno">2.2</span> <span class="content">Terminology</span></a>
+     </ol>
+    <li>
+     <a href="#css"><span class="secno">3</span> <span class="content">CSS</span></a>
+     <ol class="toc">
+      <li><a href="#the-hashless-hex-color-quirk"><span class="secno">3.1</span> <span class="content">The hashless hex color quirk</span></a>
+      <li><a href="#the-unitless-length-quirk"><span class="secno">3.2</span> <span class="content">The unitless length quirk</span></a>
+      <li><a href="#the-line-height-calculation-quirk"><span class="secno">3.3</span> <span class="content">The line height calculation quirk</span></a>
+      <li><a href="#the-blocks-ignore-line-height-quirk"><span class="secno">3.4</span> <span class="content">The blocks ignore line-height quirk</span></a>
+      <li><a href="#the-percentage-height-calculation-quirk"><span class="secno">3.5</span> <span class="content">The percentage height calculation
+quirk</span></a>
+      <li><a href="#the-table-cell-width-calculation-quirk"><span class="secno">3.6</span> <span class="content">The table cell width calculation quirk</span></a>
+      <li><a href="#the-table-cell-nowrap-minimum-width-calculation-quirk"><span class="secno">3.7</span> <span class="content">The table cell nowrap minimum width
+calculation quirk</span></a>
+      <li><a href="#the-collapsing-table-quirk"><span class="secno">3.8</span> <span class="content">The collapsing table quirk</span></a>
+      <li><a href="#the-text-decoration-doesnt-propagate-into-tables-quirk"><span class="secno">3.9</span> <span class="content">The text decoration doesn’t propagate
+into tables quirk</span></a>
+      <li><a href="#the-tables-inherit-color-from-body-quirk"><span class="secno">3.10</span> <span class="content">The tables inherit color from body
+quirk</span></a>
+      <li><a href="#the-table-cell-height-box-sizing-quirk"><span class="secno">3.11</span> <span class="content">The table cell height box sizing quirk</span></a>
+     </ol>
+    <li>
+     <a href="#selectors"><span class="secno">4</span> <span class="content">Selectors</span></a>
+     <ol class="toc">
+      <li><a href="#the-active-and-hover-quirk"><span class="secno">4.1</span> <span class="content">The :active and :hover quirk</span></a>
+     </ol>
+    <li><a href="#acknowledgments"><span class="secno"></span> <span class="content">Acknowledgments</span></a>
+    <li>
+     <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
+     <ol class="toc">
+      <li><a href="#index-defined-here"><span class="secno"></span> <span class="content">Terms defined by this specification</span></a>
+      <li><a href="#index-defined-elsewhere"><span class="secno"></span> <span class="content">Terms defined by reference</span></a>
+     </ol>
+    <li>
+     <a href="#references"><span class="secno"></span> <span class="content">References</span></a>
+     <ol class="toc">
+      <li><a href="#normative"><span class="secno"></span> <span class="content">Normative References</span></a>
+      <li><a href="#informative"><span class="secno"></span> <span class="content">Informative References</span></a>
+     </ol>
+   </ol>
+  </nav>
+  <main>
+   <h2 class="heading settled" data-level="1" id="introduction"><span class="secno">1. </span><span class="content">Introduction</span><a class="self-link" href="#introduction"></a></h2>
+   <h3 class="heading settled" data-level="1.1" id="history"><span class="secno">1.1. </span><span class="content">History</span><a class="self-link" href="#history"></a></h3>
+   <p>Browsers have several rendering modes to render HTML documents. The reason for this is basically
+a historical accident. The CSS specification was incompatible with the behavior of existing browsers
+which existing Web content relied on. In order to comply with the specification while not breaking
+existing content, browsers introduced a new rendering mode (no-quirks mode). Some browsers still had
+the shrink-wrapping behavior for images in table cells in their no-quirks mode, and sites started
+relying on that, so browsers that implemented the specification’s behavior introduced a third mode
+(limited-quirks mode). In hindsight, it would have been better to make the default CSS behavior be
+compatible with what the existing content relied on and providing opt-ins to different behavior. The
+different modes have since gained a few differences outside of CSS. </p>
+   <h3 class="heading settled" data-level="1.2" id="goals"><span class="secno">1.2. </span><span class="content">Goals</span><a class="self-link" href="#goals"></a></h3>
+   <ul>
+    <li>
+     <p>Create a specification for rendering old (or indeed new, if they happen to have a particular
+ pragma) HTML documents. </p>
+    <li>
+     <p>Remove quirks from implementations that are not needed for Web compatibility. </p>
+    <li>
+     <p>Get interoperability on quirks that <em>are</em> needed for Web compatibility. </p>
+    <li>
+     <p>Where possible, limit quirks to a fixed set of legacy features so they don’t propagate into
+ new features. </p>
+   </ul>
+   <p class="note" role="note">This specification does not enumerate all quirks that currently exist in browsers. A
+number of quirks are specified in HTML, DOM, CSSOM and CSSOM View. <a data-link-type="biblio" href="#biblio-html">[HTML]</a> <a data-link-type="biblio" href="#biblio-dom">[DOM]</a> <a data-link-type="biblio" href="#biblio-cssom">[CSSOM]</a> <a data-link-type="biblio" href="#biblio-cssom-view">[CSSOM-VIEW]</a> If a quirk is not specified anywhere, it is probably due to the second bullet point
+above. </p>
+   <h2 class="heading settled" data-level="2" id="common-infrastructure"><span class="secno">2. </span><span class="content">Common infrastructure</span><a class="self-link" href="#common-infrastructure"></a></h2>
+   <h3 class="heading settled" data-level="2.1" id="conformance"><span class="secno">2.1. </span><span class="content">Conformance</span><a class="self-link" href="#conformance"></a></h3>
+   <p>All diagrams, examples, and notes in this specification are non-normative, as are all sections
+explicitly marked non-normative. Everything else in this specification is normative. </p>
+   <p>The key words "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT
+RECOMMENDED", "MAY", and "OPTIONAL" in the normative parts of this specification are to be
+interpreted as described in RFC2119. For readability, these words do not appear in all uppercase
+letters in this specification. <a data-link-type="biblio" href="#biblio-rfc2119">[RFC2119]</a> </p>
+   <h3 class="heading settled" data-level="2.2" id="terminology"><span class="secno">2.2. </span><span class="content">Terminology</span><a class="self-link" href="#terminology"></a></h3>
+   <p>When this specification refers to a "<code><var>foo</var></code> element", it means an element with the
+local name <var>foo</var> and having the namespace <code>http://www.w3.org/1999/xhtml</code>. </p>
+   <p>When this specification refers to a "<code><var>foo</var></code> attribute", it means an attribute with
+the local name <var>foo</var> and having no namespace. </p>
+   <h2 class="heading settled" data-level="3" id="css"><span class="secno">3. </span><span class="content">CSS</span><a class="self-link" href="#css"></a></h2>
+   <h3 class="heading settled" data-level="3.1" id="the-hashless-hex-color-quirk"><span class="secno">3.1. </span><span class="content">The hashless hex color quirk</span><a class="self-link" href="#the-hashless-hex-color-quirk"></a></h3>
+   <p class="note" role="note"><a href="http://w3c-test.org/quirks-mode/hashless-hex-color.html">Tests are
+available</a>. </p>
+   <p><dfn data-dfn-type="dfn" data-export="" data-lt="quirky color" id="quirky-color">Quirky colors<a class="self-link" href="#quirky-color"></a></dfn> are denoted by <dfn class="css" data-dfn-type="type" data-export="" id="quirky-color-value">&lt;quirky-color><a class="self-link" href="#quirky-color-value"></a></dfn>. A <a data-link-type="dfn" href="#quirky-color">quirky color</a> corresponds to a <a class="production css" data-link-type="type" href="https://drafts.csswg.org/css-syntax-3/#typedef-number-token">&lt;number-token></a>, a <a class="production css" data-link-type="type" href="https://drafts.csswg.org/css-syntax-3/#typedef-dimension-token">&lt;dimension-token></a> or an <a class="production css" data-link-type="type" href="https://drafts.csswg.org/css-syntax-3/#typedef-ident-token">&lt;ident-token></a> <a data-link-type="dfn" href="https://drafts.csswg.org/css-syntax-3/#component-value">component value</a> in the syntax.
+The value of a <a data-link-type="dfn" href="#quirky-color">quirky color</a> is obtained from the possible <a data-link-type="dfn" href="https://drafts.csswg.org/css-syntax-3/#component-value">component values</a> using the
+following algorithm, aborting on the first step that returns a value: </p>
+   <ol data-algorithm="">
+    <li>
+     <p>Let <var>cv</var> be the <a data-link-type="dfn" href="https://drafts.csswg.org/css-syntax-3/#component-value">component value</a>. </p>
+    <li>
+     <p>If <var>cv</var> is a <a class="production css" data-link-type="type" href="https://drafts.csswg.org/css-syntax-3/#typedef-number-token">&lt;number-token></a> or a <a class="production css" data-link-type="type" href="https://drafts.csswg.org/css-syntax-3/#typedef-dimension-token">&lt;dimension-token></a>, follow these substeps: </p>
+     <ol>
+      <li>
+       <p>If <var>cv</var>’s type flag is not "integer", return an error. </p>
+       <p class="note" role="note">This means that values that happen to use scientific notation, e.g., <code>5e5e5e</code>, will fail to parse. </p>
+      <li>
+       <p>If <var>cv</var>’s value is less than zero, return an error. </p>
+      <li>
+       <p>Let <var>serialization</var> be the serialization of <var>cv</var>’s value, as a base-ten integer using
+   digits 0-9 (U+0030 to U+0039) in the shortest form possible. </p>
+      <li>
+       <p>If <var>cv</var> is a <a class="production css" data-link-type="type" href="https://drafts.csswg.org/css-syntax-3/#typedef-dimension-token">&lt;dimension-token></a>, append the unit to <var>serialization</var>. </p>
+      <li>
+       <p>If <var>serialization</var> consists of fewer than six characters, prepend zeros (U+0030) so that
+   it becomes six characters. </p>
+     </ol>
+    <li>
+     <p>Otherwise, <var>cv</var> is an <a class="production css" data-link-type="type" href="https://drafts.csswg.org/css-syntax-3/#typedef-ident-token">&lt;ident-token></a>; let <var>serialization</var> be <var>cv</var>’s value. </p>
+    <li>
+     <p>If <var>serialization</var> does not consist of three or six characters, return an error. </p>
+    <li>
+     <p>If <var>serialization</var> contains any characters not in the range [0-9A-Fa-f] (U+0030 to U+0039,
+ U+0041 to U+0046, U+0061 to U+0066), return an error. </p>
+    <li>
+     <p>Return the concatenation of "<code>#</code>" (U+0023) and <var>serialization</var>. </p>
+   </ol>
+   <p>If the value of a <a data-link-type="dfn" href="#quirky-color">quirky color</a> is an error, it is an <a data-link-type="dfn" href="https://drafts.csswg.org/css2/conform.html#illegal">illegal</a> value.
+Otherwise, the value of a <a data-link-type="dfn" href="#quirky-color">quirky color</a> must be interpreted as an RGB value in hexadecimal
+notation using the same rules as for <a class="production css" data-link-type="type" href="https://drafts.csswg.org/css-color-3/#valuea-def-color" title="Expands to: indigo | gold | firebrick | indianred | yellow | darkolivegreen | darkseagreen | slategrey | darkslategrey | greenyellow | mediumorchid | silver | papayawhip | dimgray | black | springgreen | crimson | lightsalmon | brown | turquoise | lightseagreen | cyan | transparent | skyblue | gray | darkturquoise | goldenrod | darkgreen | darkviolet | darkgray | lime | lightpink | teal | darkmagenta | lightgoldenrodyellow | lavender | yellowgreen | thistle | violet | navy | dimgrey | orchid | blue | ghostwhite | honeydew | cornflowerblue | maroon | purple | darkkhaki | mediumpurple | cornsilk | red | bisque | burlywood | darkcyan | khaki | wheat | deepskyblue | rebeccapurple | darkred | steelblue | aliceblue | lightslategrey | gainsboro | mediumturquoise | floralwhite | coral | aqua | mediumslateblue | lightcyan | darksalmon | beige | azure | lightsteelblue | oldlace | mediumvioletred | royalblue | olivedrab | sienna | lightcoral | orangered | navajowhite | slategray | palegreen | mistyrose | seashell | mediumspringgreen | fuchsia | chartreuse | blanchedalmond | peru | aquamarine | white | darkslategray | tomato | ivory | dodgerblue | currentcolor | lemonchiffon | lightgreen | orange | forestgreen | darkgrey | olive | mintcream | antiquewhite | cadetblue | moccasin | limegreen | saddlebrown | grey | darkslateblue | lightskyblue | deeppink | plum | lightgrey | darkgoldenrod | slateblue | sandybrown | magenta | tan | rosybrown | pink | lightblue | palevioletred | mediumseagreen | linen | darkorange | powderblue | seagreen | snow | mediumblue | midnightblue | paleturquoise | palegoldenrod | whitesmoke | darkorchid | salmon | lightslategray | lawngreen | chocolate | lightgray | hotpink | lightyellow | lavenderblush | darkblue | mediumaquamarine | green | blueviolet | peachpuff">&lt;color></a>. </p>
+   <p>In <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document-quirks">quirks mode</a>, the following properties must have
+their "Value" grammar changed by replacing <a class="production css" data-link-type="type" href="https://drafts.csswg.org/css-color-3/#valuea-def-color" title="Expands to: indigo | gold | firebrick | indianred | yellow | darkolivegreen | darkseagreen | slategrey | darkslategrey | greenyellow | mediumorchid | silver | papayawhip | dimgray | black | springgreen | crimson | lightsalmon | brown | turquoise | lightseagreen | cyan | transparent | skyblue | gray | darkturquoise | goldenrod | darkgreen | darkviolet | darkgray | lime | lightpink | teal | darkmagenta | lightgoldenrodyellow | lavender | yellowgreen | thistle | violet | navy | dimgrey | orchid | blue | ghostwhite | honeydew | cornflowerblue | maroon | purple | darkkhaki | mediumpurple | cornsilk | red | bisque | burlywood | darkcyan | khaki | wheat | deepskyblue | rebeccapurple | darkred | steelblue | aliceblue | lightslategrey | gainsboro | mediumturquoise | floralwhite | coral | aqua | mediumslateblue | lightcyan | darksalmon | beige | azure | lightsteelblue | oldlace | mediumvioletred | royalblue | olivedrab | sienna | lightcoral | orangered | navajowhite | slategray | palegreen | mistyrose | seashell | mediumspringgreen | fuchsia | chartreuse | blanchedalmond | peru | aquamarine | white | darkslategray | tomato | ivory | dodgerblue | currentcolor | lemonchiffon | lightgreen | orange | forestgreen | darkgrey | olive | mintcream | antiquewhite | cadetblue | moccasin | limegreen | saddlebrown | grey | darkslateblue | lightskyblue | deeppink | plum | lightgrey | darkgoldenrod | slateblue | sandybrown | magenta | tan | rosybrown | pink | lightblue | palevioletred | mediumseagreen | linen | darkorange | powderblue | seagreen | snow | mediumblue | midnightblue | paleturquoise | palegoldenrod | whitesmoke | darkorchid | salmon | lightslategray | lawngreen | chocolate | lightgray | hotpink | lightyellow | lavenderblush | darkblue | mediumaquamarine | green | blueviolet | peachpuff">&lt;color></a> with: </p>
+<pre class="prod">[ <a class="production" data-link-type="type" href="https://drafts.csswg.org/css-color-3/#valuea-def-color" title="Expands to: indigo | gold | firebrick | indianred | yellow | darkolivegreen | darkseagreen | slategrey | darkslategrey | greenyellow | mediumorchid | silver | papayawhip | dimgray | black | springgreen | crimson | lightsalmon | brown | turquoise | lightseagreen | cyan | transparent | skyblue | gray | darkturquoise | goldenrod | darkgreen | darkviolet | darkgray | lime | lightpink | teal | darkmagenta | lightgoldenrodyellow | lavender | yellowgreen | thistle | violet | navy | dimgrey | orchid | blue | ghostwhite | honeydew | cornflowerblue | maroon | purple | darkkhaki | mediumpurple | cornsilk | red | bisque | burlywood | darkcyan | khaki | wheat | deepskyblue | rebeccapurple | darkred | steelblue | aliceblue | lightslategrey | gainsboro | mediumturquoise | floralwhite | coral | aqua | mediumslateblue | lightcyan | darksalmon | beige | azure | lightsteelblue | oldlace | mediumvioletred | royalblue | olivedrab | sienna | lightcoral | orangered | navajowhite | slategray | palegreen | mistyrose | seashell | mediumspringgreen | fuchsia | chartreuse | blanchedalmond | peru | aquamarine | white | darkslategray | tomato | ivory | dodgerblue | currentcolor | lemonchiffon | lightgreen | orange | forestgreen | darkgrey | olive | mintcream | antiquewhite | cadetblue | moccasin | limegreen | saddlebrown | grey | darkslateblue | lightskyblue | deeppink | plum | lightgrey | darkgoldenrod | slateblue | sandybrown | magenta | tan | rosybrown | pink | lightblue | palevioletred | mediumseagreen | linen | darkorange | powderblue | seagreen | snow | mediumblue | midnightblue | paleturquoise | palegoldenrod | whitesmoke | darkorchid | salmon | lightslategray | lawngreen | chocolate | lightgray | hotpink | lightyellow | lavenderblush | darkblue | mediumaquamarine | green | blueviolet | peachpuff">&lt;color></a> <a data-link-type="grammar" href="https://drafts.csswg.org/css-values-3/#comb-one">|</a> <a class="production" data-link-type="type" href="#quirky-color-value">&lt;quirky-color></a> ]
+</pre>
+   <ul class="brief">
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-backgrounds-3/#background-color">background-color</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-backgrounds-3/#border-color">border-color</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-backgrounds-3/#border-top-color">border-top-color</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-backgrounds-3/#border-right-color">border-right-color</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-backgrounds-3/#border-bottom-color">border-bottom-color</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-backgrounds-3/#border-left-color">border-left-color</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-color-4/#propdef-color">color</a> 
+   </ul>
+   <p>Any property not listed above must not support <a class="production css" data-link-type="type" href="#quirky-color-value">&lt;quirky-color></a> even if it references one of the
+above properties in its "Value" grammar. </p>
+   <p>This quirk must apply inside an <a class="css" data-link-type="at-rule" href="https://drafts.csswg.org/css-conditional-3/#at-ruledef-supports">@supports</a> at-rule. </p>
+   <p>The <a class="production css" data-link-type="type" href="#quirky-color-value">&lt;quirky-color></a> value must not be supported in arguments to CSS expressions, and must not be
+supported in the <code><a class="idl-code" data-link-type="method" href="https://drafts.csswg.org/css-conditional-3/#dom-css-supports">supports()</a></code> static
+method of the <code class="idl"><a data-link-type="idl" href="https://drafts.csswg.org/cssom-1/#css">CSS</a></code> interface. </p>
+   <h3 class="heading settled" data-level="3.2" id="the-unitless-length-quirk"><span class="secno">3.2. </span><span class="content">The unitless length quirk</span><a class="self-link" href="#the-unitless-length-quirk"></a></h3>
+   <p class="note" role="note"><a href="http://w3c-test.org/quirks-mode/unitless-length.html">Tests are
+available</a>. </p>
+   <p><dfn data-dfn-type="dfn" data-export="" data-lt="quirky length" id="quirky-length">Quirky lengths<a class="self-link" href="#quirky-length"></a></dfn> are denoted by <dfn class="css" data-dfn-type="type" data-export="" id="quirky-length-value">&lt;quirky-length><a class="self-link" href="#quirky-length-value"></a></dfn>. A <a data-link-type="dfn" href="#quirky-length">quirky length</a> is a <a data-link-type="dfn" href="https://drafts.csswg.org/css-values-3/#number">number</a> and
+corresponds to a <a class="production css" data-link-type="type" href="https://drafts.csswg.org/css-syntax-3/#typedef-number-token">&lt;number-token></a> <a data-link-type="dfn" href="https://drafts.csswg.org/css-syntax-3/#component-value">component value</a> in the syntax. The value of a <a data-link-type="dfn" href="#quirky-length">quirky
+length</a> is obtained from the <a data-link-type="dfn" href="https://drafts.csswg.org/css-syntax-3/#component-value">component value</a>’s value. </p>
+   <p>The value of a <a data-link-type="dfn" href="#quirky-length">quirky length</a> must be interpreted as a <a class="production css" data-link-type="type" href="https://drafts.csswg.org/css-values-3/#length-value" title="Expands to: em | advance measure | ch | vmin | cm | pc | pixel unit | in | rem | q | vh | ex | pt | vw | vmax | mm">&lt;length></a> where the unit is <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-values-3/#valdef-length-px">px</a>. </p>
+   <p>In <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document-quirks">quirks mode</a>, the following properties must have
+their "Value" grammar changed by replacing <a class="production css" data-link-type="type" href="https://drafts.csswg.org/css-values-3/#length-value" title="Expands to: em | advance measure | ch | vmin | cm | pc | pixel unit | in | rem | q | vh | ex | pt | vw | vmax | mm">&lt;length></a> with: </p>
+<pre class="prod">[ <a class="production" data-link-type="type" href="https://drafts.csswg.org/css-values-3/#length-value" title="Expands to: em | advance measure | ch | vmin | cm | pc | pixel unit | in | rem | q | vh | ex | pt | vw | vmax | mm">&lt;length></a> <a data-link-type="grammar" href="https://drafts.csswg.org/css-values-3/#comb-one">|</a> <a class="production" data-link-type="type" href="#quirky-length-value">&lt;quirky-length></a> ]
+</pre>
+   <ul class="brief">
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-backgrounds-3/#background-position">background-position</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-tables-3/#propdef-border-spacing">border-spacing</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-backgrounds-3/#border-top-width">border-top-width</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-backgrounds-3/#border-right-width">border-right-width</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-backgrounds-3/#border-bottom-width">border-bottom-width</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-backgrounds-3/#border-left-width">border-left-width</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-backgrounds-3/#border-width">border-width</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-position-3/#propdef-bottom">bottom</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.fxtf.org/css-masking-1/#propdef-clip">clip</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-fonts-3/#propdef-font-size">font-size</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-height">height</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-position-3/#propdef-left">left</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/text.html#propdef-letter-spacing">letter-spacing</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/box.html#propdef-margin-right">margin-right</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/box.html#propdef-margin-left">margin-left</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/box.html#propdef-margin-top">margin-top</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/box.html#propdef-margin-bottom">margin-bottom</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/box.html#propdef-margin">margin</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-max-height">max-height</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-max-width">max-width</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-min-height">min-height</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-min-width">min-width</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/box.html#propdef-padding-top">padding-top</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/box.html#propdef-padding-right">padding-right</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/box.html#propdef-padding-bottom">padding-bottom</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/box.html#propdef-padding-left">padding-left</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/box.html#propdef-padding">padding</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-position-3/#propdef-right">right</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/text.html#propdef-text-indent">text-indent</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-position-3/#propdef-top">top</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-vertical-align">vertical-align</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-width">width</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/text.html#propdef-word-spacing">word-spacing</a> 
+   </ul>
+   <p>Any property not listed above must not support <a class="production css" data-link-type="type" href="#quirky-length-value">&lt;quirky-length></a> even if it references one of the
+above properties in its "Value" grammar. </p>
+   <p>This quirk must apply inside an <a class="css" data-link-type="at-rule" href="https://drafts.csswg.org/css-conditional-3/#at-ruledef-supports">@supports</a> at-rule. </p>
+   <p>The <a class="production css" data-link-type="type" href="#quirky-length-value">&lt;quirky-length></a> value must not be supported in arguments to CSS expressions other than the <a data-link-type="functionish" href="https://drafts.fxtf.org/css-masking-1/#funcdef-clip-rect">rect()</a> expression, and must not be supported in the <code><a class="idl-code" data-link-type="method" href="https://drafts.csswg.org/css-conditional-3/#dom-css-supports">supports()</a></code> static method of the <code class="idl"><a data-link-type="idl" href="https://drafts.csswg.org/cssom-1/#css">CSS</a></code> interface. </p>
+   <h3 class="heading settled" data-algorithm="The line height calculation quirk" data-level="3.3" id="the-line-height-calculation-quirk"><span class="secno">3.3. </span><span class="content">The line height calculation quirk</span><a class="self-link" href="#the-line-height-calculation-quirk"></a></h3>
+   <p class="note" role="note"><a href="http://w3c-test.org/quirks-mode/line-height-calculation.html">Tests are
+available</a>. </p>
+   <p>In <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document-quirks">quirks mode</a> and <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document-limited-quirks">limited-quirks mode</a>, an inline box that
+matches the following conditions, must, for the purpose of line height calculation, act as if the
+box had a <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-line-height">line-height</a> of zero. </p>
+   <ul>
+    <li>
+     <p>The <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-backgrounds-3/#border-right-width">border-right-width</a>, <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-backgrounds-3/#border-left-width">border-left-width</a>, <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/box.html#propdef-padding-right">padding-right</a> and <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/box.html#propdef-padding-left">padding-left</a> properties
+ have a used value of zero. </p>
+    <li>
+     <p>It either contains no text or it contains only collapsed whitespace. </p>
+   </ul>
+   <h3 class="heading settled" data-level="3.4" id="the-blocks-ignore-line-height-quirk"><span class="secno">3.4. </span><span class="content">The blocks ignore line-height quirk</span><a class="self-link" href="#the-blocks-ignore-line-height-quirk"></a></h3>
+   <p class="note" role="note"><a href="http://w3c-test.org/quirks-mode/blocks-ignore-line-height.html">Tests are
+available</a>. </p>
+   <p>In <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document-quirks">quirks mode</a> and <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document-limited-quirks">limited-quirks mode</a>, for a <a data-link-type="dfn" href="https://drafts.csswg.org/css2/visuren.html#block-container-element">block container
+element</a> whose content is composed of <a data-link-type="dfn" href="https://drafts.csswg.org/css-display-3/#inline-level">inline-level</a> elements, the element’s <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-line-height">line-height</a> must be ignored for the purpose of calculating the minimal height of line boxes within the element. </p>
+   <p class="note" role="note">This means that the "strut" is not created. </p>
+   <h3 class="heading settled" data-algorithm="The percentage height calculation
+quirk" data-level="3.5" id="the-percentage-height-calculation-quirk"><span class="secno">3.5. </span><span class="content">The percentage height calculation
+quirk</span><a class="self-link" href="#the-percentage-height-calculation-quirk"></a></h3>
+   <p class="note" role="note"><a href="http://w3c-test.org/quirks-mode/percentage-height-calculation.html">Tests
+are available</a>. </p>
+   <p>In <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document-quirks">quirks mode</a>, for the purpose of calculating the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-height">height</a> of an element <var>element</var>, if the computed value of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-position-3/#propdef-position">position</a> property of <var>element</var> is <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-position-3/#valdef-position-relative">relative</a> or <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-position-3/#valdef-position-static">static</a>, the specified value for the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-height">height</a> property of <var>element</var> is a <a class="production css" data-link-type="type" href="https://drafts.csswg.org/css-values-3/#percentage-value">&lt;percentage></a>, and <var>element</var> does not have a computed value of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visuren.html#propdef-display">display</a> property that is <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-display-3/#valdef-display-table-row">table-row</a>, <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-display-3/#valdef-display-table-row-group">table-row-group</a>, <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-display-3/#valdef-display-table-header-group">table-header-group</a>, <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-display-3/#valdef-display-table-footer-group">table-footer-group</a>, <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-display-3/#valdef-display-table-cell">table-cell</a> or <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-display-3/#valdef-display-table-caption">table-caption</a>, the <a data-link-type="dfn" href="https://drafts.csswg.org/css-display-3/#containing-block">containing block</a> of <var>element</var> must be calculated using the following algorithm, aborting on
+the first step that returns a value: </p>
+   <ol>
+    <li>
+     <p>Let <var>element</var> be the nearest ancestor <a data-link-type="dfn" href="https://drafts.csswg.org/css-display-3/#block-container">block container box</a> of <var>element</var>, if there is
+ one. Otherwise, return the <a data-link-type="dfn" href="https://drafts.csswg.org/css-display-3/#initial-containing-block">initial containing block</a>. </p>
+    <li>
+     <p>If <var>element</var> has a computed value of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visuren.html#propdef-display">display</a> property that is <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-display-3/#valdef-display-table-cell">table-cell</a>,
+ return a UA-defined value. </p>
+    <li>
+     <p>If <var>element</var> has a computed value of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-height">height</a> property that is not <span class="css">auto</span>,
+ return <var>element</var>. </p>
+    <li>
+     <p>If <var>element</var> has a computed value of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-position-3/#propdef-position">position</a> property that is <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-position-3/#valdef-position-absolute">absolute</a>,
+ return <var>element</var>. </p>
+    <li>
+     <p>If <var>element</var> is a <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/semantics.html#the-body-element">body</a></code> element, and its <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-tree-parent">parent</a> is the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#document-element">document element</a>, and that is an <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/semantics.html#the-html-element">html</a></code> element, let <var>element</var> have a <a data-link-type="dfn" href="#quirky-containing-block-height">quirky
+ containing block height</a> and return <var>element</var>. </p>
+    <li>
+     <p>Jump to the first step. </p>
+   </ol>
+   <p>When an element <var>body</var> is said to have a <dfn data-dfn-type="dfn" data-noexport="" id="quirky-containing-block-height">quirky containing block height<a class="self-link" href="#quirky-containing-block-height"></a></dfn>, the <a data-link-type="dfn" href="https://drafts.csswg.org/css-display-3/#containing-block">containing block</a> the element establishes must act as if it had a height calculated using the
+following algorithm: </p>
+   <ol>
+    <li>
+     <p>If the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#document-element">document element</a> has a <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#computed-value">computed value</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-height">height</a> property
+ that is <span class="css">auto</span> and has a <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#computed-value">computed value</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-position-3/#propdef-position">position</a> property that is <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-position-3/#valdef-position-absolute">absolute</a>, return <span class="css">auto</span> and abort these steps. </p>
+    <li>
+     <p>Let <var>elements</var> be an array with <var>body</var> as its only item. </p>
+    <li>
+     <p>If the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#document-element">document element</a> has a <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#computed-value">computed value</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-height">height</a> property
+ that is not <span class="css">auto</span>, let <var>A</var> be the <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#used-value">used value</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-height">height</a> property of the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#document-element">document element</a>. Otherwise, let <var>A</var> be the height of the <a data-link-type="dfn" href="https://drafts.csswg.org/css-display-3/#initial-containing-block">initial containing
+ block</a> and append the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#document-element">document element</a> to <var>elements</var>. </p>
+    <li>
+     <p>Let <var>B</var> be the sum of the <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#used-value">used values</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/box.html#propdef-margin-top">margin-top</a>, <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/box.html#propdef-margin-bottom">margin-bottom</a>, <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-backgrounds-3/#border-top-width">border-top-width</a>, <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-backgrounds-3/#border-bottom-width">border-bottom-width</a>, <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/box.html#propdef-padding-top">padding-top</a> and <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/box.html#propdef-padding-bottom">padding-bottom</a> properties of each
+ element in <var>elements</var>. </p>
+    <li>
+     <p>Let <var>result</var> be <var>A</var> minus <var>B</var>. </p>
+    <li>
+     <p>If <var>result</var> is negative, let <var>result</var> be zero. </p>
+    <li>
+     <p>Return <var>result</var>. </p>
+   </ol>
+   <p class="note" role="note">It is at the time or writing undefined how percentage heights inside tables work in
+CSS. This specification does not try to specify what to use as the containing block for calculating
+percentage heights in tables. Godspeed! </p>
+   <h3 class="heading settled" data-level="3.6" id="the-table-cell-width-calculation-quirk"><span class="secno">3.6. </span><span class="content">The table cell width calculation quirk</span><a class="self-link" href="#the-table-cell-width-calculation-quirk"></a></h3>
+   <p class="note" role="note"><a href="http://w3c-test.org/quirks-mode/table-cell-width-calculation.html">Tests
+are available</a>. </p>
+   <p>In <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document-quirks">quirks mode</a>, for the purpose of calculating the <a data-link-type="dfn" href="http://dbaron.org/css/intrinsic/#inline-intrinsic-min">min-content width of an
+inline formatting context</a> for which a table cell <var>cell</var> is the <a data-link-type="dfn" href="https://drafts.csswg.org/css-display-3/#containing-block">containing block</a>, if <var>cell</var> has a <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#computed-value">computed value</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-width">width</a> property that is <span class="css">auto</span>, <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-img-element">img</a></code> elements
+that are <a data-link-type="dfn" href="https://drafts.csswg.org/css-display-3/#inline-level">inline-level</a> <a data-link-type="dfn" href="https://drafts.csswg.org/css2/conform.html#replaced-element">replaced elements</a> in that <a data-link-type="dfn" href="https://drafts.csswg.org/css-display-3/#inline-formatting-context">inline formatting context</a> must
+not have a <a data-link-type="dfn">soft wrap opportunity</a> before or after them. <a data-link-type="biblio" href="#biblio-css-text-3">[CSS-TEXT-3]</a> <a data-link-type="biblio" href="#biblio-intrinsic">[INTRINSIC]</a> </p>
+   <h3 class="heading settled" data-level="3.7" id="the-table-cell-nowrap-minimum-width-calculation-quirk"><span class="secno">3.7. </span><span class="content">The table cell nowrap minimum width
+calculation quirk</span><a class="self-link" href="#the-table-cell-nowrap-minimum-width-calculation-quirk"></a></h3>
+   <p>In <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document-quirks">quirks mode</a>, an element <var>cell</var> that matches the following conditions must act
+as if it had an <a data-link-type="dfn" href="http://dbaron.org/css/intrinsic/#autotable">outer min-content width of a table cell</a> in the automatic table layout
+algorithm that is the bigger value of <var>cell</var>’s <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#computed-value">computed value</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-width">width</a> property and the <a data-link-type="dfn" href="http://dbaron.org/css/intrinsic/#autotable">outer min-content width of a table cell</a>. <a data-link-type="biblio" href="#biblio-intrinsic">[INTRINSIC]</a> </p>
+   <ul>
+    <li>
+     <p><var>cell</var> is a <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/tables.html#the-td-element">td</a></code> element or a <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/tables.html#the-th-element">th</a></code> element. </p>
+    <li>
+     <p><var>cell</var> has a <code>nowrap</code> attribute. </p>
+    <li>
+     <p>The <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#computed-value">computed value</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-width">width</a> property of <var>cell</var> is a <a class="production css" data-link-type="type" href="https://drafts.csswg.org/css-values-3/#length-value" title="Expands to: em | advance measure | ch | vmin | cm | pc | pixel unit | in | rem | q | vh | ex | pt | vw | vmax | mm">&lt;length></a> that is not zero. </p>
+   </ul>
+   <h3 class="heading settled" data-level="3.8" id="the-collapsing-table-quirk"><span class="secno">3.8. </span><span class="content">The collapsing table quirk</span><a class="self-link" href="#the-collapsing-table-quirk"></a></h3>
+   <p>In <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document-quirks">quirks mode</a>, an element <var>table</var> that matches the following conditions must
+have a <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#used-value">used value</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-height">height</a> property of <span class="css">0</span> and a <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#used-value">used value</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-backgrounds-3/#border-style">border-style</a> property of <span class="css">none</span>. </p>
+   <ul>
+    <li>
+     <p><var>table</var> has a <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#computed-value">computed value</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visuren.html#propdef-display">display</a> property that is <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-display-3/#valdef-display-table">table</a>. </p>
+    <li>
+     <p><var>table</var> has no child <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-display-3/#valdef-display-table-row-group">table-row-group</a>, <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-display-3/#valdef-display-table-header-group">table-header-group</a>, <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-display-3/#valdef-display-table-footer-group">table-footer-group</a> or <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-display-3/#valdef-display-table-caption">table-caption</a> box. </p>
+    <li>
+     <p><var>table</var> has no child <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-display-3/#valdef-display-table-column-group">table-column-group</a> box that itself has a child <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-display-3/#valdef-display-table-column">table-column</a> box. </p>
+   </ul>
+   <h3 class="heading settled" data-level="3.9" id="the-text-decoration-doesnt-propagate-into-tables-quirk"><span class="secno">3.9. </span><span class="content">The text decoration doesn’t propagate
+into tables quirk</span><a class="self-link" href="#the-text-decoration-doesnt-propagate-into-tables-quirk"></a></h3>
+   <p>In <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document-quirks">quirks mode</a>, text decoration must not propagate
+into <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/tables.html#the-table-element">table</a></code> elements. </p>
+   <h3 class="heading settled" data-algorithm="The tables inherit color from body
+quirk" data-level="3.10" id="the-tables-inherit-color-from-body-quirk"><span class="secno">3.10. </span><span class="content">The tables inherit color from body
+quirk</span><a class="self-link" href="#the-tables-inherit-color-from-body-quirk"></a></h3>
+   <p>In <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document-quirks">quirks mode</a>, the initial value of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-color-4/#propdef-color">color</a> property must be <span class="css">quirk-inherit</span>, a special value that has no keyword mapping to it. </p>
+   <p>The computed value of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-color-4/#propdef-color">color</a> property of an element <var>element</var> must be calculated using the
+following algorithm: </p>
+   <ol>
+    <li>
+     <p>If the specified value of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-color-4/#propdef-color">color</a> property of <var>element</var> is not <span class="css">quirk-inherit</span>, jump to the last step. </p>
+    <li>
+     <p>If <var>element</var> is not a <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/tables.html#the-table-element">table</a></code> element, jump to the last step. </p>
+    <li>
+     <p>If the <a data-link-type="dfn" href="#documents-body-element">document’s body element</a> is null, jump to the last step. </p>
+    <li>
+     <p>Return the used value of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-color-4/#propdef-color">color</a> property of the <a data-link-type="dfn" href="#documents-body-element">document’s body element</a>.
+ Abort these steps. </p>
+    <li>
+     <p>If the specified value of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-color-4/#propdef-color">color</a> property of <var>element</var> is <span class="css">quirk-inherit</span>,
+ let the specified value of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-color-4/#propdef-color">color</a> property of <var>element</var> be the initial value of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-color-4/#propdef-color">color</a> property according to the CSS specification. Return the computed value of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-color-4/#propdef-color">color</a> property of <var>element</var> as specified in the CSS specification. </p>
+   </ol>
+   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="documents-body-element">document’s body element<a class="self-link" href="#documents-body-element"></a></dfn> is the first <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-tree-child">child</a> of the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#document-element">document element</a> that is a <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/semantics.html#the-body-element">body</a></code> element, if there is one, and the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#document-element">document element</a> is an <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/semantics.html#the-html-element">html</a></code> element. Otherwise it is null. </p>
+   <h3 class="heading settled" data-level="3.11" id="the-table-cell-height-box-sizing-quirk"><span class="secno">3.11. </span><span class="content">The table cell height box sizing quirk</span><a class="self-link" href="#the-table-cell-height-box-sizing-quirk"></a></h3>
+   <p>In <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document-quirks">quirks mode</a>, elements that have a <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#computed-value">computed value</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visuren.html#propdef-display">display</a> property of <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-display-3/#valdef-display-table-cell">table-cell</a> must act as they have <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#used-value">used value</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-ui-3/#propdef-box-sizing">box-sizing</a> property of <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-ui-3/#valdef-box-sizing-border-box">border-box</a>, but only for the purpose of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-height">height</a>, <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-min-height">min-height</a> and <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-max-height">max-height</a> properties. </p>
+   <h2 class="heading settled" data-level="4" id="selectors"><span class="secno">4. </span><span class="content">Selectors</span><a class="self-link" href="#selectors"></a></h2>
+   <h3 class="heading settled" data-algorithm="The :active and :hover quirk" data-level="4.1" id="the-active-and-hover-quirk"><span class="secno">4.1. </span><span class="content">The :active and :hover quirk</span><a class="self-link" href="#the-active-and-hover-quirk"></a></h3>
+   <p class="note" role="note"><a href="http://w3c-test.org/quirks-mode/active-and-hover-manual.html">Tests are
+available</a>. </p>
+   <p>In <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document-quirks">quirks mode</a>, a <a data-link-type="dfn" href="https://drafts.csswg.org/selectors-4/#compound">compound selector</a> <var>selector</var> that matches the following
+conditions must not match elements that would not also match the <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/selectors-4/#any-link-pseudo">:any-link</a> selector. <a data-link-type="biblio" href="#biblio-selectors4">[SELECTORS4]</a> </p>
+   <ul>
+    <li>
+     <p><var>selector</var> uses the <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/selectors-4/#active-pseudo">:active</a> or <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/selectors-4/#hover-pseudo">:hover</a> <a data-link-type="dfn" href="https://drafts.csswg.org/selectors-4/#pseudo-class">pseudo-classes</a>. </p>
+    <li>
+     <p><var>selector</var> does not use a <a data-link-type="dfn" href="https://drafts.csswg.org/selectors-4/#type-selector">type selector</a>. </p>
+    <li>
+     <p><var>selector</var> does not use an <a data-link-type="dfn" href="https://drafts.csswg.org/selectors-4/#attribute-selector">attribute selector</a>. </p>
+    <li>
+     <p><var>selector</var> does not use an <a data-link-type="dfn" href="https://drafts.csswg.org/selectors-4/#id-selector">ID selector</a>. </p>
+    <li>
+     <p><var>selector</var> does not use a <a data-link-type="dfn" href="https://drafts.csswg.org/selectors-4/#class-selector">class selector</a>. </p>
+    <li>
+     <p><var>selector</var> does not use a <a data-link-type="dfn" href="https://drafts.csswg.org/selectors-4/#pseudo-class">pseudo-class</a> selector other than <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/selectors-4/#active-pseudo">:active</a> and <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/selectors-4/#hover-pseudo">:hover</a>. </p>
+    <li>
+     <p><var>selector</var> does not use a <a data-link-type="dfn" href="https://drafts.csswg.org/selectors-4/#pseudo-element">pseudo-element</a> selector. </p>
+    <li>
+     <p><var>selector</var> is not part of an argument to a <a data-link-type="dfn" href="https://drafts.csswg.org/selectors-4/#functional-pseudo-class">functional pseudo-class</a> or <a data-link-type="dfn" href="https://drafts.csswg.org/selectors-4/#pseudo-element">pseudo-element</a>. </p>
+   </ul>
+   <h2 class="no-num heading settled" id="acknowledgments"><span class="content">Acknowledgments</span><a class="self-link" href="#acknowledgments"></a></h2>
+   <p>Thanks to
 Anne van Kesteren,
 Boris Zbarsky,
 Chris Rebert,
 David Baron,
 Kang-Hao Lu,
 Ms2ger,
-Simon Sapin
+Simon Sapin,
 and
 Tab Atkins
-
-for their useful comments.
-
-<p>Special thanks to Boris Zbarsky and David Baron for documenting Mozilla's quirks in MDN.
+for their useful comments. </p>
+   <p>Special thanks to Boris Zbarsky and David Baron for documenting <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Mozilla_quirks_mode_behavior">Mozilla’s
+quirks in MDN</a>. </p>
+   <p>This standard is written by Simon Pieters (<a href="http://www.opera.com/">Opera Software
+ASA</a>, <a href="mailto:simonp@opera.com">simonp@opera.com</a>). </p>
+   <p>Per <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>, to the extent possible
+under law, the editors have waived all copyright and related or neighboring rights to this work. </p>
+  </main>
+  <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
+  <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
+  <ul class="index">
+   <li><a href="#documents-body-element">document’s body element</a><span>, in §3.10</span>
+   <li><a href="#quirky-color">quirky color</a><span>, in §3.1</span>
+   <li><a href="#quirky-color-value">&lt;quirky-color></a><span>, in §3.1</span>
+   <li><a href="#quirky-containing-block-height">quirky containing block height</a><span>, in §3.5</span>
+   <li><a href="#quirky-length">quirky length</a><span>, in §3.2</span>
+   <li><a href="#quirky-length-value">&lt;quirky-length></a><span>, in §3.2</span>
+  </ul>
+  <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
+  <ul class="index">
+   <li>
+    <a data-link-type="biblio">[css-backgrounds-3]</a> defines the following terms:
+    <ul>
+     <li><a href="https://drafts.csswg.org/css-backgrounds-3/#background-color">background-color</a>
+     <li><a href="https://drafts.csswg.org/css-backgrounds-3/#background-position">background-position</a>
+     <li><a href="https://drafts.csswg.org/css-backgrounds-3/#border-bottom-color">border-bottom-color</a>
+     <li><a href="https://drafts.csswg.org/css-backgrounds-3/#border-bottom-width">border-bottom-width</a>
+     <li><a href="https://drafts.csswg.org/css-backgrounds-3/#border-color">border-color</a>
+     <li><a href="https://drafts.csswg.org/css-backgrounds-3/#border-left-color">border-left-color</a>
+     <li><a href="https://drafts.csswg.org/css-backgrounds-3/#border-left-width">border-left-width</a>
+     <li><a href="https://drafts.csswg.org/css-backgrounds-3/#border-right-color">border-right-color</a>
+     <li><a href="https://drafts.csswg.org/css-backgrounds-3/#border-right-width">border-right-width</a>
+     <li><a href="https://drafts.csswg.org/css-backgrounds-3/#border-style">border-style</a>
+     <li><a href="https://drafts.csswg.org/css-backgrounds-3/#border-top-color">border-top-color</a>
+     <li><a href="https://drafts.csswg.org/css-backgrounds-3/#border-top-width">border-top-width</a>
+     <li><a href="https://drafts.csswg.org/css-backgrounds-3/#border-width">border-width</a>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[css-cascade-4]</a> defines the following terms:
+    <ul>
+     <li><a href="https://drafts.csswg.org/css-cascade-4/#computed-value">computed value</a>
+     <li><a href="https://drafts.csswg.org/css-cascade-4/#used-value">used value</a>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[css-color-3]</a> defines the following terms:
+    <ul>
+     <li><a href="https://drafts.csswg.org/css-color-3/#valuea-def-color">&lt;color></a>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[css-color-4]</a> defines the following terms:
+    <ul>
+     <li><a href="https://drafts.csswg.org/css-color-4/#propdef-color">color</a>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[css-conditional-3]</a> defines the following terms:
+    <ul>
+     <li><a href="https://drafts.csswg.org/css-conditional-3/#at-ruledef-supports">@supports</a>
+     <li><a href="https://drafts.csswg.org/css-conditional-3/#dom-css-supports">supports(property, value)</a>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[css-display-3]</a> defines the following terms:
+    <ul>
+     <li><a href="https://drafts.csswg.org/css-display-3/#block-container">block container box</a>
+     <li><a href="https://drafts.csswg.org/css-display-3/#containing-block">containing block</a>
+     <li><a href="https://drafts.csswg.org/css-display-3/#initial-containing-block">initial containing block</a>
+     <li><a href="https://drafts.csswg.org/css-display-3/#inline-formatting-context">inline formatting context</a>
+     <li><a href="https://drafts.csswg.org/css-display-3/#inline-level">inline-level</a>
+     <li><a href="https://drafts.csswg.org/css-display-3/#valdef-display-table">table</a>
+     <li><a href="https://drafts.csswg.org/css-display-3/#valdef-display-table-caption">table-caption</a>
+     <li><a href="https://drafts.csswg.org/css-display-3/#valdef-display-table-cell">table-cell</a>
+     <li><a href="https://drafts.csswg.org/css-display-3/#valdef-display-table-column">table-column</a>
+     <li><a href="https://drafts.csswg.org/css-display-3/#valdef-display-table-column-group">table-column-group</a>
+     <li><a href="https://drafts.csswg.org/css-display-3/#valdef-display-table-footer-group">table-footer-group</a>
+     <li><a href="https://drafts.csswg.org/css-display-3/#valdef-display-table-header-group">table-header-group</a>
+     <li><a href="https://drafts.csswg.org/css-display-3/#valdef-display-table-row">table-row</a>
+     <li><a href="https://drafts.csswg.org/css-display-3/#valdef-display-table-row-group">table-row-group</a>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[css-fonts-3]</a> defines the following terms:
+    <ul>
+     <li><a href="https://drafts.csswg.org/css-fonts-3/#propdef-font-size">font-size</a>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[css-masking-1]</a> defines the following terms:
+    <ul>
+     <li><a href="https://drafts.fxtf.org/css-masking-1/#propdef-clip">clip</a>
+     <li><a href="https://drafts.fxtf.org/css-masking-1/#funcdef-clip-rect">rect()</a>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[css-position-3]</a> defines the following terms:
+    <ul>
+     <li><a href="https://drafts.csswg.org/css-position-3/#valdef-position-absolute">absolute</a>
+     <li><a href="https://drafts.csswg.org/css-position-3/#propdef-bottom">bottom</a>
+     <li><a href="https://drafts.csswg.org/css-position-3/#propdef-left">left</a>
+     <li><a href="https://drafts.csswg.org/css-position-3/#propdef-position">position</a>
+     <li><a href="https://drafts.csswg.org/css-position-3/#valdef-position-relative">relative</a>
+     <li><a href="https://drafts.csswg.org/css-position-3/#propdef-right">right</a>
+     <li><a href="https://drafts.csswg.org/css-position-3/#valdef-position-static">static</a>
+     <li><a href="https://drafts.csswg.org/css-position-3/#propdef-top">top</a>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[css-syntax-3]</a> defines the following terms:
+    <ul>
+     <li><a href="https://drafts.csswg.org/css-syntax-3/#typedef-dimension-token">&lt;dimension-token></a>
+     <li><a href="https://drafts.csswg.org/css-syntax-3/#typedef-ident-token">&lt;ident-token></a>
+     <li><a href="https://drafts.csswg.org/css-syntax-3/#typedef-number-token">&lt;number-token></a>
+     <li><a href="https://drafts.csswg.org/css-syntax-3/#component-value">component value</a>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[css-tables-3]</a> defines the following terms:
+    <ul>
+     <li><a href="https://drafts.csswg.org/css-tables-3/#propdef-border-spacing">border-spacing</a>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[css-ui-3]</a> defines the following terms:
+    <ul>
+     <li><a href="https://drafts.csswg.org/css-ui-3/#valdef-box-sizing-border-box">border-box</a>
+     <li><a href="https://drafts.csswg.org/css-ui-3/#propdef-box-sizing">box-sizing</a>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[css-values]</a> defines the following terms:
+    <ul>
+     <li><a href="https://drafts.csswg.org/css-values-3/#length-value">&lt;length></a>
+     <li><a href="https://drafts.csswg.org/css-values-3/#percentage-value">&lt;percentage></a>
+     <li><a href="https://drafts.csswg.org/css-values-3/#number">number</a>
+     <li><a href="https://drafts.csswg.org/css-values-3/#valdef-length-px">px</a>
+     <li><a href="https://drafts.csswg.org/css-values-3/#comb-one">|</a>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[CSS2]</a> defines the following terms:
+    <ul>
+     <li><a href="https://drafts.csswg.org/css2/visuren.html#propdef-display">display</a>
+     <li><a href="https://drafts.csswg.org/css2/visudet.html#propdef-height">height</a>
+     <li><a href="https://drafts.csswg.org/css2/text.html#propdef-letter-spacing">letter-spacing</a>
+     <li><a href="https://drafts.csswg.org/css2/visudet.html#propdef-line-height">line-height</a>
+     <li><a href="https://drafts.csswg.org/css2/box.html#propdef-margin">margin</a>
+     <li><a href="https://drafts.csswg.org/css2/box.html#propdef-margin-bottom">margin-bottom</a>
+     <li><a href="https://drafts.csswg.org/css2/box.html#propdef-margin-left">margin-left</a>
+     <li><a href="https://drafts.csswg.org/css2/box.html#propdef-margin-right">margin-right</a>
+     <li><a href="https://drafts.csswg.org/css2/box.html#propdef-margin-top">margin-top</a>
+     <li><a href="https://drafts.csswg.org/css2/visudet.html#propdef-max-height">max-height</a>
+     <li><a href="https://drafts.csswg.org/css2/visudet.html#propdef-max-width">max-width</a>
+     <li><a href="https://drafts.csswg.org/css2/visudet.html#propdef-min-height">min-height</a>
+     <li><a href="https://drafts.csswg.org/css2/visudet.html#propdef-min-width">min-width</a>
+     <li><a href="https://drafts.csswg.org/css2/box.html#propdef-padding">padding</a>
+     <li><a href="https://drafts.csswg.org/css2/box.html#propdef-padding-bottom">padding-bottom</a>
+     <li><a href="https://drafts.csswg.org/css2/box.html#propdef-padding-left">padding-left</a>
+     <li><a href="https://drafts.csswg.org/css2/box.html#propdef-padding-right">padding-right</a>
+     <li><a href="https://drafts.csswg.org/css2/box.html#propdef-padding-top">padding-top</a>
+     <li><a href="https://drafts.csswg.org/css2/text.html#propdef-text-indent">text-indent</a>
+     <li><a href="https://drafts.csswg.org/css2/visudet.html#propdef-vertical-align">vertical-align</a>
+     <li><a href="https://drafts.csswg.org/css2/visudet.html#propdef-width">width</a>
+     <li><a href="https://drafts.csswg.org/css2/text.html#propdef-word-spacing">word-spacing</a>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[CSSOM]</a> defines the following terms:
+    <ul>
+     <li><a href="https://drafts.csswg.org/cssom-1/#css">CSS</a>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[DOM]</a> defines the following terms:
+    <ul>
+     <li><a href="https://dom.spec.whatwg.org/#concept-tree-child">child</a>
+     <li><a href="https://dom.spec.whatwg.org/#document-element">document element</a>
+     <li><a href="https://dom.spec.whatwg.org/#concept-document-limited-quirks">limited-quirks mode</a>
+     <li><a href="https://dom.spec.whatwg.org/#concept-tree-parent">parent</a>
+     <li><a href="https://dom.spec.whatwg.org/#concept-document-quirks">quirks mode</a>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[HTML]</a> defines the following terms:
+    <ul>
+     <li><a href="https://html.spec.whatwg.org/multipage/semantics.html#the-body-element">body</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/semantics.html#the-html-element">html</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-img-element">img</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/tables.html#the-table-element">table</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/tables.html#the-td-element">td</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/tables.html#the-th-element">th</a>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[selectors-4]</a> defines the following terms:
+    <ul>
+     <li><a href="https://drafts.csswg.org/selectors-4/#active-pseudo">:active</a>
+     <li><a href="https://drafts.csswg.org/selectors-4/#any-link-pseudo">:any-link</a>
+     <li><a href="https://drafts.csswg.org/selectors-4/#hover-pseudo">:hover</a>
+     <li><a href="https://drafts.csswg.org/selectors-4/#attribute-selector">attribute selector</a>
+     <li><a href="https://drafts.csswg.org/selectors-4/#class-selector">class selector</a>
+     <li><a href="https://drafts.csswg.org/selectors-4/#compound">compound selector</a>
+     <li><a href="https://drafts.csswg.org/selectors-4/#functional-pseudo-class">functional pseudo-class</a>
+     <li><a href="https://drafts.csswg.org/selectors-4/#id-selector">id selector</a>
+     <li><a href="https://drafts.csswg.org/selectors-4/#pseudo-class">pseudo-class</a>
+     <li><a href="https://drafts.csswg.org/selectors-4/#pseudo-element">pseudo-element</a>
+     <li><a href="https://drafts.csswg.org/selectors-4/#type-selector">type selector</a>
+    </ul>
+  </ul>
+  <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
+  <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
+  <dl>
+   <dt id="biblio-css-backgrounds-3">[CSS-BACKGROUNDS-3]
+   <dd>CSS Backgrounds and Borders Module Level 3 URL: <a href="https://drafts.csswg.org/css-backgrounds-3/">https://drafts.csswg.org/css-backgrounds-3/</a>
+   <dt id="biblio-css-cascade-4">[CSS-CASCADE-4]
+   <dd>Elika Etemad; Tab Atkins Jr.. <a href="http://dev.w3.org/csswg/css-cascade/">CSS Cascading and Inheritance Level 4</a>. 14 January 2016. CR. URL: <a href="http://dev.w3.org/csswg/css-cascade/">http://dev.w3.org/csswg/css-cascade/</a>
+   <dt id="biblio-css-color-3">[CSS-COLOR-3]
+   <dd>CSS Color Module Level 3 URL: <a href="https://drafts.csswg.org/css-color-3/">https://drafts.csswg.org/css-color-3/</a>
+   <dt id="biblio-css-color-4">[CSS-COLOR-4]
+   <dd>CSS Color Module Level 4 URL: <a href="https://drafts.csswg.org/css-color-4/">https://drafts.csswg.org/css-color-4/</a>
+   <dt id="biblio-css-conditional-3">[CSS-CONDITIONAL-3]
+   <dd>CSS Conditional Rules Module Level 3 URL: <a href="https://drafts.csswg.org/css-conditional-3/">https://drafts.csswg.org/css-conditional-3/</a>
+   <dt id="biblio-css-display-3">[CSS-DISPLAY-3]
+   <dd>Tab Atkins Jr.; Elika Etemad. <a href="http://dev.w3.org/csswg/css-display/">CSS Display Module Level 3</a>. 15 October 2015. WD. URL: <a href="http://dev.w3.org/csswg/css-display/">http://dev.w3.org/csswg/css-display/</a>
+   <dt id="biblio-css-fonts-3">[CSS-FONTS-3]
+   <dd>John Daggett. <a href="http://dev.w3.org/csswg/css-fonts/">CSS Fonts Module Level 3</a>. 3 October 2013. CR. URL: <a href="http://dev.w3.org/csswg/css-fonts/">http://dev.w3.org/csswg/css-fonts/</a>
+   <dt id="biblio-css-masking-1">[CSS-MASKING-1]
+   <dd>Dirk Schulze; Brian Birtles; Tab Atkins Jr.. <a href="http://dev.w3.org/fxtf/css-masking-1/">CSS Masking Module Level 1</a>. 26 August 2014. CR. URL: <a href="http://dev.w3.org/fxtf/css-masking-1/">http://dev.w3.org/fxtf/css-masking-1/</a>
+   <dt id="biblio-css-position-3">[CSS-POSITION-3]
+   <dd>CSS Positioned Layout Module Level 3 URL: <a href="https://drafts.csswg.org/css-position-3/">https://drafts.csswg.org/css-position-3/</a>
+   <dt id="biblio-css-syntax-3">[CSS-SYNTAX-3]
+   <dd>Tab Atkins Jr.; Simon Sapin. <a href="http://dev.w3.org/csswg/css-syntax/">CSS Syntax Module Level 3</a>. 20 February 2014. CR. URL: <a href="http://dev.w3.org/csswg/css-syntax/">http://dev.w3.org/csswg/css-syntax/</a>
+   <dt id="biblio-css-tables-3">[CSS-TABLES-3]
+   <dd>CSS Tables Module Level 3 URL: <a href="https://drafts.csswg.org/css-tables-3/">https://drafts.csswg.org/css-tables-3/</a>
+   <dt id="biblio-css-text-3">[CSS-TEXT-3]
+   <dd>Elika Etemad; Koji Ishii. <a href="http://dev.w3.org/csswg/css-text-3/">CSS Text Module Level 3</a>. 10 October 2013. LCWD. URL: <a href="http://dev.w3.org/csswg/css-text-3/">http://dev.w3.org/csswg/css-text-3/</a>
+   <dt id="biblio-css-ui-3">[CSS-UI-3]
+   <dd>Tantek Çelik; Florian Rivoal. <a href="http://dev.w3.org/csswg/css-ui/">CSS Basic User Interface Module Level 3 (CSS3 UI)</a>. 7 July 2015. CR. URL: <a href="http://dev.w3.org/csswg/css-ui/">http://dev.w3.org/csswg/css-ui/</a>
+   <dt id="biblio-css-values">[CSS-VALUES]
+   <dd>Tab Atkins Jr.; Elika Etemad. <a href="http://dev.w3.org/csswg/css-values/">CSS Values and Units Module Level 3</a>. 11 June 2015. CR. URL: <a href="http://dev.w3.org/csswg/css-values/">http://dev.w3.org/csswg/css-values/</a>
+   <dt id="biblio-css2">[CSS2]
+   <dd>Bert Bos; et al. <a href="http://www.w3.org/TR/CSS2">Cascading Style Sheets Level 2 Revision 1 (CSS 2.1) Specification</a>. 7 June 2011. REC. URL: <a href="http://www.w3.org/TR/CSS2">http://www.w3.org/TR/CSS2</a>
+   <dt id="biblio-cssom">[CSSOM]
+   <dd>Simon Pieters; Glenn Adams. <a href="https://drafts.csswg.org/cssom/">CSS Object Model (CSSOM)</a>. 17 March 2016. WD. URL: <a href="https://drafts.csswg.org/cssom/">https://drafts.csswg.org/cssom/</a>
+   <dt id="biblio-dom">[DOM]
+   <dd>Anne van Kesteren. <a href="https://dom.spec.whatwg.org/">DOM Standard</a>. Living Standard. URL: <a href="https://dom.spec.whatwg.org/">https://dom.spec.whatwg.org/</a>
+   <dt id="biblio-html">[HTML]
+   <dd>Ian Hickson. <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
+   <dt id="biblio-intrinsic">[INTRINSIC]
+   <dd>David Baron. <a href="http://dbaron.org/css/intrinsic/">More Precise Definitions of Intrinsic Widths and Table Layout (Proposal)</a>. URL: <a href="http://dbaron.org/css/intrinsic/">http://dbaron.org/css/intrinsic/</a>
+   <dt id="biblio-rfc2119">[RFC2119]
+   <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
+   <dt id="biblio-selectors-4">[SELECTORS-4]
+   <dd>Selectors Level 4 URL: <a href="https://drafts.csswg.org/selectors-4/">https://drafts.csswg.org/selectors-4/</a>
+   <dt id="biblio-selectors4">[SELECTORS4]
+   <dd>Elika Etemad; Tab Atkins Jr.. <a href="http://www.w3.org/TR/selectors4/">Selectors Level 4</a>. 2 May 2013. WD. URL: <a href="http://www.w3.org/TR/selectors4/">http://www.w3.org/TR/selectors4/</a>
+  </dl>
+  <h3 class="no-num no-ref heading settled" id="informative"><span class="content">Informative References</span><a class="self-link" href="#informative"></a></h3>
+  <dl>
+   <dt id="biblio-cssom-view">[CSSOM-VIEW]
+   <dd>Simon Pieters. <a href="https://drafts.csswg.org/cssom-view/">CSSOM View Module</a>. 17 March 2016. WD. URL: <a href="https://drafts.csswg.org/cssom-view/">https://drafts.csswg.org/cssom-view/</a>
+  </dl>
