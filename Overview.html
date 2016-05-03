@@ -11,15 +11,146 @@
 <style>
  .logo { position:absolute; top:1em; right:1em; width:106px; height:106px; border:1px outset gray; margin-top:-4px; margin-right:-4px }
  div.head .logo > img { top:2px; right:2px; border:1px inset gray }
- a.css::before, a.css::after, a.property::before, a.property::after { content:"'" }
-	[data-link-type].production::before,	[data-link-type].production::after,	.prod [data-link-type]::before, .prod [data-link-type]::after { content: "" }
 </style>
+<style>/* style-md-lists */
+
+            /* This is a weird hack for me not yet following the commonmark spec
+               regarding paragraph and lists. */
+            [data-md] > :first-child {
+                margin-top: 0;
+            }
+            [data-md] > :last-child {
+                margin-bottom: 0;
+            }</style>
+<style>/* style-counters */
+
+            .issue:not(.no-marker)::before {
+                content: "Issue " counter(issue);
+            }
+
+            .example:not(.no-marker)::before {
+                content: "Example";
+                content: "Example " counter(example);
+            }
+            .invalid.example:not(.no-marker)::before,
+            .illegal.example:not(.no-marker)::before {
+                content: "Invalid Example";
+                content: "Invalid Example" counter(example);
+            }</style>
+<style>/* style-selflinks */
+
+            .heading, .issue, .note, .example, li, dt {
+                position: relative;
+            }
+            a.self-link {
+                position: absolute;
+                top: 0;
+                left: calc(-1 * (3.5rem - 26px));
+                width: calc(3.5rem - 26px);
+                height: 2em;
+                text-align: center;
+                border: none;
+                transition: opacity .2s;
+                opacity: .5;
+            }
+            a.self-link:hover {
+                opacity: 1;
+            }
+            .heading > a.self-link {
+                font-size: 83%;
+            }
+            li > a.self-link {
+                left: calc(-1 * (3.5rem - 26px) - 2em);
+            }
+            dfn > a.self-link {
+                top: auto;
+                left: auto;
+                opacity: 0;
+                width: 1.5em;
+                height: 1.5em;
+                background: gray;
+                color: white;
+                font-style: normal;
+                transition: opacity .2s, background-color .2s, color .2s;
+            }
+            dfn:hover > a.self-link {
+                opacity: 1;
+            }
+            dfn > a.self-link:hover {
+                color: black;
+            }
+
+            a.self-link::before            { content: "¶"; }
+            .heading > a.self-link::before { content: "§"; }
+            dfn > a.self-link::before      { content: "#"; }</style>
+<style>/* style-autolinks */
+
+            .css.css, .property.property, .descriptor.descriptor {
+                color: #005a9c;
+                font-size: inherit;
+                font-family: inherit;
+            }
+            .css::before, .property::before, .descriptor::before {
+                content: "‘";
+            }
+            .css::after, .property::after, .descriptor::after {
+                content: "’";
+            }
+            .property, .descriptor {
+                /* Don't wrap property and descriptor names */
+                white-space: nowrap;
+            }
+            .type { /* CSS value <type> */
+                font-style: italic;
+            }
+            pre .property::before, pre .property::after {
+                content: "";
+            }
+            [data-link-type="property"]::before,
+            [data-link-type="propdesc"]::before,
+            [data-link-type="descriptor"]::before,
+            [data-link-type="value"]::before,
+            [data-link-type="function"]::before,
+            [data-link-type="at-rule"]::before,
+            [data-link-type="selector"]::before,
+            [data-link-type="maybe"]::before {
+                content: "‘";
+            }
+            [data-link-type="property"]::after,
+            [data-link-type="propdesc"]::after,
+            [data-link-type="descriptor"]::after,
+            [data-link-type="value"]::after,
+            [data-link-type="function"]::after,
+            [data-link-type="at-rule"]::after,
+            [data-link-type="selector"]::after,
+            [data-link-type="maybe"]::after {
+                content: "’";
+            }
+
+            [data-link-type].production::before,
+            [data-link-type].production::after,
+            .prod [data-link-type]::before,
+            .prod [data-link-type]::after {
+                content: "";
+            }
+
+            [data-link-type=element],
+            [data-link-type=element-attr] {
+                font-family: Menlo, Consolas, "DejaVu Sans Mono", monospace;
+                font-size: .9em;
+            }
+            [data-link-type=element]::before { content: "<" }
+            [data-link-type=element]::after  { content: ">" }
+
+            [data-link-type=biblio] {
+                white-space: pre;
+            }</style>
  <body class="h-entry status-LS">
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo.svg"> </a> </p>
    <hgroup>
     <h1 class="p-name no-ref" id="title">Quirks Mode</h1>
-    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-04-21">21 April 2016</time></span></h2>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-05-03">3 May 2016</time></span></h2>
    </hgroup>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -34,7 +165,7 @@
   </div>
   <h2 class="no-num no-toc no-ref heading settled" id="abstract"><span class="content">Abstract</span></h2>
   <div class="p-summary" data-fill-with="abstract">
-   <p>Quirks Mode defines quirks in CSS and Selectors that are necessary to support for Web browsers compatibility with the Web.</p>
+   <p>Quirks Mode defines quirks in CSS and Selectors that are necessary to support for Web browsers for compatibility with the Web.</p>
   </div>
   <nav data-fill-with="table-of-contents" id="toc">
    <h2 class="no-num no-toc no-ref" id="contents">Table of Contents</h2>
@@ -60,15 +191,19 @@
       <li><a href="#the-blocks-ignore-line-height-quirk"><span class="secno">3.4</span> <span class="content">The blocks ignore line-height quirk</span></a>
       <li><a href="#the-percentage-height-calculation-quirk"><span class="secno">3.5</span> <span class="content">The percentage height calculation
 quirk</span></a>
-      <li><a href="#the-table-cell-width-calculation-quirk"><span class="secno">3.6</span> <span class="content">The table cell width calculation quirk</span></a>
-      <li><a href="#the-table-cell-nowrap-minimum-width-calculation-quirk"><span class="secno">3.7</span> <span class="content">The table cell nowrap minimum width
-calculation quirk</span></a>
-      <li><a href="#the-collapsing-table-quirk"><span class="secno">3.8</span> <span class="content">The collapsing table quirk</span></a>
-      <li><a href="#the-text-decoration-doesnt-propagate-into-tables-quirk"><span class="secno">3.9</span> <span class="content">The text decoration doesn’t propagate
-into tables quirk</span></a>
-      <li><a href="#the-tables-inherit-color-from-body-quirk"><span class="secno">3.10</span> <span class="content">The tables inherit color from body
+      <li><a href="#the-html-element-fills-the-viewport-quirk"><span class="secno">3.6</span> <span class="content">The <code><span>html</span></code> element fills the viewport
 quirk</span></a>
-      <li><a href="#the-table-cell-height-box-sizing-quirk"><span class="secno">3.11</span> <span class="content">The table cell height box sizing quirk</span></a>
+      <li><a href="#the-body-element-fills-the-html-element-quirk"><span class="secno">3.7</span> <span class="content">The <code><span>body</span></code> element fills the <code><span>html</span></code> element
+quirk</span></a>
+      <li><a href="#the-table-cell-width-calculation-quirk"><span class="secno">3.8</span> <span class="content">The table cell width calculation quirk</span></a>
+      <li><a href="#the-table-cell-nowrap-minimum-width-calculation-quirk"><span class="secno">3.9</span> <span class="content">The table cell nowrap minimum width
+calculation quirk</span></a>
+      <li><a href="#the-collapsing-table-quirk"><span class="secno">3.10</span> <span class="content">The collapsing table quirk</span></a>
+      <li><a href="#the-text-decoration-doesnt-propagate-into-tables-quirk"><span class="secno">3.11</span> <span class="content">The text decoration doesn’t propagate
+into tables quirk</span></a>
+      <li><a href="#the-tables-inherit-color-from-body-quirk"><span class="secno">3.12</span> <span class="content">The tables inherit color from body
+quirk</span></a>
+      <li><a href="#the-table-cell-height-box-sizing-quirk"><span class="secno">3.13</span> <span class="content">The table cell height box sizing quirk</span></a>
      </ol>
     <li>
      <a href="#selectors"><span class="secno">4</span> <span class="content">Selectors</span></a>
@@ -131,6 +266,7 @@ letters in this specification. <a data-link-type="biblio" href="#biblio-rfc2119"
 local name <var>foo</var> and having the namespace <code>http://www.w3.org/1999/xhtml</code>. </p>
    <p>When this specification refers to a "<code><var>foo</var></code> attribute", it means an attribute with
 the local name <var>foo</var> and having no namespace. </p>
+   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="documents-body-element">document’s body element<a class="self-link" href="#documents-body-element"></a></dfn> is the first <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-tree-child">child</a> of the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#document-element">document element</a> that is a <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/semantics.html#the-body-element">body</a></code> element, if there is one, and the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#document-element">document element</a> is an <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/semantics.html#the-html-element">html</a></code> element. Otherwise it is null. </p>
    <h2 class="heading settled" data-level="3" id="css"><span class="secno">3. </span><span class="content">CSS</span><a class="self-link" href="#css"></a></h2>
    <h3 class="heading settled" data-level="3.1" id="the-hashless-hex-color-quirk"><span class="secno">3.1. </span><span class="content">The hashless hex color quirk</span><a class="self-link" href="#the-hashless-hex-color-quirk"></a></h3>
    <p class="note" role="note"><a href="http://w3c-test.org/quirks-mode/hashless-hex-color.html">Tests are
@@ -214,7 +350,7 @@ their "Value" grammar changed by replacing <a class="production css" data-link-t
     <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-fonts-3/#propdef-font-size">font-size</a> 
     <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-height">height</a> 
     <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-position-3/#propdef-left">left</a> 
-    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/text.html#propdef-letter-spacing">letter-spacing</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-text-3/#propdef-letter-spacing">letter-spacing</a> 
     <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/box.html#propdef-margin-right">margin-right</a> 
     <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/box.html#propdef-margin-left">margin-left</a> 
     <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/box.html#propdef-margin-top">margin-top</a> 
@@ -230,11 +366,11 @@ their "Value" grammar changed by replacing <a class="production css" data-link-t
     <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/box.html#propdef-padding-left">padding-left</a> 
     <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/box.html#propdef-padding">padding</a> 
     <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-position-3/#propdef-right">right</a> 
-    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/text.html#propdef-text-indent">text-indent</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-text-3/#propdef-text-indent">text-indent</a> 
     <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-position-3/#propdef-top">top</a> 
     <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-vertical-align">vertical-align</a> 
     <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-width">width</a> 
-    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/text.html#propdef-word-spacing">word-spacing</a> 
+    <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-text-3/#propdef-word-spacing">word-spacing</a> 
    </ul>
    <p>Any property not listed above must not support <a class="production css" data-link-type="type" href="#quirky-length-value">&lt;quirky-length></a> even if it references one of the
 above properties in its "Value" grammar. </p>
@@ -262,8 +398,6 @@ element</a> whose content is composed of <a data-link-type="dfn" href="https://d
    <h3 class="heading settled" data-algorithm="The percentage height calculation
 quirk" data-level="3.5" id="the-percentage-height-calculation-quirk"><span class="secno">3.5. </span><span class="content">The percentage height calculation
 quirk</span><a class="self-link" href="#the-percentage-height-calculation-quirk"></a></h3>
-   <p class="note" role="note"><a href="http://w3c-test.org/quirks-mode/percentage-height-calculation.html">Tests
-are available</a>. </p>
    <p>In <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document-quirks">quirks mode</a>, for the purpose of calculating the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-height">height</a> of an element <var>element</var>, if the <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#computed-value">computed value</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-position-3/#propdef-position">position</a> property of <var>element</var> is <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-position-3/#valdef-position-relative">relative</a> or <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-position-3/#valdef-position-static">static</a>, the specified value for the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-height">height</a> property of <var>element</var> is a <a class="production css" data-link-type="type" href="https://drafts.csswg.org/css-values-3/#percentage-value">&lt;percentage></a>, and <var>element</var> does not have a <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#computed-value">computed value</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visuren.html#propdef-display">display</a> property that is <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-display-3/#valdef-display-table-row">table-row</a>, <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-display-3/#valdef-display-table-row-group">table-row-group</a>, <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-display-3/#valdef-display-table-header-group">table-header-group</a>, <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-display-3/#valdef-display-table-footer-group">table-footer-group</a>, <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-display-3/#valdef-display-table-cell">table-cell</a> or <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-display-3/#valdef-display-table-caption">table-caption</a>, the <a data-link-type="dfn" href="https://drafts.csswg.org/css-display-3/#containing-block">containing block</a> of <var>element</var> must be calculated using the following algorithm, aborting on
 the first step that returns a value: </p>
    <ol>
@@ -277,44 +411,76 @@ the first step that returns a value: </p>
     <li>
      <p>If <var>element</var> has a <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#computed-value">computed value</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-position-3/#propdef-position">position</a> property that is <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-position-3/#valdef-position-absolute">absolute</a>, return <var>element</var>. </p>
     <li>
-     <p>If <var>element</var> is a <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/semantics.html#the-body-element">body</a></code> element, and its <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-tree-parent">parent</a> is the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#document-element">document element</a>, and that is an <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/semantics.html#the-html-element">html</a></code> element, let <var>element</var> have a <a data-link-type="dfn" href="#quirky-containing-block-height">quirky
- containing block height</a> and return <var>element</var>. </p>
-    <li>
      <p>Jump to the first step. </p>
-   </ol>
-   <p>When an element <var>body</var> is said to have a <dfn data-dfn-type="dfn" data-noexport="" id="quirky-containing-block-height">quirky containing block height<a class="self-link" href="#quirky-containing-block-height"></a></dfn>, the <a data-link-type="dfn" href="https://drafts.csswg.org/css-display-3/#containing-block">containing block</a> the element establishes must act as if it had a height calculated using the
-following algorithm: </p>
-   <ol>
-    <li>
-     <p>If the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#document-element">document element</a> has a <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#computed-value">computed value</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-height">height</a> property
- that is <span class="css">auto</span> and has a <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#computed-value">computed value</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-position-3/#propdef-position">position</a> property that is <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-position-3/#valdef-position-absolute">absolute</a>, return <span class="css">auto</span> and abort these steps. </p>
-    <li>
-     <p>Let <var>elements</var> be an array with <var>body</var> as its only item. </p>
-    <li>
-     <p>If the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#document-element">document element</a> has a <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#computed-value">computed value</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-height">height</a> property
- that is not <span class="css">auto</span>, let <var>A</var> be the <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#used-value">used value</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-height">height</a> property of the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#document-element">document element</a>. Otherwise, let <var>A</var> be the height of the <a data-link-type="dfn" href="https://drafts.csswg.org/css-display-3/#initial-containing-block">initial containing
- block</a> and append the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#document-element">document element</a> to <var>elements</var>. </p>
-    <li>
-     <p>Let <var>B</var> be the sum of the <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#used-value">used values</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/box.html#propdef-margin-top">margin-top</a>, <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/box.html#propdef-margin-bottom">margin-bottom</a>, <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-backgrounds-3/#border-top-width">border-top-width</a>, <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-backgrounds-3/#border-bottom-width">border-bottom-width</a>, <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/box.html#propdef-padding-top">padding-top</a> and <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/box.html#propdef-padding-bottom">padding-bottom</a> properties of each
- element in <var>elements</var>. </p>
-    <li>
-     <p>Let <var>result</var> be <var>A</var> minus <var>B</var>. </p>
-    <li>
-     <p>If <var>result</var> is negative, let <var>result</var> be zero. </p>
-    <li>
-     <p>Return <var>result</var>. </p>
    </ol>
    <p class="note" role="note">It is at the time or writing undefined how percentage heights inside tables work in
 CSS. This specification does not try to specify what to use as the containing block for calculating
 percentage heights in tables. Godspeed! </p>
-   <h3 class="heading settled" data-level="3.6" id="the-table-cell-width-calculation-quirk"><span class="secno">3.6. </span><span class="content">The table cell width calculation quirk</span><a class="self-link" href="#the-table-cell-width-calculation-quirk"></a></h3>
+   <p class="big-issue">This quirk needs to take writing modes into account and maybe bail for grids. </p>
+   <h3 class="heading settled" data-algorithm="The html element fills the viewport
+quirk" data-level="3.6" id="the-html-element-fills-the-viewport-quirk"><span class="secno">3.6. </span><span class="content">The <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/semantics.html#the-html-element">html</a></code> element fills the viewport
+quirk</span><a class="self-link" href="#the-html-element-fills-the-viewport-quirk"></a></h3>
+   <p>In <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document-quirks">quirks mode</a>, if the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#document-element">document element</a> <var>element</var> matches the
+following conditions: </p>
+   <ul>
+    <li>
+     <p><var>element</var> is an <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/semantics.html#the-html-element">html</a></code> element. </p>
+    <li>
+     <p>The <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#computed-value">computed value</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-width">width</a> property of <var>element</var> is <span class="css">auto</span> and <var>element</var> has a <a data-link-type="dfn" href="https://drafts.csswg.org/css-writing-modes-3/#vertical-writing-mode">vertical writing mode</a>, or the <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#computed-value">computed value</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-height">height</a> property
+ of <var>element</var> is <span class="css">auto</span> and <var>element</var> has a <a data-link-type="dfn" href="https://drafts.csswg.org/css-writing-modes-3/#horizontal-writing-mode">horizontal writing mode</a>. <a data-link-type="biblio" href="#biblio-css-writing-modes-3">[CSS-WRITING-MODES-3]</a> </p>
+   </ul>
+   <p>...then <var>element</var> must have its <a data-link-type="dfn" href="https://drafts.csswg.org/css2/box.html#border-edge">border box</a> size in the <a data-link-type="dfn" href="https://drafts.csswg.org/css-writing-modes-3/#block-flow-direction">block flow direction</a> set
+using the following algorithm: </p>
+   <ol>
+    <li>
+     <p>Let <var>margins</var> be sum of the <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#used-value">used values</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/box.html#propdef-margin-left">margin-left</a> and <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/box.html#propdef-margin-right">margin-right</a> properties of <var>element</var> if <var>element</var> has a <a data-link-type="dfn" href="https://drafts.csswg.org/css-writing-modes-3/#vertical-writing-mode">vertical writing mode</a>, otherwise let <var>margins</var> be
+ the sum of the <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#used-value">used values</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/box.html#propdef-margin-top">margin-top</a> and <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/box.html#propdef-margin-bottom">margin-bottom</a> properties of <var>element</var>. </p>
+    <li>
+     <p>Let <var>size</var> be the size of the <a data-link-type="dfn" href="https://drafts.csswg.org/css-display-3/#initial-containing-block">initial containing block</a> in the <a data-link-type="dfn" href="https://drafts.csswg.org/css-writing-modes-3/#block-flow-direction">block flow
+ direction</a> minus <var>margins</var>. </p>
+    <li>
+     <p>Return the bigger value of <var>size</var> and the normal <a data-link-type="dfn" href="https://drafts.csswg.org/css2/box.html#border-edge">border box</a> size the element would
+ have according to the CSS specification. </p>
+   </ol>
+   <h3 class="heading settled" data-level="3.7" id="the-body-element-fills-the-html-element-quirk"><span class="secno">3.7. </span><span class="content">The <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/semantics.html#the-body-element">body</a></code> element fills the <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/semantics.html#the-html-element">html</a></code> element
+quirk</span><a class="self-link" href="#the-body-element-fills-the-html-element-quirk"></a></h3>
+   <p>In <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document-quirks">quirks mode</a>, if the <a data-link-type="dfn" href="#documents-body-element">document’s body element</a> <var>body</var> is not null and if
+it matches the following conditions: </p>
+   <ul>
+    <li>
+     <p>The <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#computed-value">computed value</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-width">width</a> property of <var>body</var> is <span class="css">auto</span> and <var>body</var> has
+ a <a data-link-type="dfn" href="https://drafts.csswg.org/css-writing-modes-3/#vertical-writing-mode">vertical writing mode</a>, or the <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#computed-value">computed value</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-height">height</a> property of <var>body</var> is <span class="css">auto</span> and <var>body</var> has a <a data-link-type="dfn" href="https://drafts.csswg.org/css-writing-modes-3/#horizontal-writing-mode">horizontal writing mode</a>. <a data-link-type="biblio" href="#biblio-css-writing-modes-3">[CSS-WRITING-MODES-3]</a> </p>
+    <li>
+     <p>The <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#computed-value">computed value</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-position-3/#propdef-position">position</a> property of <var>body</var> is not <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-position-3/#valdef-position-absolute">absolute</a> or <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-position-3/#valdef-position-fixed">fixed</a>. </p>
+    <li>
+     <p>The <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#computed-value">computed value</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visuren.html#propdef-float">float</a> property of <var>body</var> is not <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-page-floats-3/#valdef-float-none">none</a>. </p>
+    <li>
+     <p><var>body</var> is not an <a data-link-type="dfn" href="https://drafts.csswg.org/css-display-3/#inline-level">inline-level</a> element. </p>
+    <li>
+     <p><var>body</var> is not a <a data-link-type="dfn" href="https://drafts.csswg.org/css-multicol-1/#spanning-element">spanning element</a>. <a data-link-type="biblio" href="#biblio-css3-multicol">[CSS3-MULTICOL]</a> </p>
+   </ul>
+   <p>...then <var>body</var> have its <a data-link-type="dfn" href="https://drafts.csswg.org/css2/box.html#border-edge">border box</a> size in the <a data-link-type="dfn" href="https://drafts.csswg.org/css-writing-modes-3/#block-flow-direction">block flow direction</a> set using the
+following algorithm: </p>
+   <ol>
+    <li>
+     <p>Let <var>margins</var> be the sum of the <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#used-value">used values</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/box.html#propdef-margin-left">margin-left</a> and <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/box.html#propdef-margin-right">margin-right</a> properties of <var>body</var> if <var>body</var> has a <a data-link-type="dfn" href="https://drafts.csswg.org/css-writing-modes-3/#vertical-writing-mode">vertical writing mode</a>, otherwise <var>margins</var> it be the
+ sum of the <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#used-value">used values</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/box.html#propdef-margin-top">margin-top</a> and <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/box.html#propdef-margin-bottom">margin-bottom</a> properties of <var>body</var>. </p>
+    <li>
+     <p>Let <var>size</var> be the size of <var>body</var>’s parent element’s <a data-link-type="dfn" href="https://drafts.csswg.org/css2/box.html#content-edge">content box</a> in the <a data-link-type="dfn" href="https://drafts.csswg.org/css-writing-modes-3/#block-flow-direction">block flow
+ direction</a> minus <var>margins</var>. </p>
+    <li>
+     <p>Return the bigger value of <var>size</var> and the normal <a data-link-type="dfn" href="https://drafts.csswg.org/css2/box.html#border-edge">border box</a> size the element would
+ have according to the CSS specification. </p>
+   </ol>
+   <p class="big-issue">What should happen if the <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/semantics.html#the-html-element">html</a></code> and the <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/semantics.html#the-body-element">body</a></code> have different writing modes? </p>
+   <h3 class="heading settled" data-level="3.8" id="the-table-cell-width-calculation-quirk"><span class="secno">3.8. </span><span class="content">The table cell width calculation quirk</span><a class="self-link" href="#the-table-cell-width-calculation-quirk"></a></h3>
    <p class="note" role="note"><a href="http://w3c-test.org/quirks-mode/table-cell-width-calculation.html">Tests
 are available</a>. </p>
    <p>In <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document-quirks">quirks mode</a>, for the purpose of calculating the <a data-link-type="dfn" href="http://dbaron.org/css/intrinsic/#inline-intrinsic-min">min-content width of an
 inline formatting context</a> for which a table cell <var>cell</var> is the <a data-link-type="dfn" href="https://drafts.csswg.org/css-display-3/#containing-block">containing block</a>, if <var>cell</var> has a <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#computed-value">computed value</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-width">width</a> property that is <span class="css">auto</span>, <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-img-element">img</a></code> elements
 that are <a data-link-type="dfn" href="https://drafts.csswg.org/css-display-3/#inline-level">inline-level</a> <a data-link-type="dfn" href="https://drafts.csswg.org/css2/conform.html#replaced-element">replaced elements</a> in that <a data-link-type="dfn" href="https://drafts.csswg.org/css-display-3/#inline-formatting-context">inline formatting context</a> must
-not have a <a data-link-type="dfn">soft wrap opportunity</a> before or after them. <a data-link-type="biblio" href="#biblio-css-text-3">[CSS-TEXT-3]</a> <a data-link-type="biblio" href="#biblio-intrinsic">[INTRINSIC]</a> </p>
-   <h3 class="heading settled" data-level="3.7" id="the-table-cell-nowrap-minimum-width-calculation-quirk"><span class="secno">3.7. </span><span class="content">The table cell nowrap minimum width
+not have a <a data-link-type="dfn" href="https://drafts.csswg.org/css-text-3/#soft-wrap-opportunity">soft wrap opportunity</a> before or after them. <a data-link-type="biblio" href="#biblio-css-text-3">[CSS-TEXT-3]</a> <a data-link-type="biblio" href="#biblio-intrinsic">[INTRINSIC]</a> </p>
+   <h3 class="heading settled" data-level="3.9" id="the-table-cell-nowrap-minimum-width-calculation-quirk"><span class="secno">3.9. </span><span class="content">The table cell nowrap minimum width
 calculation quirk</span><a class="self-link" href="#the-table-cell-nowrap-minimum-width-calculation-quirk"></a></h3>
    <p>In <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document-quirks">quirks mode</a>, an element <var>cell</var> that matches the following conditions must act
 as if it had an <a data-link-type="dfn" href="http://dbaron.org/css/intrinsic/#autotable">outer min-content width of a table cell</a> in the automatic table layout
@@ -328,7 +494,7 @@ algorithm that is the bigger value of <var>cell</var>’s <a data-link-type="dfn
      <p>The <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#computed-value">computed value</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-width">width</a> property of <var>cell</var> is a <a class="production css" data-link-type="type" href="https://drafts.csswg.org/css-values-3/#length-value" title="Expands to: em | advance measure | ch | vmin | cm | pc | pixel unit | in | rem | q | vh | ex | pt | vw | vmax | mm">&lt;length></a> that is not
  zero. </p>
    </ul>
-   <h3 class="heading settled" data-level="3.8" id="the-collapsing-table-quirk"><span class="secno">3.8. </span><span class="content">The collapsing table quirk</span><a class="self-link" href="#the-collapsing-table-quirk"></a></h3>
+   <h3 class="heading settled" data-level="3.10" id="the-collapsing-table-quirk"><span class="secno">3.10. </span><span class="content">The collapsing table quirk</span><a class="self-link" href="#the-collapsing-table-quirk"></a></h3>
    <p>In <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document-quirks">quirks mode</a>, an element <var>table</var> that matches the following conditions must
 have a <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#used-value">used value</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-height">height</a> property of <span class="css">0</span> and a <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#used-value">used value</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-backgrounds-3/#border-style">border-style</a> property of <span class="css">none</span>. </p>
    <ul>
@@ -339,12 +505,12 @@ have a <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#use
     <li>
      <p><var>table</var> has no child <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-display-3/#valdef-display-table-column-group">table-column-group</a> box that itself has a child <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-display-3/#valdef-display-table-column">table-column</a> box. </p>
    </ul>
-   <h3 class="heading settled" data-level="3.9" id="the-text-decoration-doesnt-propagate-into-tables-quirk"><span class="secno">3.9. </span><span class="content">The text decoration doesn’t propagate
+   <h3 class="heading settled" data-level="3.11" id="the-text-decoration-doesnt-propagate-into-tables-quirk"><span class="secno">3.11. </span><span class="content">The text decoration doesn’t propagate
 into tables quirk</span><a class="self-link" href="#the-text-decoration-doesnt-propagate-into-tables-quirk"></a></h3>
    <p>In <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document-quirks">quirks mode</a>, text decoration must not propagate
 into <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/tables.html#the-table-element">table</a></code> elements. </p>
    <h3 class="heading settled" data-algorithm="The tables inherit color from body
-quirk" data-level="3.10" id="the-tables-inherit-color-from-body-quirk"><span class="secno">3.10. </span><span class="content">The tables inherit color from body
+quirk" data-level="3.12" id="the-tables-inherit-color-from-body-quirk"><span class="secno">3.12. </span><span class="content">The tables inherit color from body
 quirk</span><a class="self-link" href="#the-tables-inherit-color-from-body-quirk"></a></h3>
    <p>In <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document-quirks">quirks mode</a>, the initial value of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-color-4/#propdef-color">color</a> property must be <span class="css">quirk-inherit</span>, a special value that has no keyword mapping to it. </p>
    <p>The <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#computed-value">computed value</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-color-4/#propdef-color">color</a> property of an element <var>element</var> must be calculated
@@ -364,8 +530,7 @@ using the following algorithm: </p>
  specified value of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-color-4/#propdef-color">color</a> property of <var>element</var> be the initial value of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-color-4/#propdef-color">color</a> property
  according to the CSS specification. Return the <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#computed-value">computed value</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-color-4/#propdef-color">color</a> property of <var>element</var> as specified in the CSS specification. </p>
    </ol>
-   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="documents-body-element">document’s body element<a class="self-link" href="#documents-body-element"></a></dfn> is the first <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-tree-child">child</a> of the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#document-element">document element</a> that is a <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/semantics.html#the-body-element">body</a></code> element, if there is one, and the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#document-element">document element</a> is an <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/semantics.html#the-html-element">html</a></code> element. Otherwise it is null. </p>
-   <h3 class="heading settled" data-level="3.11" id="the-table-cell-height-box-sizing-quirk"><span class="secno">3.11. </span><span class="content">The table cell height box sizing quirk</span><a class="self-link" href="#the-table-cell-height-box-sizing-quirk"></a></h3>
+   <h3 class="heading settled" data-level="3.13" id="the-table-cell-height-box-sizing-quirk"><span class="secno">3.13. </span><span class="content">The table cell height box sizing quirk</span><a class="self-link" href="#the-table-cell-height-box-sizing-quirk"></a></h3>
    <p>In <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document-quirks">quirks mode</a>, elements that have a <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#computed-value">computed value</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visuren.html#propdef-display">display</a> property of <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-display-3/#valdef-display-table-cell">table-cell</a> must act as they have <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#used-value">used value</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-ui-3/#propdef-box-sizing">box-sizing</a> property of <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-ui-3/#valdef-box-sizing-border-box">border-box</a>, but only for the purpose of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-height">height</a>, <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-min-height">min-height</a> and <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-max-height">max-height</a> properties. </p>
    <h2 class="heading settled" data-level="4" id="selectors"><span class="secno">4. </span><span class="content">Selectors</span><a class="self-link" href="#selectors"></a></h2>
    <h3 class="heading settled" data-algorithm="The :active and :hover quirk" data-level="4.1" id="the-active-and-hover-quirk"><span class="secno">4.1. </span><span class="content">The :active and :hover quirk</span><a class="self-link" href="#the-active-and-hover-quirk"></a></h3>
@@ -413,10 +578,9 @@ under law, the editors have waived all copyright and related or neighboring righ
   <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="index">
-   <li><a href="#documents-body-element">document’s body element</a><span>, in §3.10</span>
-   <li><a href="#quirky-color">quirky color</a><span>, in §3.1</span>
+   <li><a href="#documents-body-element">document’s body element</a><span>, in §2.2</span>
    <li><a href="#quirky-color-value">&lt;quirky-color></a><span>, in §3.1</span>
-   <li><a href="#quirky-containing-block-height">quirky containing block height</a><span>, in §3.5</span>
+   <li><a href="#quirky-color">quirky color</a><span>, in §3.1</span>
    <li><a href="#quirky-length">quirky length</a><span>, in §3.2</span>
    <li><a href="#quirky-length-value">&lt;quirky-length></a><span>, in §3.2</span>
   </ul>
@@ -491,10 +655,21 @@ under law, the editors have waived all copyright and related or neighboring righ
      <li><a href="https://drafts.fxtf.org/css-masking-1/#funcdef-clip-rect">rect()</a>
     </ul>
    <li>
+    <a data-link-type="biblio">[css-multicol-1]</a> defines the following terms:
+    <ul>
+     <li><a href="https://drafts.csswg.org/css-multicol-1/#spanning-element">spanning element</a>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[css-page-floats-3]</a> defines the following terms:
+    <ul>
+     <li><a href="https://drafts.csswg.org/css-page-floats-3/#valdef-float-none">none</a>
+    </ul>
+   <li>
     <a data-link-type="biblio">[css-position-3]</a> defines the following terms:
     <ul>
      <li><a href="https://drafts.csswg.org/css-position-3/#valdef-position-absolute">absolute</a>
      <li><a href="https://drafts.csswg.org/css-position-3/#propdef-bottom">bottom</a>
+     <li><a href="https://drafts.csswg.org/css-position-3/#valdef-position-fixed">fixed</a>
      <li><a href="https://drafts.csswg.org/css-position-3/#propdef-left">left</a>
      <li><a href="https://drafts.csswg.org/css-position-3/#propdef-position">position</a>
      <li><a href="https://drafts.csswg.org/css-position-3/#valdef-position-relative">relative</a>
@@ -516,6 +691,14 @@ under law, the editors have waived all copyright and related or neighboring righ
      <li><a href="https://drafts.csswg.org/css-tables-3/#propdef-border-spacing">border-spacing</a>
     </ul>
    <li>
+    <a data-link-type="biblio">[CSS-TEXT-3]</a> defines the following terms:
+    <ul>
+     <li><a href="https://drafts.csswg.org/css-text-3/#propdef-letter-spacing">letter-spacing</a>
+     <li><a href="https://drafts.csswg.org/css-text-3/#soft-wrap-opportunity">soft wrap opportunity</a>
+     <li><a href="https://drafts.csswg.org/css-text-3/#propdef-text-indent">text-indent</a>
+     <li><a href="https://drafts.csswg.org/css-text-3/#propdef-word-spacing">word-spacing</a>
+    </ul>
+   <li>
     <a data-link-type="biblio">[css-ui-3]</a> defines the following terms:
     <ul>
      <li><a href="https://drafts.csswg.org/css-ui-3/#valdef-box-sizing-border-box">border-box</a>
@@ -531,11 +714,18 @@ under law, the editors have waived all copyright and related or neighboring righ
      <li><a href="https://drafts.csswg.org/css-values-3/#comb-one">|</a>
     </ul>
    <li>
+    <a data-link-type="biblio">[CSS-WRITING-MODES-3]</a> defines the following terms:
+    <ul>
+     <li><a href="https://drafts.csswg.org/css-writing-modes-3/#block-flow-direction">block flow direction</a>
+     <li><a href="https://drafts.csswg.org/css-writing-modes-3/#horizontal-writing-mode">horizontal writing mode</a>
+     <li><a href="https://drafts.csswg.org/css-writing-modes-3/#vertical-writing-mode">vertical writing mode</a>
+    </ul>
+   <li>
     <a data-link-type="biblio">[CSS2]</a> defines the following terms:
     <ul>
      <li><a href="https://drafts.csswg.org/css2/visuren.html#propdef-display">display</a>
+     <li><a href="https://drafts.csswg.org/css2/visuren.html#propdef-float">float</a>
      <li><a href="https://drafts.csswg.org/css2/visudet.html#propdef-height">height</a>
-     <li><a href="https://drafts.csswg.org/css2/text.html#propdef-letter-spacing">letter-spacing</a>
      <li><a href="https://drafts.csswg.org/css2/visudet.html#propdef-line-height">line-height</a>
      <li><a href="https://drafts.csswg.org/css2/box.html#propdef-margin">margin</a>
      <li><a href="https://drafts.csswg.org/css2/box.html#propdef-margin-bottom">margin-bottom</a>
@@ -551,10 +741,8 @@ under law, the editors have waived all copyright and related or neighboring righ
      <li><a href="https://drafts.csswg.org/css2/box.html#propdef-padding-left">padding-left</a>
      <li><a href="https://drafts.csswg.org/css2/box.html#propdef-padding-right">padding-right</a>
      <li><a href="https://drafts.csswg.org/css2/box.html#propdef-padding-top">padding-top</a>
-     <li><a href="https://drafts.csswg.org/css2/text.html#propdef-text-indent">text-indent</a>
      <li><a href="https://drafts.csswg.org/css2/visudet.html#propdef-vertical-align">vertical-align</a>
      <li><a href="https://drafts.csswg.org/css2/visudet.html#propdef-width">width</a>
-     <li><a href="https://drafts.csswg.org/css2/text.html#propdef-word-spacing">word-spacing</a>
     </ul>
    <li>
     <a data-link-type="biblio">[CSSOM]</a> defines the following terms:
@@ -567,7 +755,6 @@ under law, the editors have waived all copyright and related or neighboring righ
      <li><a href="https://dom.spec.whatwg.org/#concept-tree-child">child</a>
      <li><a href="https://dom.spec.whatwg.org/#document-element">document element</a>
      <li><a href="https://dom.spec.whatwg.org/#concept-document-limited-quirks">limited-quirks mode</a>
-     <li><a href="https://dom.spec.whatwg.org/#concept-tree-parent">parent</a>
      <li><a href="https://dom.spec.whatwg.org/#concept-document-quirks">quirks mode</a>
     </ul>
    <li>
@@ -615,6 +802,10 @@ under law, the editors have waived all copyright and related or neighboring righ
    <dd>John Daggett. <a href="http://dev.w3.org/csswg/css-fonts/">CSS Fonts Module Level 3</a>. 3 October 2013. CR. URL: <a href="http://dev.w3.org/csswg/css-fonts/">http://dev.w3.org/csswg/css-fonts/</a>
    <dt id="biblio-css-masking-1">[CSS-MASKING-1]
    <dd>Dirk Schulze; Brian Birtles; Tab Atkins Jr.. <a href="http://dev.w3.org/fxtf/css-masking-1/">CSS Masking Module Level 1</a>. 26 August 2014. CR. URL: <a href="http://dev.w3.org/fxtf/css-masking-1/">http://dev.w3.org/fxtf/css-masking-1/</a>
+   <dt id="biblio-css-multicol-1">[CSS-MULTICOL-1]
+   <dd>CSS Multi-column Layout Module Level 1 URL: <a href="https://drafts.csswg.org/css-multicol-1/">https://drafts.csswg.org/css-multicol-1/</a>
+   <dt id="biblio-css-page-floats-3">[CSS-PAGE-FLOATS-3]
+   <dd>Johannes Wilm. <a href="http://dev.w3.org/csswg/css-page-floats/">CSS Page Floats</a>. 15 September 2015. WD. URL: <a href="http://dev.w3.org/csswg/css-page-floats/">http://dev.w3.org/csswg/css-page-floats/</a>
    <dt id="biblio-css-position-3">[CSS-POSITION-3]
    <dd>CSS Positioned Layout Module Level 3 URL: <a href="https://drafts.csswg.org/css-position-3/">https://drafts.csswg.org/css-position-3/</a>
    <dt id="biblio-css-syntax-3">[CSS-SYNTAX-3]
@@ -627,8 +818,12 @@ under law, the editors have waived all copyright and related or neighboring righ
    <dd>Tantek Çelik; Florian Rivoal. <a href="http://dev.w3.org/csswg/css-ui/">CSS Basic User Interface Module Level 3 (CSS3 UI)</a>. 7 July 2015. CR. URL: <a href="http://dev.w3.org/csswg/css-ui/">http://dev.w3.org/csswg/css-ui/</a>
    <dt id="biblio-css-values">[CSS-VALUES]
    <dd>Tab Atkins Jr.; Elika Etemad. <a href="http://dev.w3.org/csswg/css-values/">CSS Values and Units Module Level 3</a>. 11 June 2015. CR. URL: <a href="http://dev.w3.org/csswg/css-values/">http://dev.w3.org/csswg/css-values/</a>
+   <dt id="biblio-css-writing-modes-3">[CSS-WRITING-MODES-3]
+   <dd>Elika Etemad; Koji Ishii. <a href="http://dev.w3.org/csswg/css-writing-modes-3/">CSS Writing Modes Level 3</a>. 15 December 2015. CR. URL: <a href="http://dev.w3.org/csswg/css-writing-modes-3/">http://dev.w3.org/csswg/css-writing-modes-3/</a>
    <dt id="biblio-css2">[CSS2]
    <dd>Bert Bos; et al. <a href="http://www.w3.org/TR/CSS2">Cascading Style Sheets Level 2 Revision 1 (CSS 2.1) Specification</a>. 7 June 2011. REC. URL: <a href="http://www.w3.org/TR/CSS2">http://www.w3.org/TR/CSS2</a>
+   <dt id="biblio-css3-multicol">[CSS3-MULTICOL]
+   <dd>Håkon Wium Lie. <a href="http://www.w3.org/TR/css3-multicol">CSS Multi-column Layout Module</a>. 12 April 2011. CR. URL: <a href="http://www.w3.org/TR/css3-multicol">http://www.w3.org/TR/css3-multicol</a>
    <dt id="biblio-cssom">[CSSOM]
    <dd>Simon Pieters; Glenn Adams. <a href="https://drafts.csswg.org/cssom/">CSS Object Model (CSSOM)</a>. 17 March 2016. WD. URL: <a href="https://drafts.csswg.org/cssom/">https://drafts.csswg.org/cssom/</a>
    <dt id="biblio-dom">[DOM]

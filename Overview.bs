@@ -9,7 +9,7 @@ No Editor: true
 !Participate: <a href=https://wiki.whatwg.org/wiki/IRC>IRC: #whatwg on Freenode</a>
 !Commits: <a href=https://github.com/whatwg/quirks/commits>GitHub whatwg/quirks/commits</a>
 Logo: https://resources.whatwg.org/logo.svg
-Abstract: Quirks Mode defines quirks in CSS and Selectors that are necessary to support for Web browsers compatibility with the Web.
+Abstract: Quirks Mode defines quirks in CSS and Selectors that are necessary to support for Web browsers for compatibility with the Web.
 Boilerplate: omit conformance, omit feedback-header
 </pre>
 
@@ -30,6 +30,9 @@ urlPrefix: https://drafts.csswg.org/css2/
     urlPrefix: conform.html
         type: dfn; text: illegal
         type: dfn; text: replaced element
+    urlPrefix: box.html
+        type: dfn; text: border box; url: #border-edge
+        type: dfn; text: content box; url: #content-edge
 urlPrefix: http://dbaron.org/css/intrinsic/
     type: dfn;
         text: min-content width of an inline formatting context; url: #inline-intrinsic-min
@@ -49,8 +52,6 @@ spec:cssom-1; type:interface; text:CSS
 <style>
  .logo { position:absolute; top:1em; right:1em; width:106px; height:106px; border:1px outset gray; margin-top:-4px; margin-right:-4px }
  div.head .logo > img { top:2px; right:2px; border:1px inset gray }
- a.css::before, a.css::after, a.property::before, a.property::after { content:"'" }
-	[data-link-type].production::before,	[data-link-type].production::after,	.prod [data-link-type]::before, .prod [data-link-type]::after { content: "" }
 </style>
 
 
@@ -110,6 +111,10 @@ local name |foo| and having the namespace <code>http://www.w3.org/1999/xhtml</co
 
 <p>When this specification refers to a "<code>|foo|</code> attribute", it means an attribute with
 the local name |foo| and having no namespace.
+
+<p>The <dfn>document's body element</dfn> is the first <a spec=dom>child</a> of the <a
+spec=dom>document element</a> that is a <{body}> element, if there is one, and the <a
+spec=dom>document element</a> is an <{html}> element. Otherwise it is null.
 
 
 <h2 id=css>CSS</h2>
@@ -307,10 +312,10 @@ must be ignored for the purpose of calculating the minimal height of line boxes 
 
 <h3 algorithm id=the-percentage-height-calculation-quirk>The percentage height calculation
 quirk</h3>
-
+<!-- TODO update tests
 <p class="note"><a href="http://w3c-test.org/quirks-mode/percentage-height-calculation.html">Tests
 are available</a>.
-
+-->
 <p>In <a spec=dom>quirks mode</a>, for the purpose of calculating the 'height' of an element
 |element|, if the <a>computed value</a> of the 'position' property of |element| is
 ''position/relative'' or ''position/static'', the specified value for the 'height' property of
@@ -334,46 +339,93 @@ the first step that returns a value:
  <li><p>If |element| has a <a>computed value</a> of the 'position' property that is
  ''position/absolute'', return |element|.
 
- <li><p>If |element| is a <{body}> element, and its <a spec=dom>parent</a> is the <a
- spec=dom>document element</a>, and that is an <{html}> element, let |element| have a <a>quirky
- containing block height</a> and return |element|.
-
  <li><p>Jump to the first step.
-
-</ol>
-
-<p>When an element |body| is said to have a <dfn>quirky containing block height</dfn>, the
-<a>containing block</a> the element establishes must act as if it had a height calculated using the
-following algorithm:
-
-<ol>
-
- <li><p>If the <a spec=dom>document element</a> has a <a>computed value</a> of the 'height' property
- that is ''height/auto'' and has a <a>computed value</a> of the 'position' property that is
- ''position/absolute'', return ''height/auto'' and abort these steps.
-
- <li><p>Let |elements| be an array with |body| as its only item.
-
- <li><p>If the <a spec=dom>document element</a> has a <a>computed value</a> of the 'height' property
- that is not ''height/auto'', let |A| be the <a>used value</a> of the 'height' property of the <a
- spec=dom>document element</a>. Otherwise, let |A| be the height of the <a>initial containing
- block</a> and append the <a spec=dom>document element</a> to |elements|.
-
- <li><p>Let |B| be the sum of the <a>used values</a> of the 'margin-top', 'margin-bottom',
- 'border-top-width', 'border-bottom-width', 'padding-top' and 'padding-bottom' properties of each
- element in |elements|.
-
- <li><p>Let |result| be |A| minus |B|.
-
- <li><p>If |result| is negative, let |result| be zero.
-
- <li><p>Return |result|.
 
 </ol>
 
 <p class=note>It is at the time or writing undefined how percentage heights inside tables work in
 CSS. This specification does not try to specify what to use as the containing block for calculating
 percentage heights in tables. Godspeed!
+
+<p class=big-issue>This quirk needs to take writing modes into account and maybe bail for grids.
+
+
+<h3 algorithm id=the-html-element-fills-the-viewport-quirk>The <{html}> element fills the viewport
+quirk</h3>
+
+<p>In <a spec=dom>quirks mode</a>, if the <a spec=dom>document element</a> |element| matches the
+following conditions:
+
+<ul>
+
+ <li><p>|element| is an <{html}> element.
+
+ <li><p>The <a>computed value</a> of the 'width' property of |element| is ''width/auto'' and
+ |element| has a <a>vertical writing mode</a>, or the <a>computed value</a> of the 'height' property
+ of |element| is ''height/auto'' and |element| has a <a>horizontal writing mode</a>.
+ [[!CSS-WRITING-MODES-3]]
+
+</ul>
+
+<p>...then |element| must have its <a>border box</a> size in the <a>block flow direction</a> set
+using the following algorithm:
+
+<ol>
+
+ <li><p>Let |margins| be sum of the <a>used values</a> of the 'margin-left' and 'margin-right'
+ properties of |element| if |element| has a <a>vertical writing mode</a>, otherwise let |margins| be
+ the sum of the <a>used values</a> of the 'margin-top' and 'margin-bottom' properties of |element|.
+
+ <li><p>Let |size| be the size of the <a>initial containing block</a> in the <a>block flow
+ direction</a> minus |margins|.
+
+ <li><p>Return the bigger value of |size| and the normal <a>border box</a> size the element would
+ have according to the CSS specification.
+
+</ol>
+
+
+<h3 id=the-body-element-fills-the-html-element-quirk>The <{body}> element fills the <{html}> element
+quirk</h3>
+
+<p>In <a spec=dom>quirks mode</a>, if the <a>document's body element</a> |body| is not null and if
+it matches the following conditions:
+
+<ul>
+
+ <li><p>The <a>computed value</a> of the 'width' property of |body| is ''width/auto'' and |body| has
+ a <a>vertical writing mode</a>, or the <a>computed value</a> of the 'height' property of |body| is
+ ''height/auto'' and |body| has a <a>horizontal writing mode</a>. [[!CSS-WRITING-MODES-3]]
+
+ <li><p>The <a>computed value</a> of the 'position' property of |body| is not ''position/absolute''
+ or ''position/fixed''.
+
+ <li><p>The <a>computed value</a> of the 'float' property of |body| is not ''float/none''.
+
+ <li><p>|body| is not an <a>inline-level</a> element.
+
+ <li><p>|body| is not a <a>spanning element</a>. [[!CSS3-MULTICOL]]
+
+</ul>
+
+<p>...then |body| have its <a>border box</a> size in the <a>block flow direction</a> set using the
+following algorithm:
+
+<ol>
+
+ <li><p>Let |margins| be the sum of the <a>used values</a> of the 'margin-left' and 'margin-right'
+ properties of |body| if |body| has a <a>vertical writing mode</a>, otherwise |margins| it be the
+ sum of the <a>used values</a> of the 'margin-top' and 'margin-bottom' properties of |body|.
+
+ <li><p>Let |size| be the size of |body|'s parent element's <a>content box</a> in the <a>block flow
+ direction</a> minus |margins|.
+
+ <li><p>Return the bigger value of |size| and the normal <a>border box</a> size the element would
+ have according to the CSS specification.
+
+</ol>
+
+<p class=big-issue>What should happen if the <{html}> and the <{body}> have different writing modes?
 
 
 <h3 id=the-table-cell-width-calculation-quirk>The table cell width calculation quirk</h3>
@@ -465,10 +517,6 @@ using the following algorithm:
  |element| as specified in the CSS specification.
 
 </ol>
-
-<p>The <dfn>document's body element</dfn> is the first <a spec=dom>child</a> of the <a
-spec=dom>document element</a> that is a <{body}> element, if there is one, and the <a
-spec=dom>document element</a> is an <{html}> element. Otherwise it is null.
 
 
 <!--
