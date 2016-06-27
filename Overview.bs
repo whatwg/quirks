@@ -57,6 +57,9 @@ spec:cssom-1; type:interface; text:CSS
  }
 </style>
 
+<script src="https://resources.whatwg.org/dfn.js" async></script>
+<script src="https://resources.whatwg.org/file-issue.js" defer></script>
+
 
 <h2 id=introduction>Introduction</h2>
 
