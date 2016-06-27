@@ -107,10 +107,10 @@ different modes have since gained a few differences outside of CSS.
   <p>Where possible, limit quirks to a fixed set of legacy features so they don't propagate into
   new features.
 
-  <p class=example>For example, <a>quirky colors</a> and <a>quirky lengths</a> are limited to a
-  fixed set of CSS properties so that they do not apply in SVG features that also accept colors or
-  lengths, or in <a href="https://bugs.webkit.org/show_bug.cgi?id=153730">CSS gradients where the
-  grammar could otherwise become ambiguous</a>.
+  <p class=example>For example, <a>quirky colors</a> are limited to a fixed set of CSS properties so
+  that they do not apply in SVG features that also accept colors, or in <a
+  href="https://bugs.webkit.org/show_bug.cgi?id=153730">CSS gradients where the grammar could
+  otherwise become ambiguous</a>.
 
 </ul>
 
