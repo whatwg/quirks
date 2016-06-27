@@ -11,146 +11,16 @@
 <style>
  .logo { position:absolute; top:1em; right:1em; width:106px; height:106px; border:1px outset gray; margin-top:-4px; margin-right:-4px }
  div.head .logo > img { top:2px; right:2px; border:1px inset gray }
+ @media (max-width: 767px) {
+  .logo { width:calc(4em + 6px); height:calc(4em + 6px) }
+ }
 </style>
-<style>/* style-md-lists */
-
-            /* This is a weird hack for me not yet following the commonmark spec
-               regarding paragraph and lists. */
-            [data-md] > :first-child {
-                margin-top: 0;
-            }
-            [data-md] > :last-child {
-                margin-bottom: 0;
-            }</style>
-<style>/* style-counters */
-
-            .issue:not(.no-marker)::before {
-                content: "Issue " counter(issue);
-            }
-
-            .example:not(.no-marker)::before {
-                content: "Example";
-                content: "Example " counter(example);
-            }
-            .invalid.example:not(.no-marker)::before,
-            .illegal.example:not(.no-marker)::before {
-                content: "Invalid Example";
-                content: "Invalid Example" counter(example);
-            }</style>
-<style>/* style-selflinks */
-
-            .heading, .issue, .note, .example, li, dt {
-                position: relative;
-            }
-            a.self-link {
-                position: absolute;
-                top: 0;
-                left: calc(-1 * (3.5rem - 26px));
-                width: calc(3.5rem - 26px);
-                height: 2em;
-                text-align: center;
-                border: none;
-                transition: opacity .2s;
-                opacity: .5;
-            }
-            a.self-link:hover {
-                opacity: 1;
-            }
-            .heading > a.self-link {
-                font-size: 83%;
-            }
-            li > a.self-link {
-                left: calc(-1 * (3.5rem - 26px) - 2em);
-            }
-            dfn > a.self-link {
-                top: auto;
-                left: auto;
-                opacity: 0;
-                width: 1.5em;
-                height: 1.5em;
-                background: gray;
-                color: white;
-                font-style: normal;
-                transition: opacity .2s, background-color .2s, color .2s;
-            }
-            dfn:hover > a.self-link {
-                opacity: 1;
-            }
-            dfn > a.self-link:hover {
-                color: black;
-            }
-
-            a.self-link::before            { content: "¶"; }
-            .heading > a.self-link::before { content: "§"; }
-            dfn > a.self-link::before      { content: "#"; }</style>
-<style>/* style-autolinks */
-
-            .css.css, .property.property, .descriptor.descriptor {
-                color: #005a9c;
-                font-size: inherit;
-                font-family: inherit;
-            }
-            .css::before, .property::before, .descriptor::before {
-                content: "‘";
-            }
-            .css::after, .property::after, .descriptor::after {
-                content: "’";
-            }
-            .property, .descriptor {
-                /* Don't wrap property and descriptor names */
-                white-space: nowrap;
-            }
-            .type { /* CSS value <type> */
-                font-style: italic;
-            }
-            pre .property::before, pre .property::after {
-                content: "";
-            }
-            [data-link-type="property"]::before,
-            [data-link-type="propdesc"]::before,
-            [data-link-type="descriptor"]::before,
-            [data-link-type="value"]::before,
-            [data-link-type="function"]::before,
-            [data-link-type="at-rule"]::before,
-            [data-link-type="selector"]::before,
-            [data-link-type="maybe"]::before {
-                content: "‘";
-            }
-            [data-link-type="property"]::after,
-            [data-link-type="propdesc"]::after,
-            [data-link-type="descriptor"]::after,
-            [data-link-type="value"]::after,
-            [data-link-type="function"]::after,
-            [data-link-type="at-rule"]::after,
-            [data-link-type="selector"]::after,
-            [data-link-type="maybe"]::after {
-                content: "’";
-            }
-
-            [data-link-type].production::before,
-            [data-link-type].production::after,
-            .prod [data-link-type]::before,
-            .prod [data-link-type]::after {
-                content: "";
-            }
-
-            [data-link-type=element],
-            [data-link-type=element-attr] {
-                font-family: Menlo, Consolas, "DejaVu Sans Mono", monospace;
-                font-size: .9em;
-            }
-            [data-link-type=element]::before { content: "<" }
-            [data-link-type=element]::after  { content: ">" }
-
-            [data-link-type=biblio] {
-                white-space: pre;
-            }</style>
  <body class="h-entry status-LS">
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo.svg"> </a> </p>
    <hgroup>
     <h1 class="p-name no-ref" id="title">Quirks Mode</h1>
-    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-05-03">3 May 2016</time></span></h2>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-06-27">27 June 2016</time></span></h2>
    </hgroup>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -210,6 +80,7 @@ quirk</span></a>
      <ol class="toc">
       <li><a href="#the-active-and-hover-quirk"><span class="secno">4.1</span> <span class="content">The :active and :hover quirk</span></a>
      </ol>
+    <li><a href="#security-privacy"><span class="secno"></span> <span class="content">Security and Privacy Considerations</span></a>
     <li><a href="#acknowledgments"><span class="secno"></span> <span class="content">Acknowledgments</span></a>
     <li>
      <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
@@ -241,14 +112,25 @@ different modes have since gained a few differences outside of CSS. </p>
    <ul>
     <li>
      <p>Create a specification for rendering old (or indeed new, if they happen to have a particular
- pragma) HTML documents. </p>
+  pragma) HTML documents. </p>
+     <p class="note" role="note">The HTML specification <a href="https://html.spec.whatwg.org/multipage/syntax.html#the-initial-insertion-mode">defines</a> when a document is set to <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document-quirks">quirks mode</a>, <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document-limited-quirks">limited-quirks mode</a> or <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document-no-quirks">no-quirks mode</a>. <a data-link-type="biblio" href="#biblio-html">[HTML]</a> </p>
     <li>
      <p>Remove quirks from implementations that are not needed for Web compatibility. </p>
+     <p class="example" id="example-c3fa21d7"><a class="self-link" href="#example-c3fa21d7"></a>For example, <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=648331">Gecko
+  has removed a quirk about list item bullet size</a>, and <a href="https://bugs.chromium.org/p/chromium/issues/detail?id=369979">Chromium has removed a quirk
+  where display was forced to table or inline-table on <code>table</code> elements</a>. </p>
     <li>
      <p>Get interoperability on quirks that <em>are</em> needed for Web compatibility. </p>
+     <p class="example" id="example-5513c891"><a class="self-link" href="#example-5513c891"></a>For example, <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=783213">Gecko
+  aligned their implementation of the :active and :hover quirk</a> with this specification and
+  thereby achieved closer interoperability with other browsers. </p>
     <li>
      <p>Where possible, limit quirks to a fixed set of legacy features so they don’t propagate into
- new features. </p>
+  new features. </p>
+     <p class="example" id="example-62a37b95"><a class="self-link" href="#example-62a37b95"></a>For example, <a data-link-type="dfn" href="#quirky-color">quirky colors</a> and <a data-link-type="dfn" href="#quirky-length">quirky lengths</a> are limited to a
+  fixed set of CSS properties so that they do not apply in SVG features that also accept colors or
+  lengths, or in <a href="https://bugs.webkit.org/show_bug.cgi?id=153730">CSS gradients where the
+  grammar could otherwise become ambiguous</a>. </p>
    </ul>
    <p class="note" role="note">This specification does not enumerate all quirks that currently exist in browsers. A
 number of quirks are specified in HTML, DOM, CSSOM and CSSOM View. <a data-link-type="biblio" href="#biblio-html">[HTML]</a> <a data-link-type="biblio" href="#biblio-dom">[DOM]</a> <a data-link-type="biblio" href="#biblio-cssom">[CSSOM]</a> <a data-link-type="biblio" href="#biblio-cssom-view">[CSSOM-VIEW]</a> If a quirk is not specified anywhere, it is probably due to the second bullet point
@@ -268,13 +150,13 @@ local name <var>foo</var> and having the namespace <code>http://www.w3.org/1999/
 the local name <var>foo</var> and having no namespace. </p>
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="documents-body-element">document’s body element<a class="self-link" href="#documents-body-element"></a></dfn> is the first <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-tree-child">child</a> of the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#document-element">document element</a> that is a <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/semantics.html#the-body-element">body</a></code> element, if there is one, and the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#document-element">document element</a> is an <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/semantics.html#the-html-element">html</a></code> element. Otherwise it is null. </p>
    <h2 class="heading settled" data-level="3" id="css"><span class="secno">3. </span><span class="content">CSS</span><a class="self-link" href="#css"></a></h2>
-   <h3 class="heading settled" data-level="3.1" id="the-hashless-hex-color-quirk"><span class="secno">3.1. </span><span class="content">The hashless hex color quirk</span><a class="self-link" href="#the-hashless-hex-color-quirk"></a></h3>
+   <h3 class="heading settled" data-algorithm="The hashless hex color quirk" data-level="3.1" id="the-hashless-hex-color-quirk"><span class="secno">3.1. </span><span class="content">The hashless hex color quirk</span><a class="self-link" href="#the-hashless-hex-color-quirk"></a></h3>
    <p class="note" role="note"><a href="http://w3c-test.org/quirks-mode/hashless-hex-color.html">Tests are
 available</a>. </p>
    <p><dfn data-dfn-type="dfn" data-export="" data-lt="quirky color" id="quirky-color">Quirky colors<a class="self-link" href="#quirky-color"></a></dfn> are denoted by <dfn class="css" data-dfn-type="type" data-export="" id="quirky-color-value">&lt;quirky-color><a class="self-link" href="#quirky-color-value"></a></dfn>. A <a data-link-type="dfn" href="#quirky-color">quirky color</a> corresponds to a <a class="production css" data-link-type="type" href="https://drafts.csswg.org/css-syntax-3/#typedef-number-token">&lt;number-token></a>, a <a class="production css" data-link-type="type" href="https://drafts.csswg.org/css-syntax-3/#typedef-dimension-token">&lt;dimension-token></a> or an <a class="production css" data-link-type="type" href="https://drafts.csswg.org/css-syntax-3/#typedef-ident-token">&lt;ident-token></a> <a data-link-type="dfn" href="https://drafts.csswg.org/css-syntax-3/#component-value">component value</a> in the syntax.
 The value of a <a data-link-type="dfn" href="#quirky-color">quirky color</a> is obtained from the possible <a data-link-type="dfn" href="https://drafts.csswg.org/css-syntax-3/#component-value">component values</a> using the
 following algorithm, aborting on the first step that returns a value: </p>
-   <ol data-algorithm="">
+   <ol>
     <li>
      <p>Let <var>cv</var> be the <a data-link-type="dfn" href="https://drafts.csswg.org/css-syntax-3/#component-value">component value</a>. </p>
     <li>
@@ -332,10 +214,10 @@ available</a>. </p>
    <p><dfn data-dfn-type="dfn" data-export="" data-lt="quirky length" id="quirky-length">Quirky lengths<a class="self-link" href="#quirky-length"></a></dfn> are denoted by <dfn class="css" data-dfn-type="type" data-export="" id="quirky-length-value">&lt;quirky-length><a class="self-link" href="#quirky-length-value"></a></dfn>. A <a data-link-type="dfn" href="#quirky-length">quirky length</a> is a <a data-link-type="dfn" href="https://drafts.csswg.org/css-values-3/#number">number</a> and
 corresponds to a <a class="production css" data-link-type="type" href="https://drafts.csswg.org/css-syntax-3/#typedef-number-token">&lt;number-token></a> <a data-link-type="dfn" href="https://drafts.csswg.org/css-syntax-3/#component-value">component value</a> in the syntax. The value of a <a data-link-type="dfn" href="#quirky-length">quirky
 length</a> is obtained from the <a data-link-type="dfn" href="https://drafts.csswg.org/css-syntax-3/#component-value">component value</a>’s value. </p>
-   <p>The value of a <a data-link-type="dfn" href="#quirky-length">quirky length</a> must be interpreted as a <a class="production css" data-link-type="type" href="https://drafts.csswg.org/css-values-3/#length-value" title="Expands to: em | advance measure | ch | vmin | cm | pc | pixel unit | in | rem | q | vh | ex | pt | vw | vmax | mm">&lt;length></a> where the unit is <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-values-3/#valdef-length-px">px</a>. </p>
+   <p>The value of a <a data-link-type="dfn" href="#quirky-length">quirky length</a> must be interpreted as a <a class="production css" data-link-type="type" href="https://drafts.csswg.org/css-values-3/#length-value" title="Expands to: em | advance measure | vb | ch | vmin | cm | pc | pixel unit | vi | in | rem | q | vh | ex | pt | vw | vmax | mm">&lt;length></a> where the unit is <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-values-3/#px">px</a>. </p>
    <p>In <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document-quirks">quirks mode</a>, the following properties must have
-their "Value" grammar changed by replacing <a class="production css" data-link-type="type" href="https://drafts.csswg.org/css-values-3/#length-value" title="Expands to: em | advance measure | ch | vmin | cm | pc | pixel unit | in | rem | q | vh | ex | pt | vw | vmax | mm">&lt;length></a> with: </p>
-<pre class="prod">[ <a class="production" data-link-type="type" href="https://drafts.csswg.org/css-values-3/#length-value" title="Expands to: em | advance measure | ch | vmin | cm | pc | pixel unit | in | rem | q | vh | ex | pt | vw | vmax | mm">&lt;length></a> <a data-link-type="grammar" href="https://drafts.csswg.org/css-values-3/#comb-one">|</a> <a class="production" data-link-type="type" href="#quirky-length-value">&lt;quirky-length></a> ]
+their "Value" grammar changed by replacing <a class="production css" data-link-type="type" href="https://drafts.csswg.org/css-values-3/#length-value" title="Expands to: em | advance measure | vb | ch | vmin | cm | pc | pixel unit | vi | in | rem | q | vh | ex | pt | vw | vmax | mm">&lt;length></a> with: </p>
+<pre class="prod">[ <a class="production" data-link-type="type" href="https://drafts.csswg.org/css-values-3/#length-value" title="Expands to: em | advance measure | vb | ch | vmin | cm | pc | pixel unit | vi | in | rem | q | vh | ex | pt | vw | vmax | mm">&lt;length></a> <a data-link-type="grammar" href="https://drafts.csswg.org/css-values-3/#comb-one">|</a> <a class="production" data-link-type="type" href="#quirky-length-value">&lt;quirky-length></a> ]
 </pre>
    <ul class="brief">
     <li><a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-backgrounds-3/#background-position">background-position</a> 
@@ -459,8 +341,8 @@ it matches the following conditions: </p>
     <li>
      <p><var>body</var> is not a <a data-link-type="dfn" href="https://drafts.csswg.org/css-multicol-1/#spanning-element">spanning element</a>. <a data-link-type="biblio" href="#biblio-css3-multicol">[CSS3-MULTICOL]</a> </p>
    </ul>
-   <p>...then <var>body</var> have its <a data-link-type="dfn" href="https://drafts.csswg.org/css2/box.html#border-edge">border box</a> size in the <a data-link-type="dfn" href="https://drafts.csswg.org/css-writing-modes-3/#block-flow-direction">block flow direction</a> set using the
-following algorithm: </p>
+   <p>...then <var>body</var> must have its <a data-link-type="dfn" href="https://drafts.csswg.org/css2/box.html#border-edge">border box</a> size in the <a data-link-type="dfn" href="https://drafts.csswg.org/css-writing-modes-3/#block-flow-direction">block flow direction</a> set using
+the following algorithm: </p>
    <ol>
     <li>
      <p>Let <var>margins</var> be the sum of the <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#used-value">used values</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/box.html#propdef-margin-left">margin-left</a> and <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/box.html#propdef-margin-right">margin-right</a> properties of <var>body</var> if <var>body</var> has a <a data-link-type="dfn" href="https://drafts.csswg.org/css-writing-modes-3/#vertical-writing-mode">vertical writing mode</a>, otherwise <var>margins</var> it be the
@@ -491,7 +373,7 @@ algorithm that is the bigger value of <var>cell</var>’s <a data-link-type="dfn
     <li>
      <p><var>cell</var> has a <code>nowrap</code> attribute. </p>
     <li>
-     <p>The <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#computed-value">computed value</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-width">width</a> property of <var>cell</var> is a <a class="production css" data-link-type="type" href="https://drafts.csswg.org/css-values-3/#length-value" title="Expands to: em | advance measure | ch | vmin | cm | pc | pixel unit | in | rem | q | vh | ex | pt | vw | vmax | mm">&lt;length></a> that is not
+     <p>The <a data-link-type="dfn" href="https://drafts.csswg.org/css-cascade-4/#computed-value">computed value</a> of the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-width">width</a> property of <var>cell</var> is a <a class="production css" data-link-type="type" href="https://drafts.csswg.org/css-values-3/#length-value" title="Expands to: em | advance measure | vb | ch | vmin | cm | pc | pixel unit | vi | in | rem | q | vh | ex | pt | vw | vmax | mm">&lt;length></a> that is not
  zero. </p>
    </ul>
    <h3 class="heading settled" data-level="3.10" id="the-collapsing-table-quirk"><span class="secno">3.10. </span><span class="content">The collapsing table quirk</span><a class="self-link" href="#the-collapsing-table-quirk"></a></h3>
@@ -556,6 +438,8 @@ conditions must not match elements that would not also match the <a class="css" 
     <li>
      <p><var>selector</var> is not part of an argument to a <a data-link-type="dfn" href="https://drafts.csswg.org/selectors-4/#functional-pseudo-class">functional pseudo-class</a> or <a data-link-type="dfn" href="https://drafts.csswg.org/selectors-4/#pseudo-element">pseudo-element</a>. </p>
    </ul>
+   <h2 class="no-num heading settled" id="security-privacy"><span class="content">Security and Privacy Considerations</span><a class="self-link" href="#security-privacy"></a></h2>
+   <p>There are no known security or privacy impacts in this specification.</p>
    <h2 class="no-num heading settled" id="acknowledgments"><span class="content">Acknowledgments</span><a class="self-link" href="#acknowledgments"></a></h2>
    <p>Thanks to
 Anne van Kesteren,
@@ -710,7 +594,7 @@ under law, the editors have waived all copyright and related or neighboring righ
      <li><a href="https://drafts.csswg.org/css-values-3/#length-value">&lt;length></a>
      <li><a href="https://drafts.csswg.org/css-values-3/#percentage-value">&lt;percentage></a>
      <li><a href="https://drafts.csswg.org/css-values-3/#number">number</a>
-     <li><a href="https://drafts.csswg.org/css-values-3/#valdef-length-px">px</a>
+     <li><a href="https://drafts.csswg.org/css-values-3/#px">px</a>
      <li><a href="https://drafts.csswg.org/css-values-3/#comb-one">|</a>
     </ul>
    <li>
@@ -755,6 +639,7 @@ under law, the editors have waived all copyright and related or neighboring righ
      <li><a href="https://dom.spec.whatwg.org/#concept-tree-child">child</a>
      <li><a href="https://dom.spec.whatwg.org/#document-element">document element</a>
      <li><a href="https://dom.spec.whatwg.org/#concept-document-limited-quirks">limited-quirks mode</a>
+     <li><a href="https://dom.spec.whatwg.org/#concept-document-no-quirks">no-quirks mode</a>
      <li><a href="https://dom.spec.whatwg.org/#concept-document-quirks">quirks mode</a>
     </ul>
    <li>
@@ -807,7 +692,7 @@ under law, the editors have waived all copyright and related or neighboring righ
    <dt id="biblio-css-page-floats-3">[CSS-PAGE-FLOATS-3]
    <dd>Johannes Wilm. <a href="http://dev.w3.org/csswg/css-page-floats/">CSS Page Floats</a>. 15 September 2015. WD. URL: <a href="http://dev.w3.org/csswg/css-page-floats/">http://dev.w3.org/csswg/css-page-floats/</a>
    <dt id="biblio-css-position-3">[CSS-POSITION-3]
-   <dd>CSS Positioned Layout Module Level 3 URL: <a href="https://drafts.csswg.org/css-position-3/">https://drafts.csswg.org/css-position-3/</a>
+   <dd>Rossen Atanassov; Arron Eicholz. <a href="https://drafts.csswg.org/css-position/">CSS Positioned Layout Module Level 3</a>. 17 May 2016. WD. URL: <a href="https://drafts.csswg.org/css-position/">https://drafts.csswg.org/css-position/</a>
    <dt id="biblio-css-syntax-3">[CSS-SYNTAX-3]
    <dd>Tab Atkins Jr.; Simon Sapin. <a href="http://dev.w3.org/csswg/css-syntax/">CSS Syntax Module Level 3</a>. 20 February 2014. CR. URL: <a href="http://dev.w3.org/csswg/css-syntax/">http://dev.w3.org/csswg/css-syntax/</a>
    <dt id="biblio-css-tables-3">[CSS-TABLES-3]
@@ -821,9 +706,9 @@ under law, the editors have waived all copyright and related or neighboring righ
    <dt id="biblio-css-writing-modes-3">[CSS-WRITING-MODES-3]
    <dd>Elika Etemad; Koji Ishii. <a href="http://dev.w3.org/csswg/css-writing-modes-3/">CSS Writing Modes Level 3</a>. 15 December 2015. CR. URL: <a href="http://dev.w3.org/csswg/css-writing-modes-3/">http://dev.w3.org/csswg/css-writing-modes-3/</a>
    <dt id="biblio-css2">[CSS2]
-   <dd>Bert Bos; et al. <a href="http://www.w3.org/TR/CSS2">Cascading Style Sheets Level 2 Revision 1 (CSS 2.1) Specification</a>. 7 June 2011. REC. URL: <a href="http://www.w3.org/TR/CSS2">http://www.w3.org/TR/CSS2</a>
+   <dd>Bert Bos; et al. <a href="https://www.w3.org/TR/CSS2">Cascading Style Sheets Level 2 Revision 1 (CSS 2.1) Specification</a>. 7 June 2011. REC. URL: <a href="https://www.w3.org/TR/CSS2">https://www.w3.org/TR/CSS2</a>
    <dt id="biblio-css3-multicol">[CSS3-MULTICOL]
-   <dd>Håkon Wium Lie. <a href="http://www.w3.org/TR/css3-multicol">CSS Multi-column Layout Module</a>. 12 April 2011. CR. URL: <a href="http://www.w3.org/TR/css3-multicol">http://www.w3.org/TR/css3-multicol</a>
+   <dd>Håkon Wium Lie. <a href="https://www.w3.org/TR/css3-multicol">CSS Multi-column Layout Module</a>. 12 April 2011. CR. URL: <a href="https://www.w3.org/TR/css3-multicol">https://www.w3.org/TR/css3-multicol</a>
    <dt id="biblio-cssom">[CSSOM]
    <dd>Simon Pieters; Glenn Adams. <a href="https://drafts.csswg.org/cssom/">CSS Object Model (CSSOM)</a>. 17 March 2016. WD. URL: <a href="https://drafts.csswg.org/cssom/">https://drafts.csswg.org/cssom/</a>
    <dt id="biblio-dom">[DOM]
@@ -837,7 +722,7 @@ under law, the editors have waived all copyright and related or neighboring righ
    <dt id="biblio-selectors-4">[SELECTORS-4]
    <dd>Selectors Level 4 URL: <a href="https://drafts.csswg.org/selectors-4/">https://drafts.csswg.org/selectors-4/</a>
    <dt id="biblio-selectors4">[SELECTORS4]
-   <dd>Elika Etemad; Tab Atkins Jr.. <a href="http://www.w3.org/TR/selectors4/">Selectors Level 4</a>. 2 May 2013. WD. URL: <a href="http://www.w3.org/TR/selectors4/">http://www.w3.org/TR/selectors4/</a>
+   <dd>Elika Etemad; Tab Atkins Jr.. <a href="https://www.w3.org/TR/selectors4/">Selectors Level 4</a>. 2 May 2013. WD. URL: <a href="https://www.w3.org/TR/selectors4/">https://www.w3.org/TR/selectors4/</a>
   </dl>
   <h3 class="no-num no-ref heading settled" id="informative"><span class="content">Informative References</span><a class="self-link" href="#informative"></a></h3>
   <dl>

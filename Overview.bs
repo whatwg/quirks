@@ -52,6 +52,9 @@ spec:cssom-1; type:interface; text:CSS
 <style>
  .logo { position:absolute; top:1em; right:1em; width:106px; height:106px; border:1px outset gray; margin-top:-4px; margin-right:-4px }
  div.head .logo > img { top:2px; right:2px; border:1px inset gray }
+ @media (max-width: 767px) {
+  .logo { width:calc(4em + 6px); height:calc(4em + 6px) }
+ }
 </style>
 
 
@@ -73,15 +76,41 @@ different modes have since gained a few differences outside of CSS.
 
 <ul>
 
- <li><p>Create a specification for rendering old (or indeed new, if they happen to have a particular
- pragma) HTML documents.
+ <li>
+  <p>Create a specification for rendering old (or indeed new, if they happen to have a particular
+  pragma) HTML documents.
 
- <li><p>Remove quirks from implementations that are not needed for Web compatibility.
+  <p class=note>The HTML specification <a
+  href="https://html.spec.whatwg.org/multipage/syntax.html#the-initial-insertion-mode">defines</a>
+  when a document is set to <a>quirks mode</a>, <a>limited-quirks mode</a> or <a>no-quirks mode</a>.
+  [[HTML]]
 
- <li><p>Get interoperability on quirks that <em>are</em> needed for Web compatibility.
+ <li>
 
- <li><p>Where possible, limit quirks to a fixed set of legacy features so they don't propagate into
- new features.
+  <p>Remove quirks from implementations that are not needed for Web compatibility.
+
+  <p class=example>For example, <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=648331">Gecko
+  has removed a quirk about list item bullet size</a>, and <a
+  href="https://bugs.chromium.org/p/chromium/issues/detail?id=369979">Chromium has removed a quirk
+  where display was forced to table or inline-table on <code>table</code> elements</a>.
+
+ <li>
+
+  <p>Get interoperability on quirks that <em>are</em> needed for Web compatibility.
+
+  <p class=example>For example, <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=783213">Gecko
+  aligned their implementation of the :active and :hover quirk</a> with this specification and
+  thereby achieved closer interoperability with other browsers.
+
+ <li>
+
+  <p>Where possible, limit quirks to a fixed set of legacy features so they don't propagate into
+  new features.
+
+  <p class=example>For example, <a>quirky colors</a> and <a>quirky lengths</a> are limited to a
+  fixed set of CSS properties so that they do not apply in SVG features that also accept colors or
+  lengths, or in <a href="https://bugs.webkit.org/show_bug.cgi?id=153730">CSS gradients where the
+  grammar could otherwise become ambiguous</a>.
 
 </ul>
 
@@ -119,7 +148,7 @@ spec=dom>document element</a> is an <{html}> element. Otherwise it is null.
 
 <h2 id=css>CSS</h2>
 
-<h3 id=the-hashless-hex-color-quirk>The hashless hex color quirk</h3>
+<h3 algorithm id=the-hashless-hex-color-quirk>The hashless hex color quirk</h3>
 
 <p class="note"><a href="http://w3c-test.org/quirks-mode/hashless-hex-color.html">Tests are
 available</a>.
@@ -130,7 +159,7 @@ id=quirky-color-value>&lt;quirky-color></dfn>. A <a>quirky color</a> corresponds
 The value of a <a>quirky color</a> is obtained from the possible <a>component values</a> using the
 following algorithm, aborting on the first step that returns a value:
 
-<ol algorithm>
+<ol>
 
  <li><p>Let |cv| be the <a>component value</a>.
 
@@ -408,8 +437,8 @@ it matches the following conditions:
 
 </ul>
 
-<p>...then |body| have its <a>border box</a> size in the <a>block flow direction</a> set using the
-following algorithm:
+<p>...then |body| must have its <a>border box</a> size in the <a>block flow direction</a> set using
+the following algorithm:
 
 <ol>
 
@@ -575,6 +604,11 @@ conditions must not match elements that would not also match the '':any-link'' s
  <a>pseudo-element</a>.
 
 </ul>
+
+
+<h2 class=no-num id=security-privacy>Security and Privacy Considerations</h2>
+
+<p>There are no known security or privacy impacts in this specification.</p>
 
 
 <h2 class=no-num id=acknowledgments>Acknowledgments</h2>
