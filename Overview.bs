@@ -432,7 +432,7 @@ it matches the following conditions:
  <li><p>The <a>computed value</a> of the 'position' property of |body| is not ''position/absolute''
  or ''position/fixed''.
 
- <li><p>The <a>computed value</a> of the 'float' property of |body| is not ''float/none''.
+ <li><p>The <a>computed value</a> of the 'float' property of |body| is ''float/none''.
 
  <li><p>|body| is not an <a>inline-level</a> element.
 
