@@ -311,8 +311,10 @@ box had a 'line-height' of zero.
 
 <ul>
 
- <li><p>The 'border-right-width', 'border-left-width', 'padding-right' and 'padding-left' properties
- have a <a>used value</a> of zero.
+ <li><p>The 'border-top-width', 'border-bottom-width', 'padding-top' and 'padding-bottom' properties
+ have a <a>used value</a> of zero and the box has a <a>vertical writing mode</a>, or the
+ 'border-right-width', 'border-left-width', 'padding-right' and 'padding-left' properties have a
+ <a>used value</a> of zero and the box has a <a>horizontal writing mode</a>.
 
  <!-- This matches WebKit. Presto and IE9 don't have this [Presto has now implemented this
 (CORE-19183)]. Gecko has this rule for all margins, paddings and borders. -->
