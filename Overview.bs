@@ -47,6 +47,8 @@ spec:css21; type:property; text:max-height
 spec:css-tables-3; type:property; text:border-spacing
 spec:css-color-4; type:property; text:color
 spec:cssom-1; type:interface; text:CSS
+spec:selectors-4; type:selector; text::active
+spec:selectors-4; type:selector; text::hover
 </pre>
 
 <style>
@@ -57,8 +59,8 @@ spec:cssom-1; type:interface; text:CSS
  }
 </style>
 
-<script src="https://resources.whatwg.org/dfn.js" async></script>
-<script src="https://resources.whatwg.org/file-issue.js" defer></script>
+<script src="https://resources.whatwg.org/file-issue.js" async></script>
+<script src="https://resources.whatwg.org/dfn.js" defer></script>
 
 
 <h2 id=introduction>Introduction</h2>
@@ -92,8 +94,9 @@ different modes have since gained a few differences outside of CSS.
 
   <p>Remove quirks from implementations that are not needed for Web compatibility.
 
-  <p class=example>For example, <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=648331">Gecko
-  has removed a quirk about list item bullet size</a>, and <a
+  <p class=example id=example-removed-quirks>For example, <a
+  href="https://bugzilla.mozilla.org/show_bug.cgi?id=648331">Gecko has removed a quirk about list
+  item bullet size</a>, and <a
   href="https://bugs.chromium.org/p/chromium/issues/detail?id=369979">Chromium has removed a quirk
   where display was forced to table or inline-table on <code>table</code> elements</a>.
 
@@ -101,17 +104,18 @@ different modes have since gained a few differences outside of CSS.
 
   <p>Get interoperability on quirks that <em>are</em> needed for Web compatibility.
 
-  <p class=example>For example, <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=783213">Gecko
-  aligned their implementation of the :active and :hover quirk</a> with this specification and
-  thereby achieved closer interoperability with other browsers.
+  <p class=example id=example-interop-quirks>For example, <a
+  href="https://bugzilla.mozilla.org/show_bug.cgi?id=783213">Gecko aligned their implementation of
+  the :active and :hover quirk</a> with this specification and thereby achieved closer
+  interoperability with other browsers.
 
  <li>
 
   <p>Where possible, limit quirks to a fixed set of legacy features so they don't propagate into
   new features.
 
-  <p class=example>For example, <a>quirky colors</a> are limited to a fixed set of CSS properties so
-  that they do not apply in SVG features that also accept colors, or in <a
+  <p class=example id=example-limit-quirks>For example, <a>quirky colors</a> are limited to a fixed
+  set of CSS properties so that they do not apply in SVG features that also accept colors, or in <a
   href="https://bugs.webkit.org/show_bug.cgi?id=153730">CSS gradients where the grammar could
   otherwise become ambiguous</a>.
 
@@ -156,7 +160,7 @@ spec=dom>document element</a> is an <{html}> element. Otherwise it is null.
 <p class="note"><a href="http://w3c-test.org/quirks-mode/hashless-hex-color.html">Tests are
 available</a>.
 
-<p><dfn export lt="quirky color">Quirky colors</dfn> are denoted by <dfn
+<p><dfn export lt="quirky color">Quirky colors</dfn> are denoted by <dfn export type
 id=quirky-color-value>&lt;quirky-color></dfn>. A <a>quirky color</a> corresponds to a
 <<number-token>>, a <<dimension-token>> or an <<ident-token>> <a>component value</a> in the syntax.
 The value of a <a>quirky color</a> is obtained from the possible <a>component values</a> using the
@@ -240,7 +244,7 @@ method of the {{CSS}} interface.
 <p class="note"><a href="http://w3c-test.org/quirks-mode/unitless-length.html">Tests are
 available</a>.
 
-<p><dfn export lt="quirky length">Quirky lengths</dfn> are denoted by <dfn
+<p><dfn export lt="quirky length">Quirky lengths</dfn> are denoted by <dfn export type
 id=quirky-length-value>&lt;quirky-length></dfn>. A <a>quirky length</a> is a <a>number</a> and
 corresponds to a <<number-token>> <a>component value</a> in the syntax. The value of a <a>quirky
 length</a> is obtained from the <a>component value</a>'s value.
