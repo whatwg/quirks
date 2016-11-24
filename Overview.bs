@@ -152,6 +152,9 @@ the local name |foo| and having no namespace.
 spec=dom>document element</a> that is a <{body}> element, if there is one, and the <a
 spec=dom>document element</a> is an <{html}> element. Otherwise it is null.
 
+<p class=note>The <a>document's body element</a> is different from HTML's <a spec=html>the body
+element</a>, since the latter can be a <{frameset}> element.
+
 
 <h2 id=css>CSS</h2>
 
