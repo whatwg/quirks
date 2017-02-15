@@ -19,12 +19,9 @@ If you want to preview the spec locally, you can either use a locally installed 
 running `make remote`.
 
 If you want to do a complete "local deploy" including commit and/or branch snapshots, run
-
-```
-./deploy.sh --local
-```
+`make deploy`.
 
 ### Tests
 
 Tests can be found in the `quirks-mode/` directory of
-[`w3c/web-platform-tests`](https://github.com/w3c/web-platform-tests).
+[`web-platform-tests`](https://github.com/w3c/web-platform-tests).
