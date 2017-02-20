@@ -7,7 +7,7 @@ respect the [WHATWG Code of Conduct](https://wiki.whatwg.org/wiki/Code_of_Conduc
 
 ### Pull requests
 
-In short, change `Overview.bs` and submit your patch, with a
+In short, change `quirks.bs` and submit your patch, with a
 [good commit message](https://github.com/erlang/otp/wiki/Writing-good-commit-messages). Consider
 reading through the [WHATWG FAQ](https://wiki.whatwg.org/wiki/FAQ) if you are new here.
 
