@@ -19,7 +19,7 @@ Boilerplate: omit conformance, omit feedback-header
 {
     "INTRINSIC": {
         "authors": [ "David Baron" ],
-        "href": "http://dbaron.org/css/intrinsic/",
+        "href": "https://dbaron.org/css/intrinsic/",
         "title": "More Precise Definitions of Intrinsic Widths and Table Layout (Proposal)"
     }
 }
@@ -35,7 +35,7 @@ urlPrefix: https://drafts.csswg.org/css2/
     urlPrefix: box.html
         type: dfn; text: border box; url: #border-edge
         type: dfn; text: content box; url: #content-edge
-urlPrefix: http://dbaron.org/css/intrinsic/
+urlPrefix: https://dbaron.org/css/intrinsic/
     type: dfn;
         text: min-content width of an inline formatting context; url: #inline-intrinsic-min
         text: outer min-content width of a table cell; url: #autotable
