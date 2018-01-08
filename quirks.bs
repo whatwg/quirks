@@ -150,9 +150,6 @@ element</a>, since the latter can be a <{frameset}> element.
 
 <h3 algorithm id=the-hashless-hex-color-quirk>The hashless hex color quirk</h3>
 
-<p class="note"><a href="http://w3c-test.org/quirks-mode/hashless-hex-color.html">Tests are
-available</a>.
-
 <p><dfn export lt="quirky color">Quirky colors</dfn> are denoted by <dfn export type
 id=quirky-color-value>&lt;quirky-color></dfn>. A <a>quirky color</a> corresponds to a
 <<number-token>>, a <<dimension-token>> or an <<ident-token>> <a>component value</a> in the syntax.
@@ -234,9 +231,6 @@ method of the {{CSS}} interface.
 
 <h3 id=the-unitless-length-quirk>The unitless length quirk</h3>
 
-<p class="note"><a href="http://w3c-test.org/quirks-mode/unitless-length.html">Tests are
-available</a>.
-
 <p><dfn export lt="quirky length">Quirky lengths</dfn> are denoted by <dfn export type
 id=quirky-length-value>&lt;quirky-length></dfn>. A <a>quirky length</a> is a <a>number</a> and
 corresponds to a <<number-token>> <a>component value</a> in the syntax. The value of a <a>quirky
@@ -299,9 +293,6 @@ lt="supports(property, value)">supports()</a></code> static method of the {{CSS}
 
 <h3 algorithm id=the-line-height-calculation-quirk>The line height calculation quirk</h3>
 
-<p class="note"><a href="http://w3c-test.org/quirks-mode/line-height-calculation.html">Tests are
-available</a>.
-
 <p>In <a spec=dom>quirks mode</a> and <a spec=dom>limited-quirks mode</a>, an inline box that
 matches the following conditions, must, for the purpose of line height calculation, act as if the
 box had a 'line-height' of zero.
@@ -331,9 +322,6 @@ box had a 'line-height' of zero.
 
 <h3 id=the-blocks-ignore-line-height-quirk>The blocks ignore line-height quirk</h3>
 
-<p class="note"><a href="http://w3c-test.org/quirks-mode/blocks-ignore-line-height.html">Tests are
-available</a>.
-
 <p>In <a spec=dom>quirks mode</a> and <a spec=dom>limited-quirks mode</a>, for a <a>block container
 element</a> whose content is composed of <a>inline-level</a> elements, the element's 'line-height'
 must be ignored for the purpose of calculating the minimal height of line boxes within the element.
@@ -343,10 +331,7 @@ must be ignored for the purpose of calculating the minimal height of line boxes 
 
 <h3 algorithm id=the-percentage-height-calculation-quirk>The percentage height calculation
 quirk</h3>
-<!-- TODO update tests
-<p class="note"><a href="http://w3c-test.org/quirks-mode/percentage-height-calculation.html">Tests
-are available</a>.
--->
+
 <p>In <a spec=dom>quirks mode</a>, for the purpose of calculating the 'height' of an element
 |element|, if the <a>computed value</a> of the 'position' property of |element| is
 ''position/relative'' or ''position/static'', the specified value for the 'height' property of
@@ -461,9 +446,6 @@ the following algorithm:
 
 <h3 id=the-table-cell-width-calculation-quirk>The table cell width calculation quirk</h3>
 
-<p class="note"><a href="http://w3c-test.org/quirks-mode/table-cell-width-calculation.html">Tests
-are available</a>.
-
 <p>In <a spec=dom>quirks mode</a>, for the purpose of calculating the <a>min-content width of an
 inline formatting context</a> for which a table cell |cell| is the <a>containing block</a>, if
 |cell| has a <a>computed value</a> of the 'width' property that is ''width/auto'', <{img}> elements
@@ -577,9 +559,6 @@ property of ''box-sizing/border-box'', but only for the purpose of the 'height',
 <h2 id=selectors>Selectors</h2>
 
 <h3 algorithm id=the-active-and-hover-quirk>The :active and :hover quirk</h3>
-
-<p class="note"><a href="http://w3c-test.org/quirks-mode/active-and-hover-manual.html">Tests are
-available</a>.
 
 <p>In <a spec=dom>quirks mode</a>, a <a>compound selector</a> |selector| that matches the following
 conditions must not match elements that would not also match the '':any-link'' selector.
