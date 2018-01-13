@@ -612,6 +612,3 @@ quirks in MDN</a>.
 
 <p>This standard is written by Simon Pieters (<a href="https://bocoup.com/">Bocoup</a>, <a
 href="mailto:zcorpan@gmail.com">zcorpan@gmail.com</a>).
-
-<p>Per <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>, to the extent possible
-under law, the editors have waived all copyright and related or neighboring rights to this work.
