@@ -5,7 +5,9 @@ local: quirks.bs
 	bikeshed spec quirks.bs quirks.html --md-Text-Macro="SNAPSHOT-LINK LOCAL COPY"
 
 deploy: quirks.bs
-	curl --remote-name --fail https://resources.whatwg.org/build/deploy.sh && bash ./deploy.sh
+	curl --remote-name --fail https://resources.whatwg.org/build/deploy.sh
+	bash ./deploy.sh
 
 review: quirks.bs
-	curl --remote-name --fail https://resources.whatwg.org/build/review.sh && bash ./review.sh
+	curl --remote-name --fail https://resources.whatwg.org/build/review.sh
+	bash ./review.sh
