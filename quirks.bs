@@ -91,7 +91,7 @@ different modes have since gained a few differences outside of CSS.
   href="https://bugzilla.mozilla.org/show_bug.cgi?id=648331">Gecko has removed a quirk about list
   item bullet size</a>, and <a
   href="https://bugs.chromium.org/p/chromium/issues/detail?id=369979">Chromium has removed a quirk
-  where display was forced to table or inline-table on <code>table</code> elements</a>.
+  where display was forced to table or inline-table on <code>table</code> elements</a>.</p>
 
   <wpt>
    historical/list-item-bullet-size.html
@@ -233,7 +233,7 @@ above properties in its "Value" grammar.
 
 <p>The <<quirky-color>> value must not be supported in arguments to CSS expressions, and must not be
 supported in the <code><a method for=CSS lt="supports(property, value)">supports()</a></code> static
-method of the {{CSS}} interface.
+method of the {{CSS}} interface.</p>
 
 <wpt>
  hashless-hex-color.html
@@ -300,7 +300,7 @@ above properties in its "Value" grammar.
 
 <p>The <<quirky-length>> value must not be supported in arguments to CSS expressions other than the
 <a>rect()</a> expression, and must not be supported in the <code><a method for=CSS
-lt="supports(property, value)">supports()</a></code> static method of the {{CSS}} interface.
+lt="supports(property, value)">supports()</a></code> static method of the {{CSS}} interface.</p>
 
 <wpt>
  unitless-length.html
@@ -347,7 +347,7 @@ box had a 'line-height' of zero.
 element</a> whose content is composed of <a>inline-level</a> elements, the element's 'line-height'
 must be ignored for the purpose of calculating the minimal height of line boxes within the element.
 
-<p class=note>This means that the "strut" is not created.
+<p class=note>This means that the "strut" is not created.</p>
 
 <wpt>
  blocks-ignore-line-height.html
@@ -388,7 +388,7 @@ the first step that returns a value:
 CSS. This specification does not try to specify what to use as the containing block for calculating
 percentage heights in tables. Godspeed!
 
-<p class=issue>This quirk needs to take writing modes into account and maybe bail for grids.
+<p class=issue>This quirk needs to take writing modes into account and maybe bail for grids.</p>
 
 <wpt>
  percentage-height-calculation.html
@@ -479,7 +479,7 @@ the following algorithm:
 inline formatting context</a> for which a table cell |cell| is the <a>containing block</a>, if
 |cell| has a <a>computed value</a> of the 'width' property that is ''width/auto'', <{img}> elements
 that are <a>inline-level</a> <a>replaced elements</a> in that <a>inline formatting context</a> must
-not have a <a>soft wrap opportunity</a> before or after them. [[!CSS-TEXT-3]] [[!INTRINSIC]]
+not have a <a>soft wrap opportunity</a> before or after them. [[!CSS-TEXT-3]] [[!INTRINSIC]]</p>
 
 <!-- http://mxr.mozilla.org/mozilla-central/source/layout/generic/nsImageFrame.cpp#2053 -->
 
@@ -596,7 +596,8 @@ property of ''box-sizing/border-box'', but only for the purpose of the 'height',
 <h2 id=selectors>Selectors</h2>
 
 <p class=big-issue>The following test appears to be invalid. See <a
-href="https://bugs.chromium.org/p/chromium/issues/detail?id=733682#c20">chromium issue 733682</a>.
+href="https://bugs.chromium.org/p/chromium/issues/detail?id=733682#c20">chromium issue
+733682</a>.</p>
 
 <wpt>
  classname-query-after-sibling-adoption.html
