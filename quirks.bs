@@ -35,17 +35,20 @@ urlPrefix: https://dbaron.org/css/intrinsic/
 </pre>
 
 <pre class=link-defaults>
-spec:css2; type:property; text:min-width
-spec:css2; type:property; text:min-height
-spec:css2; type:property; text:max-width
-spec:css2; type:property; text:max-height
-spec:css-sizing-3; type:property; text:box-sizing
-spec:css-sizing-3; type:value; text:border-box
+spec:css2; type:property;
+    text:min-width
+    text:min-height
+    text:max-width
+    text:max-height
+spec:css-sizing-3
+    type:property; text:box-sizing
+    type:value; for:box-sizing; text:border-box
 spec:css-tables-3; type:property; text:border-spacing
 spec:css-color-4; type:property; text:color
 spec:cssom-1; type:interface; text:CSS
-spec:selectors-4; type:selector; text::active
-spec:selectors-4; type:selector; text::hover
+spec:selectors-4; type:selector
+    text::active
+    text::hover
 </pre>
 
 <style>
