@@ -19,7 +19,7 @@ WPT Path Prefix: /quirks/
 </pre>
 
 <pre class=anchors>
-urlPrefix: https://drafts.csswg.org/css2/
+urlPrefix: https://drafts.csswg.org/css2/; spec:css2
     urlPrefix: visuren.html
         type: dfn; text: block container element
     urlPrefix: conform.html
@@ -35,10 +35,12 @@ urlPrefix: https://dbaron.org/css/intrinsic/
 </pre>
 
 <pre class=link-defaults>
-spec:css21; type:property; text:min-width
-spec:css21; type:property; text:min-height
-spec:css21; type:property; text:max-width
-spec:css21; type:property; text:max-height
+spec:css2; type:property; text:min-width
+spec:css2; type:property; text:min-height
+spec:css2; type:property; text:max-width
+spec:css2; type:property; text:max-height
+spec:css-sizing-3; type:property; text:box-sizing
+spec:css-sizing-3; type:value; text:border-box
 spec:css-tables-3; type:property; text:border-spacing
 spec:css-color-4; type:property; text:color
 spec:cssom-1; type:interface; text:CSS
@@ -236,7 +238,9 @@ supported in the <code><a method for=CSS lt="supports(property, value)">supports
 method of the {{CSS}} interface.</p>
 
 <wpt>
- hashless-hex-color.html
+ hashless-hex-color/limited-quirks.html
+ hashless-hex-color/no-quirks.html
+ hashless-hex-color/quirks.html
  supports.html
 </wpt>
 
@@ -303,7 +307,10 @@ above properties in its "Value" grammar.
 lt="supports(property, value)">supports()</a></code> static method of the {{CSS}} interface.</p>
 
 <wpt>
- unitless-length.html
+ unitless-length/limited-quirks.html
+ unitless-length/no-quirks.html
+ unitless-length/quirks.html
+ unitless-length/excluded-properties.html
  supports.html
 </wpt>
 
