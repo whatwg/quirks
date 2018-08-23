@@ -549,6 +549,10 @@ into <{table}> elements.
 
 <!-- http://mxr.mozilla.org/mozilla-central/source/layout/generic/nsTextFrameThebes.cpp#4582 -->
 
+<wpt>
+  text-decoration-doesnt-propagate-into-tables/quirks.html
+  text-decoration-doesnt-propagate-into-tables/standards.html
+</wpt>
 
 <h3 algorithm id=the-tables-inherit-color-from-body-quirk>The tables inherit color from body
 quirk</h3>
