@@ -545,10 +545,14 @@ have a <a>used value</a> of the 'height' property of ''0'' and a <a>used value</
 into tables quirk</h3>
 
 <p>In <a spec=dom>quirks mode</a>, text decoration must not propagate
-into <{table}> elements.
+into <{table}> elements.</p>
 
 <!-- http://mxr.mozilla.org/mozilla-central/source/layout/generic/nsTextFrameThebes.cpp#4582 -->
 
+<wpt>
+  text-decoration-doesnt-propagate-into-tables/quirks.html
+  text-decoration-doesnt-propagate-into-tables/standards.html
+</wpt>
 
 <h3 algorithm id=the-tables-inherit-color-from-body-quirk>The tables inherit color from body
 quirk</h3>
