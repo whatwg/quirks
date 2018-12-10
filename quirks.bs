@@ -240,6 +240,8 @@ above properties in its "Value" grammar.
 supported in the <code><a method for=CSS lt="supports(property, value)">supports()</a></code> static
 method of the {{CSS}} interface.</p>
 
+<p><a>Quirky colors</a> must not be supported on a <a interface>CSSStyleSheet</a> where the <a>constructed flag</a> is set.</p>
+
 <wpt>
  hashless-hex-color/limited-quirks.html
  hashless-hex-color/no-quirks.html
@@ -308,6 +310,8 @@ above properties in its "Value" grammar.
 <p>The <<quirky-length>> value must not be supported in arguments to CSS expressions other than the
 <a>rect()</a> expression, and must not be supported in the <code><a method for=CSS
 lt="supports(property, value)">supports()</a></code> static method of the {{CSS}} interface.</p>
+
+<p><a>Quirky lengths</a> must not be supported on a <a interface>CSSStyleSheet</a> where the <a>constructed flag</a> is set.</p>
 
 <wpt>
  unitless-length/limited-quirks.html
