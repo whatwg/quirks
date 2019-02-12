@@ -57,6 +57,7 @@ spec:selectors-4; type:selector
  }
 </style>
 
+<wpt-rest></wpt-rest><!-- https://github.com/web-platform-tests/wpt/issues/15354 -->
 
 <h2 id=introduction>Introduction</h2>
 
@@ -353,13 +354,14 @@ the first step that returns a value:
  one. Otherwise, return the <a>initial containing block</a>.
 
  <li><p>If |element| has a <a>computed value</a> of the 'display' property that is
- ''display/table-cell'', return a UA-defined value.
+ ''display/table-cell'', then return a UA-defined value.
 
  <li><p>If |element| has a <a>computed value</a> of the 'height' property that is not
- ''height/auto'', return |element|.
+ ''height/auto'', then return |element|.
 
  <li><p>If |element| has a <a>computed value</a> of the 'position' property that is
- ''position/absolute'', return |element|.
+ ''position/absolute'', or if |element| is a <a>grid container</a> or a <a>flex container</a>,
+ then return |element|.
 
  <li><p>Jump to the first step.
 
@@ -369,7 +371,7 @@ the first step that returns a value:
 CSS. This specification does not try to specify what to use as the containing block for calculating
 percentage heights in tables. Godspeed!
 
-<p class=issue>This quirk needs to take writing modes into account and maybe bail for grids.</p>
+<p class=big-issue>This quirk needs to take writing modes into account.</p>
 
 
 <h3 algorithm id=the-html-element-fills-the-viewport-quirk>The <{html}> element fills the viewport
