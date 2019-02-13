@@ -350,7 +350,7 @@ the first step that returns a value:
 
 <ol>
 
- <li><p>Let |element| be the nearest ancestor <a>block container box</a> of |element|, if there is
+ <li><p>Let |element| be the nearest ancestor <a>containing block</a> of |element|, if there is
  one. Otherwise, return the <a>initial containing block</a>.
 
  <li><p>If |element| has a <a>computed value</a> of the 'display' property that is
@@ -360,8 +360,8 @@ the first step that returns a value:
  ''height/auto'', then return |element|.
 
  <li><p>If |element| has a <a>computed value</a> of the 'position' property that is
- ''position/absolute'', or if |element| is a <a>grid container</a> or a <a>flex container</a>,
- then return |element|.
+ ''position/absolute'', or if |element| is a not a <a>block container</a> or a
+ <a>table wrapper box</a>, then return |element|.
 
  <li><p>Jump to the first step.
 
