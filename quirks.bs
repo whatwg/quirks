@@ -316,6 +316,7 @@ lt="supports(property, value)">supports()</a></code> static method of the {{CSS}
  unitless-length/quirks.html
  unitless-length/excluded-properties-001.html
  unitless-length/excluded-properties-002.html
+ unitless-length/excluded-properties-003.html
  supports.html
 </wpt>
 
