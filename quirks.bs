@@ -100,6 +100,7 @@ different modes have since gained a few differences outside of CSS.
 
   <wpt>
    historical/list-item-bullet-size.html
+   vertical-align-in-quirks.html
   </wpt>
 
  <li>
@@ -349,6 +350,7 @@ box had a 'line-height' of zero.
 
 <wpt>
  line-height-calculation.html
+ line-height-in-list-item.tentative.html
 </wpt>
 
 
@@ -362,6 +364,7 @@ must be ignored for the purpose of calculating the minimal height of line boxes 
 
 <wpt>
  blocks-ignore-line-height.html
+ line-height-trailing-collapsable-whitespace.html
 </wpt>
 
 
