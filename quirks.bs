@@ -100,7 +100,7 @@ different modes have since gained a few differences outside of CSS.
 
   <wpt>
    historical/list-item-bullet-size.html
-   vertical-align-in-quirks.html
+   historical/vertical-align-in-quirks.html
   </wpt>
 
  <li>
