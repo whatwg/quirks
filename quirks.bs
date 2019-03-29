@@ -95,14 +95,6 @@ different modes have since gained a few differences outside of CSS.
   href="https://bugs.chromium.org/p/chromium/issues/detail?id=369979">Chromium has removed a quirk
   where display was forced to table or inline-table on <code>table</code> elements</a>.</p>
 
-<<<<<<< HEAD
-=======
-  <wpt>
-   historical/list-item-bullet-size.html
-   historical/vertical-align-in-quirks.html
-  </wpt>
-
->>>>>>> List remaining test - https://github.com/web-platform-tests/wpt/pull/15381
  <li>
 
   <p>Get interoperability on quirks that <em>are</em> needed for Web compatibility.
