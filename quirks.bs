@@ -443,11 +443,6 @@ property of ''box-sizing/border-box'', but only for the purpose of the 'height',
 
 <h2 id=selectors>Selectors</h2>
 
-<p class=big-issue>The following test appears to be invalid. See <a
-href="https://bugs.chromium.org/p/chromium/issues/detail?id=733682#c20">chromium issue
-733682</a>.</p>
-
-
 <h3 algorithm id=the-active-and-hover-quirk>The :active and :hover quirk</h3>
 
 <p>In <a spec=dom>quirks mode</a>, a <a>compound selector</a> |selector| that matches the following
