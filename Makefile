@@ -1,3 +1,6 @@
+SHELL=/bin/bash -o pipefail
+.PHONY: local remote deploy review
+
 remote: quirks.bs
 	curl https://api.csswg.org/bikeshed/ -f -F file=@quirks.bs > quirks.html -F md-Text-Macro="SNAPSHOT-LINK LOCAL COPY"
 
