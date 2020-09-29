@@ -3,6 +3,7 @@ Group: WHATWG
 H1: Quirks Mode
 Shortname: quirks
 Text Macro: TWITTER quirksstandard
+Text Macro: LATESTRD 2019-08
 Abstract: Quirks Mode defines quirks in CSS and Selectors that are necessary to support for Web browsers for compatibility with the Web.
 </pre>
 
