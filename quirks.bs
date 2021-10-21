@@ -235,70 +235,13 @@ above properties in its "Value" grammar.
 <p>This quirk must apply inside an <a>@supports</a> at-rule.
 
 <p>The <<quirky-color>> value must not be supported in arguments to CSS expressions, and must not be
-supported in the <code><a method for=CSS lt="supports(property, value)">supports()</a></code> static
-method of the {{CSS}} interface.</p>
+supported in the <code><a method for=CSS lt="supports(property, value)">supports()</a></code> method
+of the <code>CSS</code> namespace.</p>
 
 
 <h3 id=the-unitless-length-quirk>The unitless length quirk</h3>
 
-<p><dfn export lt="quirky length">Quirky lengths</dfn> are denoted by <dfn export type
-id=quirky-length-value>&lt;quirky-length></dfn>. A <a>quirky length</a> is a <a>number</a> and
-corresponds to a <<number-token>> <a>component value</a> in the syntax. The value of a <a>quirky
-length</a> is obtained from the <a>component value</a>'s value.
-
-<p>The value of a <a>quirky length</a> must be interpreted as a <<length>> where the unit is ''px''.
-
-<p>In <a spec=dom>quirks mode</a>, the following properties must have
-their "Value" grammar changed by replacing <<length>> with:
-
-<pre class=prod>
-[ <<length>> | <<quirky-length>> ]
-</pre>
-
-<ul class=brief>
- <li>'background-position'
- <li>'border-spacing'
- <li>'border-top-width'
- <li>'border-right-width'
- <li>'border-bottom-width'
- <li>'border-left-width'
- <li>'border-width'
- <li>'bottom'
- <li>'clip'
- <li>'font-size'
- <li>'height'
- <li>'left'
- <li>'letter-spacing'
- <li>'margin-right'
- <li>'margin-left'
- <li>'margin-top'
- <li>'margin-bottom'
- <li>'margin'
- <li>'max-height'
- <li>'max-width'
- <li>'min-height'
- <li>'min-width'
- <li>'padding-top'
- <li>'padding-right'
- <li>'padding-bottom'
- <li>'padding-left'
- <li>'padding'
- <li>'right'
- <li>'text-indent'
- <li>'top'
- <li>'vertical-align'
- <li>'width'
- <li>'word-spacing'
-</ul>
-
-<p>Any property not listed above must not support <<quirky-length>> even if it references one of the
-above properties in its "Value" grammar.
-
-<p>This quirk must apply inside an <a>@supports</a> at-rule.
-
-<p>The <<quirky-length>> value must not be supported in arguments to CSS expressions other than the
-<a>rect()</a> expression, and must not be supported in the <code><a method for=CSS
-lt="supports(property, value)">supports()</a></code> static method of the {{CSS}} interface.</p>
+<p>See [[CSS-VALUES-4#deprecated-quirky-length]].</p>
 
 
 <h3 algorithm id=the-line-height-calculation-quirk>The line height calculation quirk</h3>
