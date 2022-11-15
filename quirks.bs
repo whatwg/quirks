@@ -494,5 +494,5 @@ for their useful comments.
 href="https://developer.mozilla.org/en-US/docs/Mozilla/Mozilla_quirks_mode_behavior">Mozilla's
 quirks in MDN</a>.
 
-<p>This standard is written by Simon Pieters (<a href="https://bocoup.com/">Bocoup</a>, <a
+<p>This standard is written by Simon Pieters (<a href="https://www.mozilla.org/">Mozilla</a>, <a
 href="mailto:zcorpan@gmail.com">zcorpan@gmail.com</a>).
