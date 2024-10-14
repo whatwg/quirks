@@ -16,7 +16,7 @@ remote: quirks.bs
 	);
 
 local: quirks.bs
-	bikeshed spec quirks.bs quirks.html --md-Text-Macro="COMMIT-SHA LOCAL COPY"
+	bikeshed spec quirks.bs quirks.html --md-Text-Macro="COMMIT-SHA LOCAL-COPY"
 
 deploy: quirks.bs
 	curl --remote-name --fail https://resources.whatwg.org/build/deploy.sh

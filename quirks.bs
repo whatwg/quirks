@@ -52,6 +52,12 @@ spec:selectors-4;
     type:selector; text::hover
     type:dfn; text:type selector
 spec:css-page-floats-3; type:value; text:none
+spec:css-backgrounds-3
+    type:property; text:border-top-width
+    type:property; text:border-bottom-width
+    type:property; text:border-right-width
+    type:property; text:border-left-width
+
 </pre>
 
 <style>
@@ -299,7 +305,7 @@ it matches the following conditions:
 
  <li><p>|body| is not an <a>inline-level</a> element.
 
- <li><p>|body| is not a <a>spanning element</a>. [[!CSS3-MULTICOL]]
+ <li><p>|body| is not a <a>multi-column spanning element</a>. [[!CSS3-MULTICOL]]
 
 </ul>
 
