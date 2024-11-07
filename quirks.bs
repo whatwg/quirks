@@ -256,8 +256,8 @@ the first step that returns a value:
  ''height/auto'', then return |element|.
 
  <li><p>If |element| has a <a>computed value</a> of the 'position' property that is
- ''position/absolute'', or if |element| is a not a <a>block container</a> or a
- <a>table wrapper box</a>, then return |element|.
+ ''position/absolute'', or if |element| is a not a <a>block box</a>, a
+ <a>table wrapper box</a>, a <a>flex item</a>, or a <a>grid item</a>, then return |element|.
 
  <li><p>Jump to the first step.
 
