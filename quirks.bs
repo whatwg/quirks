@@ -34,30 +34,49 @@ urlPrefix: https://dbaron.org/css/intrinsic/
 </pre>
 
 <pre class=link-defaults>
-spec:css2; type:property;
-    text:min-width
-    text:min-height
-    text:max-width
-    text:max-height
 spec:css-sizing-3
     type:property; text:box-sizing
     type:value; for:box-sizing; text:border-box
     type:value; for:width; text:auto
     type:value; for:height; text:auto
-spec:css-tables-3; type:property; text:border-spacing
-spec:css-color-4; type:property; text:color
-spec:cssom-1; type:interface; text:CSS
+    type:property; text:min-height
+    type:property; text:max-height
+spec:css-tables-3
+    type:property; text:border-spacing
+spec:css-color-4
+    type:property; text:color
+spec:cssom-1
+    type:interface; text:CSS
 spec:selectors-4;
     type:selector; text::active
     type:selector; text::hover
     type:dfn; text:type selector
-spec:css-page-floats-3; type:value; text:none
+spec:css-page-floats-3
+    type:value; text:none
 spec:css-backgrounds-3
     type:property; text:border-top-width
     type:property; text:border-bottom-width
     type:property; text:border-right-width
     type:property; text:border-left-width
-
+    type:property; text:border-style
+spec:css-box-4
+    type:property; text:padding-top
+    type:property; text:padding-bottom
+    type:property; text:padding-right
+    type:property; text:padding-left
+    type:property; text:margin-left
+    type:property; text:margin-right
+    type:property; text:margin-top
+    type:property; text:margin-bottom
+spec:css-cascade-5
+    type:dfn; text:used value
+    type:dfn; text:computed value
+spec:css-position-3
+    type:property; text:position
+spec:css-display-4
+    type:property; text:display
+    type:dfn; text:containing block
+    type:dfn; text:initial containing block
 </pre>
 
 <style>
