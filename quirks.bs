@@ -261,7 +261,7 @@ be calculated using the following algorithm, aborting on the first step that ret
  ''height/auto'', then return |element|.
 
  <li>
-  <p>If the following conditions are true, then return |element|:</p>
+  <p>If any of the following conditions are true, then return |element|:</p>
 
   <ol>
    <li><p>|element| has a <a>computed value</a> of the 'position' property that is
