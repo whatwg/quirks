@@ -77,6 +77,7 @@ spec:css-display-4
     type:property; text:display
     type:dfn; text:containing block
     type:dfn; text:initial containing block
+    type:dfn; text:block box
 </pre>
 
 <style>
@@ -255,9 +256,18 @@ the first step that returns a value:
  <li><p>If |element| has a <a>computed value</a> of the 'height' property that is not
  ''height/auto'', then return |element|.
 
- <li><p>If |element| has a <a>computed value</a> of the 'position' property that is
- ''position/absolute'', or if |element| is a not a <a>block container</a> or a
- <a>table wrapper box</a>, then return |element|.
+ <li>
+  <p>If any of the following conditions are true, then return |element|:</p>
+
+  <ol>
+   <li><p>|element| has a <a>computed value</a> of the 'position' property that is
+   ''position/absolute''
+
+   <li><p>|element| is a not a <a>block box</a>, nor an <a>inline-block</a>, nor a block-level or
+   inline-level <a>table wrapper box</a>
+
+   <li><p>|element| is a <a>flex item</a> or a <a>grid item</a>
+  </ol>
 
  <li><p>Jump to the first step.
 
