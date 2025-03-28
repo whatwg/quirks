@@ -197,8 +197,8 @@ element</a>, since the latter can be a <{frameset}> element.
 <h3 algorithm id=the-line-height-calculation-quirk>The line height calculation quirk</h3>
 
 <p>In <a spec=dom>quirks mode</a> and <a spec=dom>limited-quirks mode</a>, an inline box that
-matches the following conditions, must, for the purpose of line height calculation, act as if the
-box had a 'line-height' of zero.
+matches all of the following conditions, must, for the purpose of line height calculation, act as
+if the box had a 'line-height' of zero.
 
 <ul>
 
@@ -273,8 +273,8 @@ percentage heights in tables. Godspeed!
 <h3 algorithm id=the-html-element-fills-the-viewport-quirk>The <{html}> element fills the viewport
 quirk</h3>
 
-<p>In <a spec=dom>quirks mode</a>, if the <a spec=dom>document element</a> |element| matches the
-following conditions:
+<p>In <a spec=dom>quirks mode</a>, if the <a spec=dom>document element</a> |element| matches all of
+the following conditions:
 
 <ul>
 
@@ -309,7 +309,7 @@ using the following algorithm:
 quirk</h3>
 
 <p>In <a spec=dom>quirks mode</a>, if the <a>document's body element</a> |body| is not null and if
-it matches the following conditions:
+it matches all of the following conditions:
 
 <ul>
 
@@ -362,10 +362,10 @@ not have a <a>soft wrap opportunity</a> before or after them. [[!CSS-TEXT-3]] [[
 <h3 id=the-table-cell-nowrap-minimum-width-calculation-quirk>The table cell nowrap minimum width
 calculation quirk</h3>
 
-<p>In <a spec=dom>quirks mode</a>, an element |cell| that matches the following conditions must act
-as if it had an <a>outer min-content width of a table cell</a> in the automatic table layout
-algorithm that is the bigger value of |cell|'s <a>computed value</a> of the 'width' property and the
-<a>outer min-content width of a table cell</a>. [[!INTRINSIC]]
+<p>In <a spec=dom>quirks mode</a>, an element |cell| that matches all of the following conditions
+must act as if it had an <a>outer min-content width of a table cell</a> in the automatic table
+layout algorithm that is the bigger value of |cell|'s <a>computed value</a> of the 'width' property
+and the <a>outer min-content width of a table cell</a>. [[!INTRINSIC]]
 
 <ul>
 
@@ -381,8 +381,8 @@ algorithm that is the bigger value of |cell|'s <a>computed value</a> of the 'wid
 
 <h3 id=the-collapsing-table-quirk>The collapsing table quirk</h3>
 
-<p>In <a spec=dom>quirks mode</a>, an element |table| that matches the following conditions must
-have a <a>used value</a> of the 'height' property of ''0'' and a <a>used value</a> of the
+<p>In <a spec=dom>quirks mode</a>, an element |table| that matches all of the following conditions
+must have a <a>used value</a> of the 'height' property of ''0'' and a <a>used value</a> of the
 'border-style' property of ''border-style/none''.
 
 <ul>
@@ -464,8 +464,8 @@ property of ''box-sizing/border-box'', but only for the purpose of the 'height',
 
 <h3 algorithm id=the-active-and-hover-quirk>The :active and :hover quirk</h3>
 
-<p>In <a spec=dom>quirks mode</a>, a <a>compound selector</a> |selector| that matches the following
-conditions must not match elements that would not also match the '':any-link'' selector.
+<p>In <a spec=dom>quirks mode</a>, a <a>compound selector</a> |selector| that matches all of the
+following conditions must not match elements that would not also match the '':any-link'' selector.
 [[!SELECTORS4]]
 
 <ul>
