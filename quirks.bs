@@ -77,6 +77,8 @@ spec:css-display-4
     type:property; text:display
     type:dfn; text:containing block
     type:dfn; text:initial containing block
+spec:html
+    type:element; text:body
 </pre>
 
 <style>
