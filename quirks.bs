@@ -6,6 +6,8 @@ Text Macro: TWITTER quirksstandard
 Text Macro: LATESTRD 2022-02
 Abstract: Quirks Mode defines quirks in CSS and Selectors that are necessary to support for Web browsers for compatibility with the Web.
 Translation: zh-Hans https://htmlspecs.com/quirks/
+Translation: ja https://jp.htmlspecs.com/quirks/
+Translation: ko https://ko.htmlspecs.com/quirks/
 </pre>
 
 <pre class="biblio">
