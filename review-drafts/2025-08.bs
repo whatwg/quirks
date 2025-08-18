@@ -1,5 +1,7 @@
 <pre class='metadata'>
 Group: WHATWG
+Status: RD
+Date: 2025-08-18
 H1: Quirks Mode
 Shortname: quirks
 Text Macro: TWITTER quirksstandard
