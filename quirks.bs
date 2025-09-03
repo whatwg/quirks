@@ -242,12 +242,12 @@ quirk</h3>
 
 <p>In <a spec=dom>quirks mode</a>, for the purpose of calculating the 'height' of an element
 |element|, if the <a>computed value</a> of the 'position' property of |element| is
-''position/relative'' or ''position/static'', the specified value for the 'height' property of
-|element| is a <<percentage>>, and |element| does not have a <a>computed value</a> of the 'display'
-property that is ''display/table-row'', ''display/table-row-group'', ''display/table-header-group'',
-''display/table-footer-group'', ''display/table-cell'' or ''display/table-caption'', the
-<a>containing block</a> of |element| must be calculated using the following algorithm, aborting on
-the first step that returns a value:
+''position/relative'', ''position/static'', or ''position/sticky'', the specified value for the
+'height' property of |element| is a <<percentage>>, and |element| does not have a
+<a>computed value</a> of the 'display' property that is ''display/table-row'',
+''display/table-row-group'', ''display/table-header-group'', ''display/table-footer-group'',
+''display/table-cell'' or ''display/table-caption'', the <a>containing block</a> of |element| must
+be calculated using the following algorithm, aborting on the first step that returns a value:
 
 <ol>
 
