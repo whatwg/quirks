@@ -268,7 +268,7 @@ the first step that returns a value:
 
 </ol>
 
-<p class=note>It is at the time or writing undefined how percentage heights inside tables work in
+<p class=note>It is at the time of writing undefined how percentage heights inside tables work in
 CSS. This specification does not try to specify what to use as the containing block for calculating
 percentage heights in tables. Godspeed!
 
